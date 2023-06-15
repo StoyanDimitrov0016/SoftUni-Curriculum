@@ -1,0 +1,11 @@
+{
+  "name": "book-section",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "mocha"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
