@@ -66,7 +66,7 @@ function solve() {
         //append the whole div with its inner elements to the received section
         receivedSection.appendChild(div);
 
-        //cleat the input fields for future request
+        //clear the input fields for future request
         inputs.description.value = '';
         inputs.name.value = '';
         inputs.phone.value = '';
