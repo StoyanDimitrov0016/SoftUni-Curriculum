@@ -1,0 +1,15 @@
+{
+  "name": "1-js-back-end",
+  "version": "1.0.0",
+  "description": "The course aims to introduce participants \r to the development of server-side JavaScript applications \r on the Node.js platform using Express.js as a framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Stoyan Dimitrov",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^3.5.0"
+  }
+}
