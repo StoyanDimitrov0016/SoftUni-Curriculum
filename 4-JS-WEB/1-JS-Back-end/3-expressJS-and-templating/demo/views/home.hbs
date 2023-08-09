@@ -1,0 +1,32 @@
+<h1>Handlebars demo</h1>
+
+{{#if username}}
+<p>Welcome, {{username}}</p>
+{{else}}
+<p>Welcome, guest</p>
+{{/if}}
+
+<p>{{message}}</p>
+
+{{#with product}}
+<div>
+  <p>Name: {{name}}</p>
+  <p>Price: {{price}}</p>
+  <p>Color: {{color}}</p>
+</div>
+{{/with}}
+
+{{#if contacts}}
+<ul>
+  {{#each contacts}}
+  {{>userCard}}
+  {{/each}}
+  {{!--The context will be automatically changed for each element using this helper --}}
+</ul>
+{{else}}
+<p>No contacts yet</p>
+{{/if}}
+{{!-- this is called helper and its purpose is to set the content to the given
+one in on obj with a lot of nested objs in it --}}
+
+{{!-- using partials to create separate little files that can be combined in one bigger with {{>FILENAME}} --}}
