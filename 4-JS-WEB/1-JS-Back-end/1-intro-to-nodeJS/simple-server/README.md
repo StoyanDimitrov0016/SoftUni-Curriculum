@@ -1,7 +1,6 @@
 # Simple Node.js WEB application
 
-This is a simple Node.js web application that demonstrates server-side routing and form handling using the Express.js framework.
-
+This is a simple Node.js web application that demonstrates server-side routing and form handling.
 ## Table of Contents
 
 - [About](#about)

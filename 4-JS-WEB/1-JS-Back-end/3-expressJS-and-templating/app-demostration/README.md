@@ -14,7 +14,6 @@ improved WEB application than the previous ones.
 The project includes different routes for displaying a home 
 page, catalog of items, creating new items, seeing details 
 for each product, an option to delete it and an about page. 
-The project uses the Formidable library for handling form data.
 
 ## Features
 
