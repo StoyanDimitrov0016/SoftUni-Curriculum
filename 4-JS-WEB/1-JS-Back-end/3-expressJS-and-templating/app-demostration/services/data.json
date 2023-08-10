@@ -1,0 +1,12 @@
+[
+  {
+    "id": "abcd-0001",
+    "name": "Windshield wiper",
+    "price": 19
+  },
+  {
+    "id": "abcd-0002",
+    "name": "Summer tyre size: 16",
+    "price": 69
+  }
+]
