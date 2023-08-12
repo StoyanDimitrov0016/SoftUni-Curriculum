@@ -1,0 +1,23 @@
+[
+  {
+    "id": "000001",
+    "name": "Rubik Cube",
+    "description": "The Rubik's Cube is a 3-D combination puzzle originally invented in 1974 by Hungarian sculptor and professor of architecture Ernő Rubik.",
+    "imageUrl": "https://rb.gy/qybqy",
+    "difficultyLevel": 3
+  },
+  {
+    "id": "000002",
+    "name": "Mirror Cube",
+    "description": "The Mirror Blocks, also known as the Mirror Cube and Bump Cube, is a type of combination puzzle and shape modification of the standard 3×3×3 Rubik's Cube and was invented in 2006. The puzzle's internal mechanism is nearly identical to that of the Rubik's Cube, although it differs from normal 3×3 cubes in that all pieces are the same color (typically reflective gold or silver stickers) and are identified by shape since each one is also a distinct rectangular prism.[1][2] Like the Ghost Cube and Mastermorphix, the mirror cube has a 3×3×3 shape, meaning that it can be solved the same way as the 3×3×3 Rubik's Cube. The fastest time to solve a mirror cube is 13.66 seconds and was achieved by Lim Kai Yi (Malaysia) in Butterworth, Penang, Malaysia, on 1 December 2022.",
+    "imageUrl": "https://rb.gy/dsuq6",
+    "difficultyLevel": 4
+  },
+  {
+    "id": "880fkv4esll7p1vys",
+    "name": "da",
+    "description": "ne",
+    "imageUrl": "image",
+    "difficultyLevel": 1
+  }
+]
