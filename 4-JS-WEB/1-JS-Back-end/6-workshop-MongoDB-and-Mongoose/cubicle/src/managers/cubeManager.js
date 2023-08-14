@@ -1,3 +1,4 @@
+const Cube = require('../models/Cube');
 const uniqid = require('uniqid');
 
 
@@ -30,16 +31,9 @@ function getById(id) {
 };
 
 async function create(cubeData) {
-    const newCube = {
-        id: uniqid(),
-        ...cubeData
-    };
-
-    cubes.push(newCube);
-
-    await persist();
-
-    return newCube;
+    const cube = new Cube(cubeData);
+    await cube.save();
+    return cube;
 }
 
 async function persist() {
