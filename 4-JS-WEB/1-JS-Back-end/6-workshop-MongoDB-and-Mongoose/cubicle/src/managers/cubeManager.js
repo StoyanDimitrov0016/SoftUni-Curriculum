@@ -26,8 +26,7 @@ function getAll(search, from, to) {
 };
 
 function getById(id) {
-    const cube = cubes.find(c => c.id == id);
-    return cube;
+    return Cube.findById(id);
 };
 
 async function create(cubeData) {
