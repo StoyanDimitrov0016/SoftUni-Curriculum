@@ -7,15 +7,15 @@ async function getAll(search, from, to) {
     if (search) {
         result = result.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
     }
-    
+
     if (from) {
         result = result.filter(c => c.difficultyLevel >= Number(from));
     }
-    
+
     if (to) {
         result = result.filter(c => c.difficultyLevel <= Number(to));
     }
-    
+
     // console.log('>>>>>>',result);
     return result;
 };
@@ -26,9 +26,17 @@ function getById(id) {
 
 async function create(cubeData) {
     const cube = new Cube(cubeData);
-    await cube.save();
-    console.log(cube);
-    return cube;
+    return cube.save();
+}
+
+async function attachAccessory(cubeId, accessoryId) {
+    // return Cube.findByIdAndUpdate(cubeId, { $push: { accessories: accessoryId } });
+
+    // const cube = await Cube.findById(cubeId);
+    // cube.accessories.push(accessoryId);
+    // await cube.save();
+
+    // return cube;
 }
 
 module.exports = { getAll, getById, create };
