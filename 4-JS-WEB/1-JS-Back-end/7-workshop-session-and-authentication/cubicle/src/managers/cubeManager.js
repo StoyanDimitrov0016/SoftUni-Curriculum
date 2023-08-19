@@ -32,6 +32,14 @@ async function create(cubeData) {
     return cube.save();
 }
 
+async function update(cubeId, cubeData) {
+    return Cube.findByIdAndUpdate(cubeId, cubeData);
+}
+
+async function deleteById(cubeId) {
+    return Cube.findByIdAndDelete(cubeId)
+}
+
 async function attachAccessory(cubeId, accessoryId) {
     // return Cube.findByIdAndUpdate(cubeId, { $push: { accessories: accessoryId } });
 
@@ -42,4 +50,12 @@ async function attachAccessory(cubeId, accessoryId) {
     return cube;
 }
 
-module.exports = { getAll, getById, create, attachAccessory, getByIdAndAccessories: getByIdWithAccessories };
+module.exports = {
+    getAll,
+    getById,
+    create,
+    attachAccessory,
+    getByIdAndAccessories: getByIdWithAccessories, 
+    deleteById,
+    update
+};
