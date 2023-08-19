@@ -9,13 +9,13 @@ router.get('/create', (req, res) => {
 
 router.post('/create', async (req, res) => {
     const user = req.user;
-    
+
     const { name,
         description,
         imageUrl,
         difficultyLevel,
     } = req.body;
-    
+
     await cubeManager.create({
         name,
         description,
@@ -56,5 +56,11 @@ router.post('/:cubeId/attach-accessories', async (req, res) => {
 
     res.redirect(`/cubes/${cubeId}/details`);
 });
+
+router.get('/:cubeId/delete', async (req, res) => {
+    const cube = await cubeManager.getById(req.params.cubeId).lean();
+
+    res.render('cube/delete', { cube });
+})
 
 module.exports = router;
