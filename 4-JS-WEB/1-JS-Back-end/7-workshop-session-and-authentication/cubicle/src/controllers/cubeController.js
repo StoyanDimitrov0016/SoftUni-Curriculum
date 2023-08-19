@@ -35,7 +35,10 @@ router.get('/:cubeId/details', async (req, res) => {
         res.redirect('/404');
     }
 
-    res.render('cube/details', { cube });
+    const userId = req.user._id;
+    const isOwner = userId == cube.owner?.toString();
+
+    res.render('cube/details', { cube, isOwner });
 });
 
 router.get('/:cubeId/attach-accessories', async (req, res) => {
