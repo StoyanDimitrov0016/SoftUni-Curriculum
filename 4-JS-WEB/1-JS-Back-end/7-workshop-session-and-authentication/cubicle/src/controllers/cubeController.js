@@ -27,6 +27,7 @@ router.post('/create', async (req, res) => {
 
     res.redirect('/');
 });
+
 router.get('/:cubeId/details', async (req, res) => {
     const cubeId = req.params.cubeId;
     const cube = await cubeManager.getByIdAndAccessories(cubeId).lean();
@@ -46,7 +47,6 @@ router.get('/:cubeId/attach-accessories', async (req, res) => {
     const cube = await cubeManager.getById(cubeId).lean();
 
     const accessories = await accessoryManager.getOthers(cube.accessories).lean();
-
     const hasAccessories = accessories.length > 0;
 
     res.render('accessory/attach', { cube, accessories, hasAccessories });
@@ -87,6 +87,8 @@ router.post('/:cubeId/edit', async (req, res) => {
     const cubeData = req.body;
 
     await cubeManager.update(cubeId, cubeData);
+
     res.redirect(`/cubes/${cubeId}/details`);
 });
+
 module.exports = router;
