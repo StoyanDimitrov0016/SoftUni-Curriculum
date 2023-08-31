@@ -7,8 +7,7 @@ const JWT_SECRET = 'eba13b027f82a861ea3edc29a9e9435a';
 
 async function register(username, password) {
     const existingUser = await User.findOne({ username })
-        .collation({ locale: 'en', strength: 2 })
-        .exec();
+        .collation({ locale: 'en', strength: 2 });
 
     if (existingUser) {
         throw new Error('This username is taken');
@@ -16,11 +15,11 @@ async function register(username, password) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = User.create({
+    const user = await User.create({
         username,
         hashedPassword
     });
-
+    
     // TODO: Check if a session is required after registration, or if users should be
     // redirected to the login page to create a session.
 
