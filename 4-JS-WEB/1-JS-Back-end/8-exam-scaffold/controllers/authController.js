@@ -1,4 +1,4 @@
-const { register } = require('../services/userService');
+const { register, login } = require('../services/userService');
 const { parseError } = require('../util/parser');
 
 const authController = require('express').Router();
@@ -22,14 +22,15 @@ authController.post('/register', async (req, res) => {
             throw new Error('Passwords must be the same!');
         }
 
-        const token = await register(req.body.username, req.body.password);
+        const token = await register(username, password);
 
+        //TODO: Check assignment to see if register has to create session
         res.cookie('token', token);
-        res.redirect('/auth/register');
+        res.redirect('/'); //TODO: Redirect by the assignment requirements
     } catch (error) {
         const errors = parseError(error);
 
-        // Render the registration page with error messages
+        //TODO: Render the registration page with error messages
         res.render('register', {
             title: 'Register Page',
             errors,
@@ -37,6 +38,29 @@ authController.post('/register', async (req, res) => {
         });
     }
 
+});
+
+authController.get('/login', (req, res) => {
+    res.render('login', { title: 'Log in Page' });
+});
+
+authController.post('/login', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    try {
+        const token = await login(username, password);;
+
+        res.cookie('token', token);
+        res.redirect('/'); //TODO: Redirect by the assignment requirements
+    } catch (err) {
+        const errors = parseError(err);
+        res.render('login', {
+            title: 'Log in Page',
+            errors,
+            body: { username: username }
+        })
+    }
 });
 
 module.exports = authController;

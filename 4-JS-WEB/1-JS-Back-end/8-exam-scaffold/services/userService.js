@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = 'eba13b027f82a861ea3edc29a9e9435a';
 
+//TODO: Check assignment fields for register - username, password etc.
 async function register(username, password) {
-    const existingUser = await User.findOne({ username })
-        .collation({ locale: 'en', strength: 2 });
+    const existingUser = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
 
     if (existingUser) {
         throw new Error('This username is taken');
@@ -19,16 +19,30 @@ async function register(username, password) {
         username,
         hashedPassword
     });
-    
-    // TODO: Check if a session is required after registration, or if users should be
-    // redirected to the login page to create a session.
+
+    /* TODO: Check if a session is required after registration, or if users should be
+     redirected to the login page to create a session.*/
 
     const token = createSession(user);
     return token;
 }
 
-async function login() {
+//TODO: Check assignment fields for login - username, password etc.
+async function login(username, password) {
+    const user = await User.findOne({username}).collation({ locale: 'en', strength: 2 });
 
+    if (!user) {
+        throw new Error('Username or password is incorrect!');
+    }
+
+    const arePasswordsTheSame = await bcrypt.compare(password, user.hashedPassword);
+
+    if (arePasswordsTheSame == false) {
+        throw new Error('Username or password is incorrect!');
+    }
+
+    const token = createSession(username);
+    return token;
 }
 
 function createSession(user) {
