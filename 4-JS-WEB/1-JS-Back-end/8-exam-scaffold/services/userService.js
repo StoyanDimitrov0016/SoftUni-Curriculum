@@ -6,13 +6,15 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'eba13b027f82a861ea3edc29a9e9435a';
 
 async function register(username, password) {
-    const existingUser = User.findOne({ username }).collation({ locale: 'en', strength: 2 });
+    const existingUser = await User.findOne({ username })
+        .collation({ locale: 'en', strength: 2 })
+        .exec();
 
     if (existingUser) {
         throw new Error('This username is taken');
     }
 
-    const hashedPassword = bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = User.create({
         username,
@@ -23,9 +25,7 @@ async function register(username, password) {
     // redirected to the login page to create a session.
 
     const token = createSession(user);
-
     return token;
-
 }
 
 async function login() {
@@ -39,7 +39,6 @@ function createSession(user) {
     };
 
     const token = jwt.sign(payload, JWT_SECRET);
-
     return token;
 }
 
