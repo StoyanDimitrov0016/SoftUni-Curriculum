@@ -1,4 +1,3 @@
-const { Error } = require('mongoose');
 const { register } = require('../services/userService');
 const { parseError } = require('../util/parser');
 
@@ -15,7 +14,6 @@ authController.post('/register', async (req, res) => {
     const repass = req.body.repass;
 
     try {
-
         if (username === '' || password === '') {
             throw new Error('All fields must be filled!');
         }
@@ -25,12 +23,13 @@ authController.post('/register', async (req, res) => {
         }
 
         const token = await register(req.body.username, req.body.password);
+
         res.cookie('token', token);
         res.redirect('/auth/register');
     } catch (error) {
         const errors = parseError(error);
-        
-        //TODO: add error msg to actual page
+
+        // Render the registration page with error messages
         res.render('register', {
             title: 'Register Page',
             errors,
