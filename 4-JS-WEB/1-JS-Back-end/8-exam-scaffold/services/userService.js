@@ -41,13 +41,14 @@ async function login(username, password) {
         throw new Error('Username or password is incorrect!');
     }
 
-    const token = createSession(username);
+    const token = createSession(user);
     return token;
 }
 
 function createSession(user) {
+    console.log(user);
     const payload = {
-        _id: user._id,
+        id: user._id,
         username: user.username
     };
 
@@ -55,8 +56,8 @@ function createSession(user) {
     return token;
 }
 
-function verifyToken() {
-
+function verifyToken(token) {
+    return jwt.verify(token, JWT_SECRET);
 }
 
 module.exports = {

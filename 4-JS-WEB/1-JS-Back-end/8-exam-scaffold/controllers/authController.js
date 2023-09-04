@@ -1,7 +1,7 @@
 const { register, login } = require('../services/userService');
 const { parseError } = require('../util/parser');
-
 const authController = require('express').Router();
+
 
 authController.get('/register', (req, res) => {
     //TODO: replace with real register page
