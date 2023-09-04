@@ -37,7 +37,6 @@ authController.post('/register', async (req, res) => {
             body: { username }
         });
     }
-
 });
 
 authController.get('/login', (req, res) => {
@@ -55,6 +54,7 @@ authController.post('/login', async (req, res) => {
         res.redirect('/'); //TODO: Redirect by the assignment requirements
     } catch (err) {
         const errors = parseError(err);
+        //TODO add error display to actual template from assignment
         res.render('login', {
             title: 'Log in Page',
             errors,
