@@ -4,7 +4,7 @@ function hasUser() {
             next();
         } else {
             //TODO redirect to the path from the actual assignment
-            res.redirect('auth/login');
+            res.redirect('/auth/login');
         }
     }
 }
