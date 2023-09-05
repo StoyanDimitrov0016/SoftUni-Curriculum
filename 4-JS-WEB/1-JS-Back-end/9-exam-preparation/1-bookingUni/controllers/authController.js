@@ -1,3 +1,4 @@
+const validator = require('validator');
 const { register, login } = require('../services/userService');
 const { parseError } = require('../util/parser');
 const authController = require('express').Router();
@@ -9,20 +10,29 @@ authController.get('/register', (req, res) => {
 });
 
 authController.post('/register', async (req, res) => {
+    const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
     const repass = req.body.repass;
 
     try {
+        if (validator.default.isEmail(email) == false) {
+            throw new Error('Invalid email!');
+        }
+
         if (username === '' || password === '') {
             throw new Error('All fields must be filled!');
+        }
+
+        if (password.length < 5) {
+            throw new Error('Password must be at least 5 characters long!');
         }
 
         if (password !== repass) {
             throw new Error('Passwords must be the same!');
         }
 
-        const token = await register(username, password);
+        const token = await register(email, username, password);
 
         //TODO: Check assignment to see if register has to create session
         res.cookie('token', token);
@@ -31,10 +41,13 @@ authController.post('/register', async (req, res) => {
         const errors = parseError(error);
 
         //TODO: Render the registration page with error messages
-        res.render('register', {
+        res.render('user/register', {
             title: 'Register Page',
             errors,
-            body: { username }
+            body: {
+                email,
+                username
+            }
         });
     }
 });
@@ -44,21 +57,21 @@ authController.get('/login', (req, res) => {
 });
 
 authController.post('/login', async (req, res) => {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
     try {
-        const token = await login(username, password);;
+        const token = await login(email, password);;
 
         res.cookie('token', token);
         res.redirect('/'); //TODO: Redirect by the assignment requirements
     } catch (err) {
         const errors = parseError(err);
         //TODO add error display to actual template from assignment
-        res.render('login', {
-            title: 'Log in Page',
+        res.render('user/login', {
+            title: 'Login Page',
             errors,
-            body: { username: username }
+            body: { email }
         })
     }
 });

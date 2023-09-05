@@ -2,16 +2,16 @@ const { Schema, model } = require('mongoose');
 
 //TODO change the fields and their types, require and unique
 const userSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     username: {
         type: String,
         required: true,
         unique: true,
         match: [/^[a-zA-Z0-9]+$/i, 'Username may contain only english letters and numbers']
-    },
-    email: {
-        type: String,
-        required: true, 
-        unique: true
     },
     hashedPassword: { type: String, required: true },
 });
