@@ -14,7 +14,16 @@ async function create(hotel) {
 }
 
 async function update(id, hotel) {
+    // return await Hotel.findByIdAndUpdate(id, { ...hotel });
 
+    const existingHotel = await Hotel.findById(id);
+
+    existingHotel.name = hotel.name;
+    existingHotel.city = hotel.city;
+    existingHotel.imageUrl = hotel.imageUrl;
+    existingHotel.rooms = hotel.rooms;
+
+    await existingHotel.save();
 }
 
 async function deleteById(id) {
