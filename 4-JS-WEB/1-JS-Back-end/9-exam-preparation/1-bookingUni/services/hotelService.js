@@ -6,11 +6,11 @@ async function getAll() {
 }
 
 async function getById(id) {
-
+    return await Hotel.findOne({ _id: id }).lean();
 }
 
 async function create(hotel) {
-    return await Hotel.create(hotel);
+    return await Hotel.create(hotel).lean();
 }
 
 async function update(id, hotel) {
