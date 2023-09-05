@@ -5,7 +5,7 @@ const authController = require('express').Router();
 
 authController.get('/register', (req, res) => {
     //TODO: replace with real register page
-    res.render('register', { title: 'Register page' });
+    res.render('user/register', { title: 'Register page' });
 });
 
 authController.post('/register', async (req, res) => {
@@ -40,7 +40,7 @@ authController.post('/register', async (req, res) => {
 });
 
 authController.get('/login', (req, res) => {
-    res.render('login', { title: 'Log in Page' });
+    res.render('user/login', { title: 'Log in Page' });
 });
 
 authController.post('/login', async (req, res) => {
