@@ -1,7 +1,15 @@
+const { hasUser } = require('../middlewares/guards');
+const { getByUserBooking } = require('../services/hotelService');
 const profileController = require('express').Router();
 
-profileController.get('/', (req, res) => {
-    res.render('user/profile', { title: 'Profile Page', user: req.user });
+
+profileController.get('/', hasUser(), async (req, res) => {
+    const bookings = await getByUserBooking(req.user._id);
+
+    res.render('user/profile', {
+        title: 'Profile Page',
+        user: Object.assign({ bookings }, req.user)
+    });
 });
 
 module.exports = profileController;

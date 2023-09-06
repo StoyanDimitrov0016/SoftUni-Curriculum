@@ -106,7 +106,13 @@ hotelController.get('/:id/book', async (req, res) => {
 
     try {
         if (hotel.owner == userId) {
+            hotel.isOwner = true;
             throw new Error('Cannot book your own hotel!');
+        }
+
+        if (hotel.bookings.map(b => b.toString()).includes(userId.toString())) {
+            hotel.isBooked = true;
+            throw new Error('Cannot book hotel twice!');
         }
 
         await bookRoom(hotelId, userId);
