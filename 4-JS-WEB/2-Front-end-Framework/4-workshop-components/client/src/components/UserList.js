@@ -11,7 +11,11 @@ export const UserList = ({
     users,
     onUserCreateSubmit,
     onUserDelete,
-    onUserUpdateSubmit
+    onUserUpdateSubmit,
+    formValues,
+    formChangeHandler,
+    formErrors,
+    formValidate
 }) => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [showDeleteUser, setShowDeleteUser] = useState(null);
@@ -40,8 +44,8 @@ export const UserList = ({
         setShowAddUser(false);
     };
 
-    const onUserUpdateSubmitHandler = (e,userId) => {
-        onUserUpdateSubmit(e,userId);
+    const onUserUpdateSubmitHandler = (e, userId) => {
+        onUserUpdateSubmit(e, userId);
         setShowEditUser(null);
     };
 
@@ -63,9 +67,30 @@ export const UserList = ({
     return (
         <>
             {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
-            {showAddUser && <UserCreate onClose={onClose} onUserCreateSubmit={onUserCreateSubmitHandler} />}
+
+            {showAddUser &&
+                <UserCreate
+                    onClose={onClose}
+                    onUserCreateSubmit={onUserCreateSubmitHandler}
+                    formValues={formValues}
+                    formChangeHandler={formChangeHandler}
+                    formErrors={formErrors}
+                    formValidate={formValidate}
+                />}
+
             {showDeleteUser && <UserDelete onClose={onClose} onDelete={onDeleteHandler} />}
-            {showEditUser && <UserCreate user={showEditUser} onClose={onClose} onUserCreateSubmit={onUserUpdateSubmitHandler} />}
+
+            {showEditUser &&
+                <UserCreate
+                    user={showEditUser}
+                    onClose={onClose}
+                    onUserCreateSubmit={onUserUpdateSubmitHandler}
+                    formValues={formValues}
+                    formChangeHandler={formChangeHandler}
+                    formErrors={formErrors}
+                    formValidate={formValidate}
+
+                />}
             <div className="table-wrapper">
                 {/* <div className="loading-shade">
                 <div className="spinner"></div>
