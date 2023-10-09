@@ -25,6 +25,8 @@ export const NewSneakerForm = () => {
     const onSubmitHandler = async(e) => {
         e.preventDefault();
 
+        const res = await sneakerService.create(formValues);
+        console.log(res);
     }
 
     return (
@@ -82,7 +84,8 @@ export const NewSneakerForm = () => {
                         placeholder="Value"
                         value={formValues.value}
                         onChange={onChangeHandler} />
-                    <button type="submit">post</button>
+
+                    <button type="submit">Post</button>
                 </form>
             </div>
         </section >
