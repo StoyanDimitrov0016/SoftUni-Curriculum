@@ -1,4 +1,5 @@
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { EditSneaker } from './components/EditSneaker/EditSneaker';
 import { Home } from './components/Home/Home';
@@ -10,41 +11,26 @@ import { SearchSneaker } from './components/SearchSneaker/SearchSneaker';
 import { SneakerDetails } from './components/SneakerDetails/SneakerDetails';
 
 function App() {
-  return (
-    <div id="wrapper">
-      <header>
+    return (
+        <div id="wrapper">
+            <header>
+                <NavigationBar />
+            </header>
+            <main>
+                <Routes>
+                    <Route path='/' element={<Home />} /> 
+                    <Route path='/catalog' element={<Dashboard />} /> 
+                    <Route path='/register' element={<Register />} /> 
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/create' element={<NewSneakerForm />} />
+                    <Route path='/details/:sneakerId' element={<SneakerDetails />} />
+                    <Route path='/edit/:sneakerId' element={<EditSneaker />} />
+                    <Route path='/search' element={<SearchSneaker />} />
+                </Routes>
+            </main>
+        </div>
 
-        <NavigationBar />
-
-      </header>
-      <main>
-
-        <Home />
-        <Dashboard />
-
-        {/* Register Page (Only for Guest users) */}
-        <Register />
-
-        {/* Login Page (Only for Guest users) */}
-        <Login />
-
-        {/* Create Page (Only for logged-in users) */}
-        <NewSneakerForm />
-
-        {/* Details page */}
-        <SneakerDetails />
-
-        {/* Edit Page (Only for logged-in users) */}
-
-        <EditSneaker />
-
-        {/* Search Page (Only for logged-in users) */}
-        <SearchSneaker />
-
-      </main>
-    </div>
-
-  );
+    );
 }
 
 export default App;
