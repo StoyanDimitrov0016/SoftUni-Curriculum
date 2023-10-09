@@ -1,68 +1,28 @@
 import React from "react";
+import { SneakerCard } from "./SneakerCard";
+import { useState, useEffect } from "react";
+import * as sneakerService from '../../services/sneakerService';
 
 export const Dashboard = () => {
+    const [sneakers, setSneakers] = useState([]);
+
+    useEffect(() => {
+        sneakerService.getAll()
+            .then(newSneakers => {
+                setSneakers(Object.values(newSneakers))
+            })
+            .catch(error => console.log('Error in getting all sneakers:' + error))
+    }, []);
+
     return (
         <section id="dashboard">
             <h2>Collectibles</h2>
             <ul className="card-wrapper">
-                {/* Display a li with information about every post (if any)*/}
-                <li className="card">
-                    <img src="./images/travis.jpg" alt="travis" />
-                    <p>
-                        <strong>Brand: </strong>
-                        <span className="brand">Air Jordan</span>
-                    </p>
-                    <p>
-                        <strong>Model: </strong>
-                        <span className="model">1 Retro High TRAVIS SCOTT</span>
-                    </p>
-                    <p>
-                        <strong>Value:</strong>
-                        <span className="value">2000</span>$
-                    </p>
-                    <a className="details-btn" href="">
-                        Details
-                    </a>
-                </li>
-                <li className="card">
-                    <img src="./images/back2future.webp" alt="back2future" />
-                    <p>
-                        <strong>Brand: </strong>
-                        <span className="brand">Nike</span>
-                    </p>
-                    <p>
-                        <strong>Model: </strong>
-                        <span className="model">Back To the Future Part II</span>
-                    </p>
-                    <p>
-                        <strong>Value:</strong>
-                        <span className="value">92100</span>$
-                    </p>
-                    <a className="details-btn" href="">
-                        Details
-                    </a>
-                </li>
-                <li className="card">
-                    <img src="./images/eminem.jpg" alt="eminem" />
-                    <p>
-                        <strong>Brand: </strong>
-                        <span className="brand">Air Jordan</span>
-                    </p>
-                    <p>
-                        <strong>Model: </strong>
-                        <span className="model">4 Retro CARHARTT X EMINEM</span>
-                    </p>
-                    <p>
-                        <strong>Value:</strong>
-                        <span className="value">30000</span>$
-                    </p>
-                    <a className="details-btn" href="">
-                        Details
-                    </a>
-                </li>
+                {sneakers.length === 0 && <h2>There are no items added yet.</h2>}
+                {sneakers.length >= 1 && 
+                sneakers.map(sneaker => <SneakerCard key={sneaker._id}  {...sneaker} />)}
             </ul>
-            {/* Display an h2 if there are no posts */}
-            <h2>There are no items added yet.</h2>
+
         </section>
     );
 }
