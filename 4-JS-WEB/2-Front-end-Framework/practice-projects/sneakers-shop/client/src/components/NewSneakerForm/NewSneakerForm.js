@@ -9,7 +9,7 @@ export const NewSneakerForm = () => {
         release: '',
         designer: '',
         value: ''
-    })
+    });
 
     const onChangeHandler = (e) => {
         e.preventDefault();
@@ -20,20 +20,20 @@ export const NewSneakerForm = () => {
             ...state,
             [name]: name === 'value' ? Number(value) : value,
         }));
-    }
+    };
 
-    const onSubmitHandler = async(e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         const res = await sneakerService.create(formValues);
-        console.log(res);
-    }
+
+    };
 
     return (
         <section id="create" >
-            <div className="form" onSubmit={onSubmitHandler}>
+            <div className="form">
                 <h2>Add item</h2>
-                <form className="create-form" >
+                <form className="create-form" onSubmit={onSubmitHandler} >
                     <input
                         type="text"
                         name="brand"

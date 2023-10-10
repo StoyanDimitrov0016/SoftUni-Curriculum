@@ -22,7 +22,6 @@ export const Dashboard = () => {
                 {sneakers.length >= 1 && 
                 sneakers.map(sneaker => <SneakerCard key={sneaker._id}  {...sneaker} />)}
             </ul>
-
         </section>
     );
 }
