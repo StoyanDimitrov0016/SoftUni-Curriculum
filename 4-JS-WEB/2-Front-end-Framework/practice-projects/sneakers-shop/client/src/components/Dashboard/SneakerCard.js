@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const SneakerCard = ({ _id, brand, model, imageUrl, value }) => {
     return (
@@ -16,9 +17,7 @@ export const SneakerCard = ({ _id, brand, model, imageUrl, value }) => {
                 <strong>Value:</strong>
                 <span className="value">{value}</span>$
             </p>
-            <a className="details-btn" href="/">
-                Details
-            </a>
+            <Link className="details-btn" to={`/details/${_id}`} >Details</Link>
         </li>
     );
 }
