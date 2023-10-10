@@ -1,25 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const NavigationBar = () => {
     return (
         <>
-            < a id="logo" href="/" >
-                <img id="logo-img" src="./images/logo.png" alt="" />
-            </a >
+            <Link id='logo' to="/">
+                <img id="logo-img" src="/images/logo.png" alt="Home page link" />
+            </Link>
             <nav>
                 <div>
-                    <a href="#">Dashboard</a>
-                    <a href="#">Search</a>
+                    <Link to="/catalog">Dashboard</Link>
+                    <Link to="/search">Search </Link>
                 </div>
                 {/* Logged-in users */}
                 <div className="user">
-                    <a href="#">Add Pair</a>
-                    <a href="#">Logout</a>
+                    <Link to="/create">Add Pair</Link>
+                    <Link to="/logout">Logout </Link>
                 </div>
                 {/* Guest users */}
                 <div className="guest">
-                    <a href="#">Login</a>
-                    <a href="#">Register</a>
+                    <Link to="/login">Login</Link>
+                    <Link to="/register">Register </Link>
                 </div>
             </nav>
         </>
