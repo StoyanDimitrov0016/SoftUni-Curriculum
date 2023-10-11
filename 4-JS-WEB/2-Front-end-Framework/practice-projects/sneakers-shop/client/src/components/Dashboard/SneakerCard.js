@@ -1,9 +1,10 @@
 import React from "react";
+import styles from '../../styles/Dashboard.module.css'
 import { Link } from "react-router-dom";
 
 export const SneakerCard = ({ _id, brand, model, imageUrl, value }) => {
     return (
-        <li className="card">
+        <li className={styles.card}>
             <img src={imageUrl} alt={`Sneaker: ${brand} - ${model}`} />
             <p>
                 <strong>Brand: </strong>
@@ -17,7 +18,7 @@ export const SneakerCard = ({ _id, brand, model, imageUrl, value }) => {
                 <strong>Value:</strong>
                 <span className="value">{value}</span>$
             </p>
-            <Link className="details-btn" to={`/details/${_id}`} >Details</Link>
+            <Link className={styles["details-btn"]} to={`/details/${_id}`} >Details</Link>
         </li>
     );
 }
