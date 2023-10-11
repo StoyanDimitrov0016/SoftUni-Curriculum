@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styles from '../../styles/Form.module.css';
 import { useParams } from "react-router-dom";
 import * as sneakerService from '../../services/sneakerService';
 
@@ -42,15 +43,15 @@ export const EditSneaker = () => {
     };
 
     return (
-        <section id="edit">
-            <div className="form" onSubmit={onSubmitHandler}>
+        <section id={styles.edit}>
+            <div className={styles.form} onSubmit={onSubmitHandler}>
                 <h2>Edit Sneaker:</h2>
                 <h2>{`${formValues.brand} ${formValues.model} - ${formValues.release}`}</h2>
-                <form className="edit-form">
+                <form className={styles['edit-form']}>
                     <input
                         type="text"
                         name="brand"
-                        id="shoe-brand"
+                        id={styles['shoe-brand']}
                         placeholder="Brand"
                         value={formValues.brand}
                         onChange={onChangeHandler}
@@ -58,14 +59,14 @@ export const EditSneaker = () => {
                     <input
                         type="text"
                         name="model"
-                        id="shoe-model"
+                        id={styles['shoe-model']}
                         placeholder="Model"
                         value={formValues.model}
                         onChange={onChangeHandler} />
                     <input
                         type="text"
                         name="imageUrl"
-                        id="shoe-img"
+                        id={styles['shoe-img']}
                         placeholder="Image url"
                         value={formValues.imageUrl}
                         onChange={onChangeHandler}
@@ -73,7 +74,7 @@ export const EditSneaker = () => {
                     <input
                         type="text"
                         name="release"
-                        id="shoe-release"
+                        id={styles['shoe-release']}
                         placeholder="Release date"
                         value={formValues.release}
                         onChange={onChangeHandler}
@@ -81,7 +82,7 @@ export const EditSneaker = () => {
                     <input
                         type="text"
                         name="designer"
-                        id="shoe-designer"
+                        id={styles['shoe-designer']}
                         placeholder="Designer"
                         value={formValues.designer}
                         onChange={onChangeHandler}
@@ -89,7 +90,7 @@ export const EditSneaker = () => {
                     <input
                         type="text"
                         name="value"
-                        id="shoe-value"
+                        id={styles['shoe-value']}
                         placeholder="Value"
                         value={formValues.value}
                         onChange={onChangeHandler} />
