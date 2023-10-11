@@ -1,32 +1,33 @@
 import React from "react";
+import styles from '../../styles/Form.module.css';
 import { Link } from "react-router-dom";
 
 export const Register = () => {
     return (
-        <section id="register">
-            <div className="form">
+        <section id={styles.register}>
+            <div className={styles.form}>
                 <h2>Register</h2>
-                <form className="login-form">
+                <form className={styles.login}>
                     <input
                         type="text"
                         name="email"
-                        id="register-email"
+                        id={styles['register-email']}
                         placeholder="email"
                     />
                     <input
                         type="password"
                         name="password"
-                        id="register-password"
+                        id={styles['register-password']}
                         placeholder="password"
                     />
                     <input
                         type="password"
                         name="re-password"
-                        id="repeat-password"
+                        id={styles['repeat-password']}
                         placeholder="repeat password"
                     />
                     <button type="submit">login</button>
-                    <p className="message">
+                    <p className={styles.message}>
                         <Link to="/login">Already registered?</Link>
                     </p>
                 </form>
