@@ -1,4 +1,5 @@
 import React from "react";
+import styles from '../../styles/Dashboard.module.css'
 import { SneakerCard } from "./SneakerCard";
 import { useState, useEffect } from "react";
 import * as sneakerService from '../../services/sneakerService';
@@ -15,12 +16,12 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <section id="dashboard">
+        <section id={styles["dashboard"]}>
             <h2>Collectibles</h2>
-            <ul className="card-wrapper">
+            <ul className={styles["card-wrapper"]}>
                 {sneakers.length === 0 && <h2>There are no items added yet.</h2>}
-                {sneakers.length >= 1 && 
-                sneakers.map(sneaker => <SneakerCard key={sneaker._id}  {...sneaker} />)}
+                {sneakers.length >= 1 &&
+                    sneakers.map(sneaker => <SneakerCard key={sneaker._id}  {...sneaker} />)}
             </ul>
         </section>
     );
