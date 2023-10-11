@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from '../../styles/Form.module.css';
 import * as sneakerService from '../../services/sneakerService';
 
 export const NewSneakerForm = () => {
@@ -30,14 +31,14 @@ export const NewSneakerForm = () => {
     };
 
     return (
-        <section id="create" >
-            <div className="form">
+        <section id={styles.create} >
+            <div className={styles.form}>
                 <h2>Add item</h2>
-                <form className="create-form" onSubmit={onSubmitHandler} >
+                <form className={styles['create-form']} onSubmit={onSubmitHandler} >
                     <input
                         type="text"
                         name="brand"
-                        id="shoe-brand"
+                        id={styles['shoe-brand']}
                         placeholder="Brand"
                         value={formValues.brand}
                         onChange={onChangeHandler} />
@@ -45,7 +46,7 @@ export const NewSneakerForm = () => {
                     <input
                         type="text"
                         name="model"
-                        id="shoe-model"
+                        id={styles['shoe-model']}
                         placeholder="Model"
                         value={formValues.model}
                         onChange={onChangeHandler} />
@@ -53,7 +54,7 @@ export const NewSneakerForm = () => {
                     <input
                         type="text"
                         name="imageUrl"
-                        id="shoe-img"
+                        id={styles['shoe-img']}
                         placeholder="Image url"
                         value={formValues.imageUrl}
                         onChange={onChangeHandler}
@@ -62,7 +63,7 @@ export const NewSneakerForm = () => {
                     <input
                         type="text"
                         name="release"
-                        id="shoe-release"
+                        id={styles['shoe-release']}
                         placeholder="Release date"
                         value={formValues.release}
                         onChange={onChangeHandler}
@@ -71,7 +72,7 @@ export const NewSneakerForm = () => {
                     <input
                         type="text"
                         name="designer"
-                        id="shoe-designer"
+                        id={styles['shoe-designer']}
                         placeholder="Designer"
                         value={formValues.designer}
                         onChange={onChangeHandler}
@@ -80,7 +81,7 @@ export const NewSneakerForm = () => {
                     <input
                         type="text"
                         name="value"
-                        id="shoe-value"
+                        id={styles['shoe-value']}
                         placeholder="Value"
                         value={formValues.value}
                         onChange={onChangeHandler} />
