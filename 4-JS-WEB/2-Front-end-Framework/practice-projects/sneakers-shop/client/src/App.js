@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { EditSneaker } from './components/EditSneaker/EditSneaker';
@@ -9,6 +9,7 @@ import { NewSneakerForm } from './components/NewSneakerForm/NewSneakerForm';
 import { Register } from './components/Register/Register';
 import { SearchSneaker } from './components/SearchSneaker/SearchSneaker';
 import { SneakerDetails } from './components/SneakerDetails/SneakerDetails';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
     return (
@@ -18,9 +19,9 @@ function App() {
             </header>
             <main>
                 <Routes>
-                    <Route path='/' element={<Home />} /> 
-                    <Route path='/catalog' element={<Dashboard />} /> 
-                    <Route path='/register' element={<Register />} /> 
+                    <Route path='/' element={<Home />} />
+                    <Route path='/catalog' element={<Dashboard />} />
+                    <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/create' element={<NewSneakerForm />} />
                     <Route path='/details/:sneakerId' element={<SneakerDetails />} />
@@ -28,6 +29,7 @@ function App() {
                     <Route path='/search' element={<SearchSneaker />} />
                 </Routes>
             </main>
+            <Footer />
         </div>
 
     );
