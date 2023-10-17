@@ -2,8 +2,11 @@ import React from 'react';
 import styles from '../../styles/Navigation.module.css';
 
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export const NavigationBar = () => {
+    const { userCredentials } = useAuth();
+
     return (
         <>
             <Link id={styles.logo} to="/">
@@ -14,16 +17,16 @@ export const NavigationBar = () => {
                     <Link to="/catalog">Dashboard</Link>
                     <Link to="/search">Search </Link>
                 </div>
-                {/* Logged-in users */}
-                <div className={styles.user}>
+
+                {userCredentials.email ? 
+                (<div className={styles.user}>
                     <Link to="/create">Add Pair</Link>
                     <Link to="/logout">Logout </Link>
-                </div>
-                {/* Guest users */}
-                <div className={styles.guest}>
+                </div>) : 
+                (<div className={styles.guest}>
                     <Link to="/login">Login</Link>
                     <Link to="/register">Register </Link>
-                </div>
+                </div>)}
             </nav>
         </>
     );
