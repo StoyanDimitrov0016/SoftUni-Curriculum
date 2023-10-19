@@ -6,13 +6,13 @@
                 <h2>"I hope you're pleased with yourselves. We could all have been killed — or worse, expelled. Now if
                     you don't mind, I'm going to bed."</h2>
             </div>
-            <form action="/auth/register" method="post" class="signupForm">
+            <form class="signupForm" action="/auth/register" method="post">
                 <h2>Sign Up</h2>
                 <ul class="noBullet">
                     <li>
                         <label for="first-name">First Name:</label>
-                        <input type="text" class="inputFields" id="first-name" name="firstName" value="{{body.firstName}}"
-                            placeholder="Alex" />
+                        <input type="text" class="inputFields" id="first-name" name="firstName"
+                            value="{{body.firstName}}" placeholder="Alex" />
                     </li>
                     <li>
                         <label for="last-name">Last Name:</label>
