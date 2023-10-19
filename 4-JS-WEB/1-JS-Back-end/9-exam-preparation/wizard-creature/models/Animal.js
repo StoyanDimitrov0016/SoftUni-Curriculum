@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 //TODO: Make userSchema properties according to the assignment
 const ANIMAL_IMAGE_PATTERN = /^https?:\/\/.+$/;
@@ -36,6 +36,11 @@ const animalSchema = new Schema({
         minlength: [5, 'Description length must be between 5 and 500 characters long!'],
         maxlength: [500, 'Description length must be between 5 and 500 characters long!'],
     },
+    owner: {
+        type: Types.ObjectId,
+        ref: 'User'
+    },
+    votes: { type: [Types.ObjectId], ref: 'User', default: [] }
 });
 
 animalSchema.index({ name: 1 }, {
