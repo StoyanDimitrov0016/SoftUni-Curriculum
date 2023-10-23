@@ -29,7 +29,7 @@ async function requester(method, url = '', body) {
         }
 
         if (response.status === 204) {
-            return response;
+            return response; //maybe it has to return an empty object (204 - no content)
         } else {
             return response.json();
         }
@@ -46,4 +46,4 @@ const post = await requester.bind(null, 'post');
 const put = await requester.bind(null, 'put');
 const del = await requester.bind(null, 'delete');
 
-export { get, post, put, del }
+export { get, post, put, del };
