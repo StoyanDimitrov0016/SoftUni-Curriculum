@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 export const CatalogItem = ({
     title,
     category,
-    maxLevel,
     imageUrl,
-    summary,
     _id
 }) => {
     return (
