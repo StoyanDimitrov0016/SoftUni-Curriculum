@@ -1,15 +1,25 @@
 import { useState } from "react";
 
 export const CreateGame = ({
-    onSubmit,
+    onCreateGameSubmit,
 }) => {
     const [formValues, setFormValues] = useState({
         title: '',
         category: '',
-        maxLevel: null,
+        maxLevel: '',
         imageUrl: '',
         summary: ''
     });
+
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }));
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        onCreateGameSubmit(formValues);
+    };
 
     return (
         <section id="create-page" className="auth">
@@ -23,6 +33,7 @@ export const CreateGame = ({
                         name="title"
                         placeholder="Enter game title..."
                         value={formValues.title}
+                        onChange={onChangeHandler}
                     />
                     <label htmlFor="category">Category:</label>
                     <input
@@ -31,6 +42,7 @@ export const CreateGame = ({
                         name="category"
                         placeholder="Enter game category..."
                         value={formValues.category}
+                        onChange={onChangeHandler}
                     />
                     <label htmlFor="levels">MaxLevel:</label>
                     <input
@@ -40,6 +52,7 @@ export const CreateGame = ({
                         min={1}
                         placeholder={1}
                         value={formValues.maxLevel}
+                        onChange={onChangeHandler}
                     />
                     <label htmlFor="game-img">Image:</label>
                     <input
@@ -48,13 +61,14 @@ export const CreateGame = ({
                         name="imageUrl"
                         placeholder="Upload a photo..."
                         value={formValues.imageUrl}
+                        onChange={onChangeHandler}
                     />
                     <label htmlFor="summary">Summary:</label>
                     <textarea
                         name="summary"
                         id="summary"
-                        defaultValue={""}
-                        value={formValues.summary} />
+                        value={formValues.summary}
+                        onChange={onChangeHandler} />
                     <input
                         className="btn submit"
                         type="submit"
