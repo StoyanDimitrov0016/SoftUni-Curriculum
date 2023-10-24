@@ -1,4 +1,4 @@
-export const Details = () => {
+export const GameDetails = () => {
     return (
         <section id="game-details">
             <h1>Game Details</h1>
