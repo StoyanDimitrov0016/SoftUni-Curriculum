@@ -11,10 +11,14 @@ async function requester(method, url = '', body) {
         options.body = JSON.stringify(body);
     }
 
+    //TODO: implement authorization
     // const user = getUser();
     // if (user) {
     //     options.headers['X-Authorization'] = user.accessToken;
     // }
+
+    //before implementing authorization it will be with hardcoded authorization token
+    options.headers['X-Authorization'] = 'e6db00ddae4d92873f0de3b9ca79323ef80b476c66f18a64071e601c8ae458f3';
 
 
     try {
