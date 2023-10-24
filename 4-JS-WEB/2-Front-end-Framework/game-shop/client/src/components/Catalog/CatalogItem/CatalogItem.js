@@ -9,12 +9,10 @@ export const CatalogItem = ({
     return (
         <div className="allGames">
             <div className="allGames-info">
-                <img src={imageUrl} />
+                <img src={imageUrl} alt={title} />
                 <h6>{category}</h6>
                 <h2>{title}</h2>
-                <Link to={`/details/${_id}`} className="details-button">
-                    Details
-                </Link>
+                <Link to={`/catalog/${_id}`} className="details-button">Details</Link>
             </div>
         </div>
     );
