@@ -18,7 +18,7 @@ export const Login = () => {
 
     return (
         <section id="login-page" className="auth">
-            <form id="login" onSubmit={onLoginSubmit}>
+            <form id="login" method="post" onSubmit={onLoginSubmit}>
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Login</h1>
