@@ -1,15 +1,18 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import * as gameService from '../../services/gameService';
-import * as commentService from '../../services/commentService';
+import { gameServiceFactory } from "../../services/gameService";
+import { commentServiceFactory } from '../../services/commentService';
+import { useService } from "../../hooks/useService";
 
 export const GameDetails = () => {
     const { gameId } = useParams();
-    
+
     const [game, setGame] = useState({});
     const [existingComments, setExistingComments] = useState([]);
     const [comment, setComment] = useState('');
+    const gameService = useService(gameServiceFactory);
+    const commentService = useService(commentServiceFactory);
 
     useEffect(() => {
         gameService.getOne(gameId)
