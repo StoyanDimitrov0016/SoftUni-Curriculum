@@ -1,8 +1,8 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import * as gameService from './services/gameService';
-import * as authService from './services/authService';
+import { gameServiceFactory } from './services/gameService';
+import { authServiceFactory } from './services/authService';
 
 import { AuthContext } from './contexts/AuthContext';
 
@@ -14,11 +14,16 @@ import { Register } from './components/Register/Register';
 import { CreateGame } from './components/CreateGame/CreateGame';
 import { Catalog } from './components/Catalog/Catalog';
 import { GameDetails } from './components/GameDetails/GameDetails';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
     const navigate = useNavigate();
+
     const [games, setGames] = useState([]);
     const [auth, setAuth] = useState({});
+  
+    const gameService = gameServiceFactory(auth.accessToken);
+    const authService = authServiceFactory(auth.accessToken);
 
     useEffect(() => {
         gameService.getAll()
@@ -34,7 +39,6 @@ function App() {
 
     const onLoginSubmit = async (data) => {
         try {
-            console.log(data.email, data.password);
             const result = await authService.login(data.email, data.password);
             setAuth(result);
             navigate('/');
@@ -43,8 +47,33 @@ function App() {
         }
     };
 
+    const onRegisterSubmit = async (data) => {
+        const confirmPassword = data['confirm-password'];
+        const password = data.password;
+
+        //TODO: Further improving of password validation
+        if (password !== confirmPassword) {
+            return;
+        }
+
+        try {
+            const result = await authService.register(data.email, data.password);
+            setAuth(result);
+            navigate('/');
+        } catch (error) {
+            console.log('Error while registering in occurred:', error);
+        }
+    };
+
+    const onLogout = async () => {
+        await authService.logout();
+        setAuth({});
+    };
+
     const context = {
         onLoginSubmit,
+        onRegisterSubmit,
+        onLogout,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
@@ -61,6 +90,7 @@ function App() {
                         <Route path="/" element={<Home games={games} />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/logout" element={<Logout />} />
                         <Route path="/create-game" element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />} />
                         <Route path="/catalog" element={<Catalog games={games} />} />
                         <Route path="/catalog/:gameId" element={<GameDetails />} />
