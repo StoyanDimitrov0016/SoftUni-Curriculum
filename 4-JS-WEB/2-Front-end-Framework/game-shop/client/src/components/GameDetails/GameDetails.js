@@ -1,11 +1,13 @@
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 
 import { gameServiceFactory } from "../../services/gameService";
 import { commentServiceFactory } from '../../services/commentService';
 import { useService } from "../../hooks/useService";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const GameDetails = () => {
+    const { userId } = useContext(AuthContext);
     const { gameId } = useParams();
 
     const [game, setGame] = useState({});
@@ -13,6 +15,8 @@ export const GameDetails = () => {
     const [comment, setComment] = useState('');
     const gameService = useService(gameServiceFactory);
     const commentService = useService(commentServiceFactory);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         gameService.getOne(gameId)
@@ -36,6 +40,14 @@ export const GameDetails = () => {
         e.preventDefault();
 
         setComment(e.target.value);
+    };
+
+    const isOwner = (game._ownerId === userId);
+
+    const onDeleteClick = async () => {
+        await gameService.delete(game._id);
+        //TODO: Delete from state
+        navigate('/catalog');
     };
 
     return (
@@ -66,12 +78,14 @@ export const GameDetails = () => {
                 </div>
 
                 {/* Edit/Delete buttons ( Only for creator of this game )  */}
-                <div className="buttons">
-                    <Link to={'/'} className="button">Edit</Link>
-                    <Link to={'/'} className="button">Delete</Link>
-                </div>
+                {isOwner && (
+                    <div className="buttons">
+                        <Link to={`/catalog/${gameId}/edit`} className="button">Edit</Link>
+                        <button className="button" onClick={onDeleteClick}>Delete</button>
+                    </div>
+                )}
+
             </div>
-            {/* Bonus */}
             {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
             <article className="create-comment">
                 <label>Add new comment:</label>
