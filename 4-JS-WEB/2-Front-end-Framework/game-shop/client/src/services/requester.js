@@ -1,6 +1,6 @@
-async function requester(method, url = '', body) {
+async function requester(method, token, url = '', body) {
     const BASE_URL = 'http://localhost:3030';
-
+   
     const options = {
         method,
         headers: {}
@@ -11,15 +11,9 @@ async function requester(method, url = '', body) {
         options.body = JSON.stringify(body);
     }
 
-    //TODO: implement authorization
-    // const user = getUser();
-    // if (user) {
-    //     options.headers['X-Authorization'] = user.accessToken;
-    // }
-
-    //before implementing authorization it will be with hardcoded authorization token
-    options.headers['X-Authorization'] = 'e6db00ddae4d92873f0de3b9ca79323ef80b476c66f18a64071e601c8ae458f3';
-
+    if (token) {
+        options.headers['X-Authorization'] = token;
+    }
 
     try {
         const response = await fetch(BASE_URL + url, options);
@@ -45,9 +39,12 @@ async function requester(method, url = '', body) {
     }
 }
 
-const get = await requester.bind(null, 'get');
-const post = await requester.bind(null, 'post');
-const put = await requester.bind(null, 'put');
-const del = await requester.bind(null, 'delete');
-
-export { get, post, put, del };
+export const requestFactory = (token) => {
+    return {
+        get: requester.bind(null, 'get', token),
+        post: requester.bind(null, 'post', token),
+        put: requester.bind(null, 'put', token),
+        patch: requester.bind(null, 'patch', token),
+        delete: requester.bind(null, 'delete', token),
+    };
+};
