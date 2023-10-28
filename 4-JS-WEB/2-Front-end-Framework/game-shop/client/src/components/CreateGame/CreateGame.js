@@ -1,31 +1,22 @@
-import { useState } from "react";
+import { useForm } from "../../hooks/useForm";
 
 export const CreateGame = ({
     onCreateGameSubmit,
 }) => {
-    const [formValues, setFormValues] = useState({
+    const { formValues, changeHandler, onSubmit } = useForm({
         title: '',
         category: '',
         maxLevel: '',
         imageUrl: '',
         summary: ''
-    });
-
-    const onChangeHandler = (e) => {
-        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }));
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        onCreateGameSubmit(formValues);
-    };
+    }, onCreateGameSubmit);
 
     return (
         <section id="create-page" className="auth">
             <form id="create" onSubmit={onSubmit}>
                 <div className="container">
                     <h1>Create Game</h1>
+
                     <label htmlFor="leg-title">Legendary title:</label>
                     <input
                         type="text"
@@ -33,8 +24,9 @@ export const CreateGame = ({
                         name="title"
                         placeholder="Enter game title..."
                         value={formValues.title}
-                        onChange={onChangeHandler}
+                        onChange={changeHandler}
                     />
+
                     <label htmlFor="category">Category:</label>
                     <input
                         type="text"
@@ -42,8 +34,9 @@ export const CreateGame = ({
                         name="category"
                         placeholder="Enter game category..."
                         value={formValues.category}
-                        onChange={onChangeHandler}
+                        onChange={changeHandler}
                     />
+
                     <label htmlFor="levels">MaxLevel:</label>
                     <input
                         type="number"
@@ -52,8 +45,9 @@ export const CreateGame = ({
                         min={1}
                         placeholder={1}
                         value={formValues.maxLevel}
-                        onChange={onChangeHandler}
+                        onChange={changeHandler}
                     />
+
                     <label htmlFor="game-img">Image:</label>
                     <input
                         type="text"
@@ -61,14 +55,15 @@ export const CreateGame = ({
                         name="imageUrl"
                         placeholder="Upload a photo..."
                         value={formValues.imageUrl}
-                        onChange={onChangeHandler}
+                        onChange={changeHandler}
                     />
+
                     <label htmlFor="summary">Summary:</label>
                     <textarea
                         name="summary"
                         id="summary"
                         value={formValues.summary}
-                        onChange={onChangeHandler} />
+                        onChange={changeHandler} />
                     <input
                         className="btn submit"
                         type="submit"
