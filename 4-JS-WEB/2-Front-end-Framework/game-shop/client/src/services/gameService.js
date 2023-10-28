@@ -1,16 +1,26 @@
-import * as requester from './requester';
+import { requestFactory } from './requester';
 
-export const getAll = async () => {
-    const games = await requester.get('/data/games?sortBy=_createdOn%20desc');
-    return games;
-};
+export const gameServiceFactory = (token) => {
+    const request = requestFactory(token);
 
-export const getOne = async (gameId) => {
-    const game = await requester.get(`/data/games/${gameId}`);
-    return game;
-};
+    const getAll = async () => {
+        const games = await request.get('/data/games?sortBy=_createdOn%20desc');
+        return games;
+    };
 
-export const create = async (gameData) => {
-    const result = await requester.post('/data/games', gameData);
-    return result;
+    const getOne = async (gameId) => {
+        const game = await request.get(`/data/games/${gameId}`);
+        return game;
+    };
+
+    const create = async (gameData) => {
+        const result = await request.post('/data/games', gameData);
+        return result;
+    };
+
+    return {
+        getAll,
+        getOne,
+        create
+    };
 };
