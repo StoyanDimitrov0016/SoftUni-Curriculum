@@ -18,9 +18,21 @@ export const gameServiceFactory = (token) => {
         return result;
     };
 
+    const update = async (gameId, gameData) => {
+        const result = await request.put(`/data/games/${gameId}`, gameData);
+        return result;
+    };
+
+    const del = async (gameId) => {
+        const result = await request.delete(`/data/games/${gameId}`);
+        return result;
+    };
+
     return {
         getAll,
         getOne,
-        create
+        create,
+        update,
+        delete: del
     };
 };
