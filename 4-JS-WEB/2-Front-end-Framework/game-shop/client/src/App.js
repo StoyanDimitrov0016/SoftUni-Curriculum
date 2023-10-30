@@ -2,9 +2,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { gameServiceFactory } from './services/gameService';
-import { authServiceFactory } from './services/authService';
 
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
@@ -21,10 +20,8 @@ function App() {
     const navigate = useNavigate();
 
     const [games, setGames] = useState([]);
-    const [auth, setAuth] = useState({});
 
-    const gameService = gameServiceFactory(auth.accessToken);
-    const authService = authServiceFactory(auth.accessToken);
+    const gameService = gameServiceFactory();//auth.accessToken
 
     useEffect(() => {
         gameService.getAll()
@@ -38,39 +35,6 @@ function App() {
         navigate('/catalog');
     };
 
-    const onLoginSubmit = async (data) => {
-        try {
-            const result = await authService.login(data.email, data.password);
-            setAuth(result);
-            navigate('/');
-        } catch (error) {
-            console.log('Error while logging in occurred:', error);
-        }
-    };
-
-    const onRegisterSubmit = async (data) => {
-        const confirmPassword = data['confirm-password'];
-        const password = data.password;
-
-        //TODO: Further improving of password validation
-        if (password !== confirmPassword) {
-            return;
-        }
-
-        try {
-            const result = await authService.register(data.email, data.password);
-            setAuth(result);
-            navigate('/');
-        } catch (error) {
-            console.log('Error while registering in occurred:', error);
-        }
-    };
-
-    const onLogout = async () => {
-        await authService.logout();
-        setAuth({});
-    };
-
     const onGameEditSubmit = async (data) => {
         const editedGame = await gameService.update(data._id, data);
 
@@ -79,18 +43,8 @@ function App() {
         navigate(`/catalog/${data._id}`);
     };
 
-    const context = {
-        onLoginSubmit,
-        onRegisterSubmit,
-        onLogout,
-        userId: auth._id,
-        token: auth.accessToken,
-        userEmail: auth.email,
-        isAuthenticated: auth.accessToken
-    };
-
     return (
-        <AuthContext.Provider value={context} >
+        <AuthProvider >
             <div id="box">
                 <Header />
 
@@ -109,7 +63,7 @@ function App() {
 
                 <Footer />
             </div>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 };
 
