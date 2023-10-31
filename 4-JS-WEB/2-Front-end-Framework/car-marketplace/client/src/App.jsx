@@ -5,6 +5,8 @@ import NavigationBar from "./components/Header/NavigationBar";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import Details from "./components/Details/Details";
+import CreateOffer from "./components/CreateOffer/CreateOffer";
 
 function App() {
   return (
@@ -18,7 +20,8 @@ function App() {
           <Route path="/" element={<Catalog />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/create-offer"></Route>
+          <Route path="/offer/:offerId" element={<Details />}></Route>
+          <Route path="/create-offer" element={<CreateOffer />}></Route>
           <Route path="/about" element={<About />}></Route>
         </Routes>
       </main>
