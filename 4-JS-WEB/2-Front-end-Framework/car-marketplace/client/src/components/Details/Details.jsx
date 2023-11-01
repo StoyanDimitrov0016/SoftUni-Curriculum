@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import offerService from "../../services/offerService";
+import DetailsPreview from "./DetailsPreview";
 
 const Details = () => {
-  return (
-    <div className="details-container">
-      <div className="car-image">
-        <img
-          src="https://www.bmw-m.com/content/dam/bmw/marketBMW_M/common/topics/magazine-article-pool/2018/bmw-m3-e46/bmw-e46-m3-coup%C3%A9-double-image-background.jpg"
-          alt="Car 1"
-        />
-      </div>
-      <div className="car-properties">
-        <h2>Car Make and Model 1</h2>
-        <p>Year: 20XX</p>
-        <p>Price: $XX,XXX</p>
-        <p>City: Example City</p>
-        <p>Fuel Type: Petrol</p>
-        <p>Mileage: 50,000 miles</p>
-      </div>
-    </div>
-  );
+  const [offer, setOffer] = useState({
+    _id: "",
+    ownerId: "",
+    brand: "",
+    model: "",
+    productionYear: 0,
+    fuelType: "",
+    mileage: 0,
+    color: "",
+    price: 0,
+    region: "",
+    transmissionType: "",
+    vehicleType: "",
+    contactInformation: "",
+    description: "",
+    image: "",
+  });
+
+  const { offerId } = useParams();
+
+  useEffect(() => {
+    offerService
+      .getOne(offerId)
+      .then((result) => setOffer(result))
+      .catch((error) =>
+        console.log(
+          "--- An error while fetching current offer in OfferPreview occurred:",
+          error
+        )
+      );
+  }, [offerId]);
+
+  return <DetailsPreview {...offer} />;
 };
 
 export default Details;
