@@ -21,7 +21,7 @@ function OfferPreview({
       <p>Region: {region}</p>
       <p>Fuel Type: {fuelType}</p>
       <p>Mileage: {mileage} miles</p>
-      <Link to={`/offer/derails/${id}`}>View Details</Link>
+      <Link to={`/offer/${id}`}>View Details</Link>
     </article>
   );
 }
