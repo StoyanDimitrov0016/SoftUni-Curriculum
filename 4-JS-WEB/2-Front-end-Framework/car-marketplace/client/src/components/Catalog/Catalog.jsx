@@ -17,13 +17,16 @@ const Catalog = () => {
       );
   }, []);
 
+  const renderContent = () => {
+    if (offers.length > 0) {
+      return offers.map((offer) => <OfferPreview key={offer.id} {...offer} />);
+    }
+    return <p>There are no offers yet</p>;
+  };
+
   return (
     <section className="catalog">
-      {offers.length >= 1 ? (
-        offers.map((offer) => <OfferPreview key={offer.id} {...offer}/>)
-      ) : (
-        <p>There are no offers yet</p>
-      )}
+      {renderContent()}
     </section>
   );
 };
