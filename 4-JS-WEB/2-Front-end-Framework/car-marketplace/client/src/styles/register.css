@@ -1,98 +1,33 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-}
 
-header {
+.user-type-label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+.user-type-button {
+    width: 100px; /* Adjust the width to your desired size, e.g., 100px */
+    height: 40px; /* Adjust the height to your desired size, e.g., 36px */
+    padding: 5px 20px;
+    margin: 10px;
     background-color: #333;
     color: #fff;
-    text-align: center;
-    padding: 1rem 0;
-}
-
-main {
-    max-width: 400px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
+    border: none;
+    cursor: pointer;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 0.5rem 0;
-}
-
-.navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar li {
-    margin: 0 15px;
-}
-
-.navbar a {
+    transition: background-color 0.2s;
+  }
+  
+  .user-type-button:hover {
+    background-color: #ff8c00;
+  }
+  
+  /* Styling for the login link */
+  .login-link {
     text-decoration: none;
     color: #fff;
-    font-weight: bold;
-    transition: color 0.2s;
-}
-
-.navbar a:hover {
+  }
+  
+  .login-link:hover {
     color: #ff8c00;
-    /* Change the color on hover */
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #ff8c00;
-}
-
-p {
-    text-align: center;
-    margin-top: 10px;
-}
-
-/* Hide the company fields by default */
-.company-fields {
-    display: none;
-}
-
-/* Show the company fields when "Company" is selected */
-#userType[value="company"]~.company-fields {
-    display: block;
-}
+  }
+  

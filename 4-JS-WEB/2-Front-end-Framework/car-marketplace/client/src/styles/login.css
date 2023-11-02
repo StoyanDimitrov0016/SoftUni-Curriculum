@@ -85,13 +85,3 @@ p {
     text-align: center;
     margin-top: 10px;
 }
-
-/* Hide the company fields by default */
-.company-fields {
-    display: none;
-}
-
-/* Show the company fields when "Company" is selected */
-#userType[value="company"] ~ .company-fields {
-    display: block;
-}
