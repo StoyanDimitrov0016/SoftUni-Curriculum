@@ -7,6 +7,8 @@ const offerEndpoints = {
     detailsOffer: (id) => `/data/offers/${id}`,
     updateOffer: (id) => `/data/offers/${id}`,
     deleteOffer: (id) => `/data/offers/${id}`,
+    offerOptions: '/data/vehicle-properties',
+    brandModels: (brand) => `/data/vehicle-models/${brand}`
 };
 
 async function getAll() {
@@ -52,13 +54,38 @@ async function del(offerId) {
     return result;
 }
 
+async function getOfferOptions() {
+    const options = await requestHTTP.get(offerEndpoints.offerOptions);
+    const formattedOptions = {
+        brand: options[0],
+        fuelType: options[1],
+        color: options[2],
+        transmissionType: options[3],
+        vehicleType: options[4],
+        region: options[5],
+    }
+    return formattedOptions;
+}
+
+async function getBrandModels(brand) {
+    if (brand) {
+        const brandModels = await requestHTTP.get(offerEndpoints.brandModels(brand));
+        return brandModels;
+    }
+    return [];
+}
+
+//TODO: Add getOfferOptions() and getBrandModels(brand) 
+
 const offerService = {
     getAll,
     getOne,
     getOfferDetails,
     create,
     update,
-    delete: del
+    delete: del,
+    getOfferOptions,
+    getBrandModels
 };
 
 export default offerService;
