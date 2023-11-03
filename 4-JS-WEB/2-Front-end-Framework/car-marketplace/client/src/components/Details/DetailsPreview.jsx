@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 function DetailsPreview({
   _id,
@@ -18,8 +19,9 @@ function DetailsPreview({
   description,
   image,
 }) {
+    
   //TODO: Get actual userId
-  const userId = ownerId;
+  const {userId} = useAuthContext();
   return (
     <div className="details-container">
       <div className="car-image">
@@ -41,15 +43,15 @@ function DetailsPreview({
         <p>Description: {description}</p>
       </div>
       <div className="offer-actions">
-        <Link to={"#"} className="details-link">
+        <Link to={`/offer/like/${_id}`} className="details-link">
           Like
         </Link>
         {ownerId == userId && (
           <>
-            <Link to={"#"} className="details-link">
+            <Link to={`/offer/edit/${_id}`} className="details-link">
               Edit
             </Link>
-            <Link to={"#"} className="details-link">
+            <Link to={`/offer/delete/${_id}`} className="details-link">
               Delete
             </Link>
           </>

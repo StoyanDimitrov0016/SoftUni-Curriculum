@@ -23,7 +23,7 @@ const Details = () => {
   });
 
   const { offerId } = useParams();
-
+  
   useEffect(() => {
     offerService
       .getOne(offerId)
