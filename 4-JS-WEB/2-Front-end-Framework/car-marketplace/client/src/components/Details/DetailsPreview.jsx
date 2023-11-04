@@ -4,7 +4,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 
 function DetailsPreview({
   _id,
-  ownerId,
+  _ownerId,
   brand,
   model,
   productionYear,
@@ -19,9 +19,8 @@ function DetailsPreview({
   description,
   image,
 }) {
-    
-  //TODO: Get actual userId
-  const {userId} = useAuthContext();
+  const { userId } = useAuthContext();
+  
   return (
     <div className="details-container">
       <div className="car-image">
@@ -43,10 +42,7 @@ function DetailsPreview({
         <p>Description: {description}</p>
       </div>
       <div className="offer-actions">
-        <Link to={`/offer/like/${_id}`} className="details-link">
-          Like
-        </Link>
-        {ownerId == userId && (
+        {_ownerId === userId ? (
           <>
             <Link to={`/offer/edit/${_id}`} className="details-link">
               Edit
@@ -55,6 +51,10 @@ function DetailsPreview({
               Delete
             </Link>
           </>
+        ) : (
+          <Link to={`/offer/like/${_id}`} className="details-link">
+            Like
+          </Link>
         )}
       </div>
     </div>
