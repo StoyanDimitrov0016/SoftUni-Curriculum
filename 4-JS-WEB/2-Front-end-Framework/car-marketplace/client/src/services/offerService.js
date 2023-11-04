@@ -8,14 +8,19 @@ const offerEndpoints = {
     updateOffer: (id) => `/data/offers/${id}`,
     deleteOffer: (id) => `/data/offers/${id}`,
     offerOptions: '/data/vehicle-properties',
-    brandModels: (brand) => `/data/vehicle-models/${brand}`
+    brandModels: (brand) => `/data/vehicle-models/${brand}`,
+    userOffers: (id) => {
+        const staticPart = '/data/offers/?where=';
+        const encodedPart = encodeURIComponent(`_ownerId="${id}"`);
+        return staticPart + encodedPart;
+    }
 };
 
 async function getAll() {
     const offers = await requestHTTP.get(offerEndpoints.allOffers);
 
     const leanOffers = offers.map(offer => ({
-        id: offer._id,
+        _id: offer._id,
         brand: offer.brand,
         model: offer.model,
         image: offer.image,
@@ -28,6 +33,7 @@ async function getAll() {
 
     return leanOffers;
 }
+//TODO: add getNewest - first 10 offers or add criteria for getting the first 10 of most liked or newest
 
 async function getOne(id) {
     const offer = await requestHTTP.get(offerEndpoints.oneOffer(id));
@@ -75,7 +81,11 @@ async function getBrandModels(brand) {
     return [];
 }
 
-//TODO: Add getOfferOptions() and getBrandModels(brand) 
+async function getUserOffers(id) {
+    console.log(offerEndpoints.userOffers(id));
+    const offers = requestHTTP.get(offerEndpoints.userOffers(id));
+    return offers;
+}
 
 const offerService = {
     getAll,
@@ -85,7 +95,8 @@ const offerService = {
     update,
     delete: del,
     getOfferOptions,
-    getBrandModels
+    getBrandModels,
+    getUserOffers
 };
 
 export default offerService;
