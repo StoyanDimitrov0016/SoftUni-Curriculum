@@ -6,7 +6,7 @@ import DetailsPreview from "./DetailsPreview";
 const Details = () => {
   const [offer, setOffer] = useState({
     _id: "",
-    ownerId: "",
+    _ownerId: "",
     brand: "",
     model: "",
     productionYear: 0,
