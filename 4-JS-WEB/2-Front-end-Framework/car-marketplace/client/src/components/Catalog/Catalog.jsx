@@ -19,7 +19,7 @@ const Catalog = () => {
 
   const renderContent = () => {
     if (offers.length > 0) {
-      return offers.map((offer) => <OfferPreview key={offer.id} {...offer} />);
+      return offers.map((offer) => <OfferPreview key={offer._id} {...offer} />);
     }
     return <p>There are no offers yet</p>;
   };
