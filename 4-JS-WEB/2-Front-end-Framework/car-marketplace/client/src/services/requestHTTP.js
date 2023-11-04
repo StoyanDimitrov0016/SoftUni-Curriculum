@@ -24,6 +24,15 @@ async function request(url = '', options) {
     }
 }
 
+function getAccessToken() {
+    const credentials = JSON.parse(localStorage.getItem('auth'));
+    if (credentials) {
+        const accessToken = credentials.accessToken;
+        return accessToken;
+    }
+    return null;
+}
+
 function createOptions(method, data) {
     const options = {
         method,
@@ -35,9 +44,7 @@ function createOptions(method, data) {
         options.body = JSON.stringify(data);
     }
 
-    //TODO: get auth token from local storage
-    const accessToken = null;
-    // "dcbf6914b9518f560990a8bde30dab48cb3d128c7527bb82c99998528348b33a";
+    const accessToken = getAccessToken();
 
     if (accessToken) {
         options.headers['X-Authorization'] = accessToken;
