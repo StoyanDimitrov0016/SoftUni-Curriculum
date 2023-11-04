@@ -54,7 +54,21 @@ const CreateOffer = () => {
       );
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   offerService
+  //     .getBrandModels(offerValues.brand)
+  //     .then((models) => {
+  //       setOfferPredefinedOptions((state) => ({
+  //         ...state,
+  //         [keys.model]: models,
+  //       }));
+  //     })
+  //     .catch((error) =>
+  //       console.log("--- An error while fetching brand models in CreateOffer occurred:", error)
+  //     );
+  // }, [offerValues.brand]);
+
+  const loadModels = () => {
     offerService
       .getBrandModels(offerValues.brand)
       .then((models) => {
@@ -66,7 +80,7 @@ const CreateOffer = () => {
       .catch((error) =>
         console.log("--- An error while fetching brand models in CreateOffer occurred:", error)
       );
-  }, [offerValues.brand]);
+  };
 
   const onChangeHandler = (e) => {
     let { name, value } = e.target;
@@ -77,6 +91,7 @@ const CreateOffer = () => {
 
     setOfferValues((state) => ({ ...state, [name]: value }));
   };
+  
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
@@ -84,13 +99,13 @@ const CreateOffer = () => {
 
     await offerService.create(offerValues);
     //TODO: navigate to my offers
-    navigate("/catalog");
+    navigate("/");
   };
 
   return (
     <form className="new-offer-form" onSubmit={onSubmitHandler}>
       <label htmlFor="brand">Brand:</label>
-      <select id="brand" name={keys.brand} required onChange={onChangeHandler}>
+      <select id="brand" name={keys.brand} required onChange={onChangeHandler} onBlur={loadModels}>
         <option value="">Please select</option>
         {offerPredefinedOptions.brand.map((option) => (
           <option key={option} value={option}>
@@ -100,7 +115,7 @@ const CreateOffer = () => {
       </select>
 
       <label htmlFor="model">Model:</label>
-      <select id="model" name={keys.model} required onChange={onChangeHandler}>
+      <select id="model" name={keys.model} required onChange={onChangeHandler} >
         <option value="">Please select</option>
         {offerPredefinedOptions.model.map((option) => (
           <option key={option} value={option}>
