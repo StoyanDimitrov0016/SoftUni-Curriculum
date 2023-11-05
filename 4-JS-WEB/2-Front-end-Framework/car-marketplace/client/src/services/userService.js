@@ -11,8 +11,13 @@ async function login(email, password) {
     return userCredentials;
 }
 
-async function register(email, password) {
-    const userCredentials = await requestHTML.post(userEndpoint.register, { email, password });
+async function userRegister({ firstName, lastName, email, password, userType }) {
+    const userCredentials = await requestHTML.post(userEndpoint.register, { firstName, lastName, email, password, userType });
+    return userCredentials;
+}
+
+async function dealershipRegister({ dealershipName, location, email, phoneNumber, password, userType }) {
+    const userCredentials = await requestHTML.post(userEndpoint.register, { dealershipName, location, email, phoneNumber, password, userType });
     return userCredentials;
 }
 
@@ -23,7 +28,8 @@ async function logout() {
 
 const userService = {
     login,
-    register,
+    userRegister,
+    dealershipRegister,
     logout
 };
 
