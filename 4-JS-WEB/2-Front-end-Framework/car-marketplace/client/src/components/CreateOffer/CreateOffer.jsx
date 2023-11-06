@@ -1,35 +1,20 @@
 import React, { useEffect, useState } from "react";
 import offerService from "../../services/offerService";
 import { useNavigate } from "react-router-dom";
-
-const keys = {
-  brand: "brand",
-  model: "model",
-  productionYear: "productionYear",
-  fuelType: "fuelType",
-  mileage: "mileage",
-  color: "color",
-  price: "price",
-  region: "region",
-  transmissionType: "transmissionType",
-  vehicleType: "vehicleType",
-  contactInformation: "contactInformation",
-  description: "description",
-  image: "image",
-};
+import { useForm } from "../../hooks/useForm";
 
 const CreateOffer = () => {
   const [offerPredefinedOptions, setOfferPredefinedOptions] = useState({
-    [keys.brand]: [],
-    [keys.model]: [],
-    [keys.fuelType]: [],
-    [keys.color]: [],
-    [keys.region]: [],
-    [keys.transmissionType]: [],
-    [keys.vehicleType]: [],
+    brand: [],
+    model: [],
+    fuelType: [],
+    color: [],
+    region: [],
+    transmissionType: [],
+    vehicleType: [],
   });
 
-  const [offerValues, setOfferValues] = useState({
+  const { formValues, changeHandler, onSubmit } = useForm({
     brand: "",
     model: "",
     productionYear: 0,
@@ -56,7 +41,7 @@ const CreateOffer = () => {
 
   // useEffect(() => {
   //   offerService
-  //     .getBrandModels(offerValues.brand)
+  //     .getBrandModels(formValues.brand)
   //     .then((models) => {
   //       setOfferPredefinedOptions((state) => ({
   //         ...state,
@@ -66,15 +51,15 @@ const CreateOffer = () => {
   //     .catch((error) =>
   //       console.log("--- An error while fetching brand models in CreateOffer occurred:", error)
   //     );
-  // }, [offerValues.brand]);
+  // }, [formValues.brand]);
 
   const loadModels = () => {
     offerService
-      .getBrandModels(offerValues.brand)
+      .getBrandModels(formValues.brand)
       .then((models) => {
         setOfferPredefinedOptions((state) => ({
           ...state,
-          [keys.model]: models,
+          model: models,
         }));
       })
       .catch((error) =>
@@ -82,30 +67,10 @@ const CreateOffer = () => {
       );
   };
 
-  const onChangeHandler = (e) => {
-    let { name, value } = e.target;
-
-    if (name === keys.productionYear || name === keys.mileage || name === keys.price) {
-      value = Number(value);
-    }
-
-    setOfferValues((state) => ({ ...state, [name]: value }));
-  };
-  
-  const navigate = useNavigate();
-
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-
-    await offerService.create(offerValues);
-    //TODO: navigate to my offers
-    navigate("/");
-  };
-
   return (
-    <form className="new-offer-form" onSubmit={onSubmitHandler}>
+    <form className="new-offer-form" onSubmit={onSubmit}>
       <label htmlFor="brand">Brand:</label>
-      <select id="brand" name={keys.brand} required onChange={onChangeHandler} onBlur={loadModels}>
+      <select id="brand" name="brand" required onChange={changeHandler} onBlur={loadModels}>
         <option value="">Please select</option>
         {offerPredefinedOptions.brand.map((option) => (
           <option key={option} value={option}>
@@ -115,7 +80,7 @@ const CreateOffer = () => {
       </select>
 
       <label htmlFor="model">Model:</label>
-      <select id="model" name={keys.model} required onChange={onChangeHandler} >
+      <select id="model" name="model" required onChange={changeHandler}>
         <option value="">Please select</option>
         {offerPredefinedOptions.model.map((option) => (
           <option key={option} value={option}>
@@ -128,14 +93,14 @@ const CreateOffer = () => {
       <input
         type="number"
         id="year"
-        name={keys.productionYear}
+        name="productionYear"
         required
-        value={offerValues[keys.productionYear] || ""}
-        onChange={onChangeHandler}
+        value={formValues.productionYear || ""}
+        onChange={changeHandler}
       />
 
       <label htmlFor="fuelType">Fuel Type:</label>
-      <select id="fuelType" name={keys.fuelType} required onChange={onChangeHandler}>
+      <select id="fuelType" name="fuelType" required onChange={changeHandler}>
         <option value="">Please select</option>
         {offerPredefinedOptions.fuelType.map((option) => (
           <option key={option} value={option}>
@@ -148,14 +113,14 @@ const CreateOffer = () => {
       <input
         type="number"
         id="mileage"
-        name={keys.mileage}
+        name="mileage"
         required
-        value={offerValues.mileage || ""}
-        onChange={onChangeHandler}
+        value={formValues.mileage || ""}
+        onChange={changeHandler}
       />
 
       <label htmlFor="color">Color:</label>
-      <select id="color" name={keys.color} required onChange={onChangeHandler}>
+      <select id="color" name="color" required onChange={changeHandler}>
         <option value="">Please select</option>
         {offerPredefinedOptions.color.map((option) => (
           <option key={option} value={option}>
@@ -168,14 +133,14 @@ const CreateOffer = () => {
       <input
         type="number"
         id="price"
-        name={keys.price}
+        name="price"
         required
-        value={offerValues.price || ""}
-        onChange={onChangeHandler}
+        value={formValues.price || ""}
+        onChange={changeHandler}
       />
 
       <label htmlFor="region">Region:</label>
-      <select id="region" name={keys.region} required onChange={onChangeHandler}>
+      <select id="region" name="region" required onChange={changeHandler}>
         <option value="">Please select</option>
         {offerPredefinedOptions.region.map((option) => (
           <option key={option} value={option}>
@@ -187,9 +152,9 @@ const CreateOffer = () => {
       <label htmlFor="transmissionType">Transmission Type:</label>
       <select
         id="transmissionType"
-        name={keys.transmissionType}
+        name="transmissionType"
         required
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       >
         <option value="">Please select</option>
         {offerPredefinedOptions.transmissionType.map((option) => (
@@ -200,7 +165,7 @@ const CreateOffer = () => {
       </select>
 
       <label htmlFor="vehicleType">Vehicle Type:</label>
-      <select id="vehicleType" name={keys.vehicleType} required onChange={onChangeHandler}>
+      <select id="vehicleType" name="vehicleType" required onChange={changeHandler}>
         <option value="">Please select</option>
         {offerPredefinedOptions.vehicleType.map((option) => (
           <option key={option} value={option}>
@@ -213,31 +178,31 @@ const CreateOffer = () => {
       <input
         type="text"
         id="contactInformation"
-        name={keys.contactInformation}
+        name="contactInformation"
         placeholder="tel. or email"
         required
-        value={offerValues.contactInformation}
-        onChange={onChangeHandler}
+        value={formValues.contactInformation}
+        onChange={changeHandler}
       />
 
       <label htmlFor="description">Description:</label>
       <textarea
         id="description"
-        name={keys.description}
+        name="description"
         required
-        value={offerValues.description}
-        onChange={onChangeHandler}
+        value={formValues.description}
+        onChange={changeHandler}
       ></textarea>
 
       <label htmlFor="image">Image:</label>
       <input
         type="text"
         id="image"
-        name={keys.image}
+        name="image"
         placeholder="https://"
         required
-        value={offerValues.image}
-        onChange={onChangeHandler}
+        value={formValues.image}
+        onChange={changeHandler}
       />
 
       <button type="submit">Create Offer</button>
