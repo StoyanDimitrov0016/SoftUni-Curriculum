@@ -23,16 +23,13 @@ const Details = () => {
   });
 
   const { offerId } = useParams();
-  
+
   useEffect(() => {
     offerService
       .getOne(offerId)
       .then((result) => setOffer(result))
       .catch((error) =>
-        console.log(
-          "--- An error while fetching current offer in OfferPreview occurred:",
-          error
-        )
+        console.log("--- An error while fetching current offer in OfferPreview occurred:", error)
       );
   }, [offerId]);
 

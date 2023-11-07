@@ -19,7 +19,8 @@ function DetailsPreview({
   description,
   image,
 }) {
-  const { userId } = useAuthContext();
+  const { userCredentials } = useAuthContext();
+  const userId = userCredentials.userId;
   
   return (
     <div className="details-container">
