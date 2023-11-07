@@ -1,71 +1,79 @@
-import { createContext, useContext } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useState } from "react";
 import userService from "../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useLocalStorage("auth", {});
+const AuthProvider = ({ children }) => {
+  const [userCredentials, setUserCredentials] = useState(() => {
+    const userCredentialsString = localStorage.getItem("userCredentials");
+
+    if (!userCredentialsString) {
+      return null;
+    }
+
+    const parsedUserCredentials = JSON.parse(userCredentialsString);
+    return parsedUserCredentials;
+  });
 
   const navigate = useNavigate();
 
-  const onLoginSubmit = async ({ email, password }) => {
-    
+  const login = async (credentials) => {
     try {
-      const credentials = await userService.login( email, password );
-      setAuth(credentials);
+      const response = await userService.login(credentials.email, credentials.password);
+      const userData = responseParser(response);
+
+      setUserCredentials(userData);
+      localStorage.setItem("userCredentials", JSON.stringify(userData));
+
       navigate("/");
     } catch (error) {
-      console.log("--- An error while logging in AuthContext occurred:", error);
+      console.error("Error logging in:", error);
     }
   };
 
-  const onRegisterSubmit = async (data) => {
-    let credentials = null;
-
+  const register = async (credentials) => {
     try {
-      if (data.password !== data.confirmPassword) {
-        throw new Error("The passwords must be the same!");
-      }
+      const response = await userService.userRegister(credentials);
+      const userData = responseParser(response);
 
-      if (data.userType === "regular") {
-        credentials = await userService.userRegister(data);
-        console.log(credentials);
-      }
+      setUserCredentials(userData);
+      localStorage.setItem("userCredentials", JSON.stringify(userData));
 
-      if (data.userType === "dealership") {
-        credentials = await userService.register(data);
-      }
-
-      if (credentials) {
-        setAuth(credentials);
-        navigate("/");
-      }
+      navigate("/");
     } catch (error) {
-      console.log("--- An error while registering in AuthContext occurred:", error);
+      console.error("Error registering in:", error);
     }
   };
 
-  const onLogout = async () => {
-    await userService.logout();
-    setAuth({});
+  const logout = async () => {
+    try {
+      await userService.logout();
+      setUserCredentials(null);
+
+      localStorage.removeItem("userCredentials");
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
-  const contextValues = {
-    onLoginSubmit,
-    onRegisterSubmit,
-    onLogout,
-    userId: auth._id,
-    accessToken: auth.accessToken,
-    userEmail: auth.email,
-    isAuthenticated: auth.accessToken,
-  };
+  const contextValues = { userCredentials, login, register, logout };
 
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;
+};
+
+const responseParser = (response) => {
+  return {
+    userEmail: response.email,
+    userId: response._id,
+    accessToken: response.accessToken,
+  };
 };
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   return context;
 };
+
+export default AuthProvider;
