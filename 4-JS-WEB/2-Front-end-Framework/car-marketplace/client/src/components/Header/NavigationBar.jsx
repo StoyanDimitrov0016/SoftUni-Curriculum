@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 const NavigationBar = () => {
-  const { isAuthenticated } = useAuthContext();
+  const { userCredentials } = useAuthContext();
+  const userEmail = userCredentials?.userEmail;
 
   return (
     <nav className="navbar">
-      {/* <h1>Welcome to the Car Place</h1> */}
       <ul>
         <li>
           <Link to="/">Home</Link>
         </li>
-        {isAuthenticated ? (
+        {userEmail ? (
           <>
             <li>
               <Link to="/create-offer">Create an offer</Link>
