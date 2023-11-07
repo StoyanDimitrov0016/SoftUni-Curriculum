@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import offerService from "../../services/offerService";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
 
 const CreateOffer = () => {
+  const navigate = useNavigate();
+  
   const [offerPredefinedOptions, setOfferPredefinedOptions] = useState({
     brand: [],
     model: [],
@@ -14,21 +16,34 @@ const CreateOffer = () => {
     vehicleType: [],
   });
 
-  const { formValues, changeHandler, onSubmit } = useForm({
-    brand: "",
-    model: "",
-    productionYear: 0,
-    fuelType: "",
-    mileage: 0,
-    color: "",
-    price: 0,
-    region: "",
-    transmissionType: "",
-    vehicleType: "",
-    contactInformation: "",
-    description: "",
-    image: "",
-  });
+  const onSubmitHandler = async () => {
+    try {
+      const response = await offerService.create(formValues);
+      console.log(response);
+      navigate('/my-offers');
+    } catch (error) {
+      console.log("An error while creating an offer occurred in CreateOffer", error);
+    }
+  };
+
+  const { formValues, changeHandler, onSubmit } = useForm(
+    {
+      brand: "",
+      model: "",
+      productionYear: 0,
+      fuelType: "",
+      mileage: 0,
+      color: "",
+      price: 0,
+      region: "",
+      transmissionType: "",
+      vehicleType: "",
+      contactInformation: "",
+      description: "",
+      image: "",
+    },
+    onSubmitHandler
+  );
 
   useEffect(() => {
     offerService
@@ -150,12 +165,7 @@ const CreateOffer = () => {
       </select>
 
       <label htmlFor="transmissionType">Transmission Type:</label>
-      <select
-        id="transmissionType"
-        name="transmissionType"
-        required
-        onChange={changeHandler}
-      >
+      <select id="transmissionType" name="transmissionType" required onChange={changeHandler}>
         <option value="">Please select</option>
         {offerPredefinedOptions.transmissionType.map((option) => (
           <option key={option} value={option}>
