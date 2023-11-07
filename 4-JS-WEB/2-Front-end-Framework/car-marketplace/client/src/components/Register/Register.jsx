@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import UserRegisterForm from "./UserRegisterForm";
@@ -7,8 +7,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 
 const Register = () => {
   const [userType, setUserType] = useState("user");
-
-  const { onRegisterSubmit } = useAuthContext();
+  const { register } = useAuthContext();
 
   return (
     <>
@@ -21,9 +20,9 @@ const Register = () => {
       </button>
 
       {userType === "user" ? (
-        <UserRegisterForm onRegisterSubmit={onRegisterSubmit} />
+        <UserRegisterForm register={register} />
       ) : (
-        <DealershipRegisterForm onRegisterSubmit={onRegisterSubmit} />
+        <DealershipRegisterForm register={register} />
       )}
 
       <p>
