@@ -1,25 +1,18 @@
-import React, { useState } from "react";
+import { useForm } from "../../hooks/useForm";
 
-const DealershipRegisterForm = () => {
-  const [formValues, setFormValues] = useState({
-    dealershipName: "",
-    location: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    confirmPassword: "",
-    userType: "dealership",
-  });
-
-  const onChangeHandler = (e) => {
-    console.log(e.target.name, e.target.value);
-    setFormValues((state) => ({ ...state, [e.target.name]: e.target.value }));
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(formValues);
-  };
+const DealershipRegisterForm = ({register}) => {
+  const { formValues, changeHandler, onSubmit } = useForm(
+    {
+      dealershipName: "",
+      location: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
+      userType: "dealership",
+    },
+    register
+  );
 
   return (
     <form className="dealership-register-form" onSubmit={onSubmit}>
@@ -31,7 +24,7 @@ const DealershipRegisterForm = () => {
         required
         className="dealership-input"
         value={formValues.dealershipName}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="location">Location:</label>
@@ -42,7 +35,7 @@ const DealershipRegisterForm = () => {
         required
         className="dealership-input"
         value={formValues.location}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="email">Email:</label>
@@ -53,7 +46,7 @@ const DealershipRegisterForm = () => {
         required
         className="dealership-input"
         value={formValues.email}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="phoneNumber">Phone Number:</label>
@@ -64,7 +57,7 @@ const DealershipRegisterForm = () => {
         required
         className="dealership-input"
         value={formValues.phoneNumber}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="password">Password:</label>
@@ -75,7 +68,7 @@ const DealershipRegisterForm = () => {
         required
         className="dealership-input"
         value={formValues.password}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="password">Confirm password:</label>
@@ -86,7 +79,7 @@ const DealershipRegisterForm = () => {
         required
         className="dealership-input"
         value={formValues.confirmPassword}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <button type="submit" className="dealership-button">
