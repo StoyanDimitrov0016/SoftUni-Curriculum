@@ -1,30 +1,16 @@
-import React, { useState } from "react";
-import userService from "../../services/userService";
+import { useForm } from "../../hooks/useForm";
 
-const UserRegisterForm = ({ onRegisterSubmit }) => {
-  const [formValues, setFormValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    userType: "regular",
-  });
-
-  const onChangeHandler = (e) => {
-    console.log(e.target.name, e.target.value);
-    setFormValues((state) => ({ ...state, [e.target.name]: e.target.value }));
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    if (formValues.password !== formValues.confirmPassword) {
-      return;
-    }
-  
-    await onRegisterSubmit( formValues);
-  };
+const UserRegisterForm = ({ register }) => {
+  const { formValues, changeHandler, onSubmit } = useForm(
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    register
+  );
 
   return (
     <form className="user-register-form" onSubmit={onSubmit}>
@@ -36,7 +22,7 @@ const UserRegisterForm = ({ onRegisterSubmit }) => {
         required
         className="user-input"
         value={formValues.firstName}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="lastname">Last Name:</label>
@@ -47,7 +33,7 @@ const UserRegisterForm = ({ onRegisterSubmit }) => {
         required
         className="user-input"
         value={formValues.lastName}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="email">Email:</label>
@@ -58,7 +44,7 @@ const UserRegisterForm = ({ onRegisterSubmit }) => {
         required
         className="user-input"
         value={formValues.email}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="password">Password:</label>
@@ -69,7 +55,7 @@ const UserRegisterForm = ({ onRegisterSubmit }) => {
         required
         className="user-input"
         value={formValues.password}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <label htmlFor="password">Confirm password:</label>
@@ -80,7 +66,7 @@ const UserRegisterForm = ({ onRegisterSubmit }) => {
         required
         className="user-input"
         value={formValues.confirmPassword}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
 
       <button type="submit" className="user-button">
