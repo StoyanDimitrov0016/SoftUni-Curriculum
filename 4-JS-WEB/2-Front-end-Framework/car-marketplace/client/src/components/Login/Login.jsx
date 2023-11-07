@@ -1,15 +1,16 @@
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 
 const Login = () => {
-  const { onLoginSubmit } = useAuth();
+  const { login } = useAuthContext();
 
   const { formValues, changeHandler, onSubmit } = useForm(
     {
       email: "",
       password: "",
     },
-    onLoginSubmit
+    login
   );
 
   return (
