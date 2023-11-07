@@ -4,7 +4,10 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import OfferPreview from "../Catalog/OfferPreview";
 
 const MyOffers = () => {
-  const { userId } = useAuthContext();
+  
+  const { userCredentials } = useAuthContext();
+  const userId = userCredentials.userId;
+
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
@@ -17,12 +20,13 @@ const MyOffers = () => {
         console.error("Error fetching user offers:", error);
       });
   }, []);
-  
-//TODO: Make offer preview component to receive class names so it becomes a reusable component
+
+  //TODO: Make offer preview component to receive class names so it becomes a reusable component
 
   const renderContent = () => {
     if (offers.length > 0) {
-      return offers.map((offer) => <OfferPreview key={offer.id} {...offer} />);
+      console.log(offers);
+      return offers.map((offer) => <OfferPreview key={offer._id} {...offer} />);
     }
     return <p>There are no offers yet</p>;
   };
