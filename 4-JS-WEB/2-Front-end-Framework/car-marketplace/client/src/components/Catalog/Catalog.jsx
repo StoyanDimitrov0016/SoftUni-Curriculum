@@ -10,10 +10,7 @@ const Catalog = () => {
       .getAll()
       .then((result) => setOffers(result))
       .catch((error) =>
-        console.log(
-          "--- An error while fetching all offers in Catalog occurred:",
-          error
-        )
+        console.log("--- An error while fetching all offers in Catalog occurred:", error)
       );
   }, []);
 
@@ -24,11 +21,7 @@ const Catalog = () => {
     return <p>There are no offers yet</p>;
   };
 
-  return (
-    <section className="catalog">
-      {renderContent()}
-    </section>
-  );
+  return <section className="catalog">{renderContent()}</section>;
 };
 
 export default Catalog;

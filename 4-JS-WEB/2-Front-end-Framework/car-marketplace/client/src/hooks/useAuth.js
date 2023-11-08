@@ -1,15 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext";
 import userService from "../services/userService";
+import { useLocalStorage } from "./useLocalStorage";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export const useAuth = () => {
-  const [setAuth] = useAuthContext();
   const navigate = useNavigate();
+
+  // const [_, setLocalStorageState] = useLocalStorage('auth', {});
+  const { setCallbackState} = useAuthContext()
 
   const onLoginSubmit = async ({ email, password }) => {
     try {
       const credentials = await userService.login(email, password);
-      setAuth(credentials);
+      // console.log(credentials, 'received credentials in onLoginSubmit from user service login'); //receiving correct data
+      setCallbackState(credentials);
+      // console.log(_, 'Auth state after setAuth form onLoginSubmit in onLoginSubmit');
       navigate("/");
     } catch (error) {
       console.error("An error occurred while logging in:", error);
@@ -33,7 +38,7 @@ export const useAuth = () => {
       }
 
       if (credentials) {
-        setAuth(credentials);
+        setCallbackState(credentials);
         navigate("/");
       }
     } catch (error) {
@@ -43,10 +48,9 @@ export const useAuth = () => {
 
   const onLogout = async () => {
     await userService.logout();
-    setAuth({});
+    setCallbackState({});
   };
 
-  // Return the functions to make them available to components
   return {
     onLoginSubmit,
     onRegisterSubmit,
