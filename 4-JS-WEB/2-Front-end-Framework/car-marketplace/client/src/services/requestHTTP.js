@@ -7,6 +7,7 @@ async function request(url = '', options) {
         if (response.ok !== true) {
             if (response.status == 403) {
                 //clear local storage, because the token is invalid/expired
+                localStorage.clear();
             }
 
             const err = await response.json();
@@ -25,7 +26,7 @@ async function request(url = '', options) {
 }
 
 function getAccessToken() {
-    const credentials = JSON.parse(localStorage.getItem('auth'));
+    const credentials = JSON.parse(localStorage.getItem('userCredentials'));
     if (credentials) {
         const accessToken = credentials.accessToken;
         return accessToken;
