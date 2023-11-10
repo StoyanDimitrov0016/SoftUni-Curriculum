@@ -50,8 +50,8 @@ async function create(offerData) {
     return result;
 }
 
-async function update(offerId) {
-    const result = await requestHTTP.put(offerEndpoints.updateOffer(offerId));
+async function update(offerId, offerData) {
+    const result = await requestHTTP.put(offerEndpoints.updateOffer(offerId), offerData);
     return result;
 }
 
@@ -82,9 +82,12 @@ async function getBrandModels(brand) {
 }
 
 async function getUserOffers(id) {
-    console.log(offerEndpoints.userOffers(id));
     const offers = requestHTTP.get(offerEndpoints.userOffers(id));
     return offers;
+}
+
+async function addToWatchList(offerId, userId) {
+    const result = await requestHTTP.post()
 }
 
 const offerService = {
