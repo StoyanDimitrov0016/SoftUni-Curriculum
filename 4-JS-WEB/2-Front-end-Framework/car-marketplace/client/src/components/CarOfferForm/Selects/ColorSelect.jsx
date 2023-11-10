@@ -3,10 +3,10 @@ const ColorSelect = ({ colors, changeHandler, selectedColor }) => {
     <>
       <label htmlFor="color">Color:</label>
 
-      <select id="color" name="color" required onChange={changeHandler}>
+      <select id="color" name="color" required value={selectedColor} onChange={changeHandler}>
         <option value="">Please select</option>
         {colors.map((color) => (
-          <option key={color} value={color} selected={selectedColor === color}>
+          <option key={color} value={color}>
             {color}
           </option>
         ))}
