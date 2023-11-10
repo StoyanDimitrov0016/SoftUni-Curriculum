@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
+import offerService from "../../services/offerService";
 
 function DetailsPreview({
   _id,
@@ -21,7 +22,11 @@ function DetailsPreview({
 }) {
   const { userCredentials } = useAuthContext();
   const userId = userCredentials.userId;
-  
+
+  const addToWatchList = async () => {
+    
+  };
+
   return (
     <div className="details-container">
       <div className="car-image">
@@ -31,16 +36,18 @@ function DetailsPreview({
         <h2>
           {brand} {model}
         </h2>
-        <p>Year: {productionYear}</p>
-        <p>Price: ${price}</p>
-        <p>City: {region}</p>
-        <p>Fuel Type: {fuelType}</p>
-        <p>Mileage: {mileage} miles</p>
-        <p>Color: {color}</p>
-        <p>Transmission Type: {transmissionType}</p>
-        <p>Vehicle Type: {vehicleType}</p>
-        <p>Contact Information: {contactInformation}</p>
-        <p>Description: {description}</p>
+        <ul>
+          <li>Year: {productionYear}</li>
+          <li>Price: ${price}</li>
+          <li>City: {region}</li>
+          <li>Fuel Type: {fuelType}</li>
+          <li>Mileage: {mileage} miles</li>
+          <li>Color: {color}</li>
+          <li>Transmission Type: {transmissionType}</li>
+          <li>Vehicle Type: {vehicleType}</li>
+          <li>Contact Information: {contactInformation}</li>
+          <li>Description: {description}</li>
+        </ul>
       </div>
       <div className="offer-actions">
         {_ownerId === userId ? (
@@ -54,7 +61,7 @@ function DetailsPreview({
           </>
         ) : (
           <Link to={`/offer/like/${_id}`} className="details-link">
-            Like
+            Add to watch list
           </Link>
         )}
       </div>
