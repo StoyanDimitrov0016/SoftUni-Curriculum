@@ -4,7 +4,6 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import OfferPreview from "../Catalog/OfferPreview";
 
 const MyOffers = () => {
-  
   const { userCredentials } = useAuthContext();
   const userId = userCredentials.userId;
 
@@ -25,7 +24,6 @@ const MyOffers = () => {
 
   const renderContent = () => {
     if (offers.length > 0) {
-      console.log(offers);
       return offers.map((offer) => <OfferPreview key={offer._id} {...offer} />);
     }
     return <p>There are no offers yet</p>;
@@ -35,7 +33,7 @@ const MyOffers = () => {
     <div className="my-offers">
       <h1 className="my-offers-title">My Offers</h1>
 
-      {renderContent()}
+      <div className="list">{renderContent()}</div>
     </div>
   );
 };
