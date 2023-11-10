@@ -4,7 +4,7 @@ import userService from "../services/userService";
 
 export const useCarOfferForm = (submitHandler, offerId) => {
     const parseToNumberValues = ["productionYear", "mileage", "price"];
-
+    
     const [offerPredefinedOptions, setOfferPredefinedOptions] = useState({
         brand: [],
         model: [],
@@ -41,7 +41,7 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         }).catch((error) => {
             console.log('An error while fetching predefined options occurred', error);
         });
-    }, []);
+    }, [offerId]);
 
     const changeHandler = async (e) => {
         let { name, value } = e.target;
@@ -77,11 +77,11 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         try {
             const offerData = await offerService.getOne(offerId);
             setFormValues((values) => ({ ...values, ...offerData }));
+            await loadModels(offerData.brand);
         } catch (error) {
             console.log("An error while fetching offer data occurred:", error);
         }
-    }, []);
+    }, [offerId]);
 
     return { offerPredefinedOptions, formValues, changeHandler, submit };
-
 };
