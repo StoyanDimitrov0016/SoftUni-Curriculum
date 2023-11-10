@@ -5,9 +5,11 @@ const Footer = () => {
   return (
     <footer>
       <p>© 2023 Vehicle Catalog</p>
-      <li>
-        <Link to="/about">About us</Link>
-      </li>
+      <ul>
+        <li>
+          <Link to="/about">About us</Link>
+        </li>
+      </ul>
     </footer>
   );
 };
