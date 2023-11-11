@@ -8,6 +8,7 @@ const UserRegisterForm = ({ register }) => {
       email: "",
       password: "",
       confirmPassword: "",
+      userType: "regular",
     },
     register
   );
