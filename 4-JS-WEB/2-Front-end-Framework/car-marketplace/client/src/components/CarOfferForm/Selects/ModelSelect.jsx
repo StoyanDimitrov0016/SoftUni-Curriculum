@@ -1,5 +1,5 @@
 const ModelSelect = ({ models, changeHandler, selectedModel }) => {
-console.log(models, selectedModel);
+  
   return (
     <>
       <label htmlFor="model">Model:</label>
