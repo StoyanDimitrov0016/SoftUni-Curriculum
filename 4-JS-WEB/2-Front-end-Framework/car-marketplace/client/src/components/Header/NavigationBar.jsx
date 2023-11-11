@@ -28,6 +28,9 @@ const NavigationBar = () => {
             <li>
               <Link to="/logout">Logout</Link>
             </li>
+            <li>
+              <p>{userEmail}</p>
+            </li>
           </>
         ) : (
           <>
