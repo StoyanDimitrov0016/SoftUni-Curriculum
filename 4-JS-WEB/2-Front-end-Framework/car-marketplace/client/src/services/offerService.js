@@ -13,7 +13,11 @@ const offerEndpoints = {
         const staticPart = '/data/offers/?where=';
         const encodedPart = encodeURIComponent(`_ownerId="${id}"`);
         return staticPart + encodedPart;
-    }
+    },
+    'watchlist-add': '/data/watchlist',
+    'watchlist-count': (offerId) => `/data/watchlist?where=offerId%3D%22${offerId}%22&count`,
+    'watchlist-remove': '/data/watchlist',
+
 };
 
 async function getAll() {
@@ -86,8 +90,15 @@ async function getUserOffers(id) {
     return offers;
 }
 
-async function addToWatchList(offerId, userId) {
-    const result = await requestHTTP.post()
+async function addToWatchList(offerId) {
+    const result = await requestHTTP.post(offerEndpoints["watchlist-add"], { offerId });
+    return result;
+}
+
+async function getWatchlistCountForOffer(offerId) {
+    // debugger
+    const result = await requestHTTP.get(offerEndpoints["watchlist-count"](offerId), { offerId });
+    return result;
 }
 
 const offerService = {
@@ -99,7 +110,9 @@ const offerService = {
     delete: del,
     getOfferOptions,
     getBrandModels,
-    getUserOffers
+    getUserOffers,
+    addToWatchList,
+    getWatchlistCountForOffer
 };
 
 export default offerService;
