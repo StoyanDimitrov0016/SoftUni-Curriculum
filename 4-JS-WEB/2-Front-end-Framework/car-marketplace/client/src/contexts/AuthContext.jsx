@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
-import userService from "../services/userService";
 import { useNavigate } from "react-router-dom";
+
+import regularUserService from "../services/RegularUserService";
+import dealershipService from "../services/dealershipService";
 
 const AuthContext = createContext();
 
@@ -20,7 +22,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await userService.login(credentials.email, credentials.password);
+      const response = await regularUserService.login(credentials.email, credentials.password);
       const userData = responseParser(response);
 
       setUserCredentials(userData);
@@ -34,11 +36,51 @@ const AuthProvider = ({ children }) => {
 
   const register = async (credentials) => {
     try {
-      const response = await userService.userRegister(credentials);
-      const userData = responseParser(response);
+      const { userType } = credentials;
 
-      setUserCredentials(userData);
-      localStorage.setItem("userCredentials", JSON.stringify(userData));
+      let userData = {};
+
+      if (userType === "regular") {
+        const response = await regularUserService.register(credentials);
+        userData = responseParser(response);
+
+        setUserCredentials(userData);
+        localStorage.setItem("userCredentials", JSON.stringify(userData));
+      }
+
+      if (userType === "dealership") {
+        const { dealershipName, email, password, ...additionalInfo } = credentials;
+
+        const response = await dealershipService.register({
+          dealershipName,
+          email,
+          password,
+          userType,
+        });
+
+        userData = responseParser(response);
+        console.log(userData);
+
+        setUserCredentials(userData);
+        localStorage.setItem("userCredentials", JSON.stringify(userData));
+
+        const dealershipDataFromCollection = await dealershipService.createDealershipInCollection({
+          ...additionalInfo,
+          dealershipName,
+          email,
+        });
+
+        console.log(dealershipDataFromCollection);
+
+        setUserCredentials((state) => {
+          const newState = { ...state, reference: dealershipDataFromCollection._id };
+          localStorage.setItem("userCredentials", JSON.stringify(newState));
+          return newState;
+        });
+        
+        console.log(userCredentials, "the last clg");
+        localStorage.clear();
+      }
 
       navigate("/");
     } catch (error) {
@@ -48,7 +90,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await userService.logout();
+      await regularUserService.logout();
       setUserCredentials(null);
 
       localStorage.removeItem("userCredentials");
@@ -63,13 +105,11 @@ const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;
 };
 
-const responseParser = (response) => {
-  return {
-    userEmail: response.email,
-    userId: response._id,
-    accessToken: response.accessToken,
-  };
-};
+const responseParser = ({ _id, email, ...response }) => ({
+  ...response,
+  userId: _id,
+  userEmail: email,
+});
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
