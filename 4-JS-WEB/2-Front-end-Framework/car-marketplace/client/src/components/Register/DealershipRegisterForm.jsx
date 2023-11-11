@@ -1,6 +1,6 @@
 import { useForm } from "../../hooks/useForm";
 
-const DealershipRegisterForm = ({register}) => {
+const DealershipRegisterForm = ({ register }) => {
   const { formValues, changeHandler, onSubmit } = useForm(
     {
       dealershipName: "",
@@ -9,6 +9,7 @@ const DealershipRegisterForm = ({register}) => {
       phoneNumber: "",
       password: "",
       confirmPassword: "",
+      workingHours: "",
       userType: "dealership",
     },
     register
@@ -71,14 +72,25 @@ const DealershipRegisterForm = ({register}) => {
         onChange={changeHandler}
       />
 
-      <label htmlFor="password">Confirm password:</label>
+      <label htmlFor="confirmPassword">Confirm Password:</label>
       <input
         type="password"
-        id="password"
+        id="confirmPassword"
         name="confirmPassword"
         required
         className="dealership-input"
         value={formValues.confirmPassword}
+        onChange={changeHandler}
+      />
+
+      <label htmlFor="workingHours">Working Hours:</label>
+      <input
+        type="text"
+        id="workingHours"
+        name="workingHours"
+        required
+        className="dealership-input"
+        value={formValues.workingHours}
         onChange={changeHandler}
       />
 
