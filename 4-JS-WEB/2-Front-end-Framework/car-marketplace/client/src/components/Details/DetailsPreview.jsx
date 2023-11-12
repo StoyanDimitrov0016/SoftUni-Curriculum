@@ -1,32 +1,36 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../../contexts/AuthContext";
-import offerService from "../../services/offerService";
 
 function DetailsPreview({
-  _id,
-  _ownerId,
-  brand,
-  model,
-  productionYear,
-  fuelType,
-  mileage,
-  color,
-  price,
-  region,
-  transmissionType,
-  vehicleType,
-  contactInformation,
-  description,
-  image,
+  offer,
+
+  isDeleting,
+  deleteClickHandler,
+  cancelDeleteClickHandler,
+  confirmDeleteClickHandler,
+
+  addToWatchList,
+  removeFromWatchList,
 }) {
-  const { userCredentials } = useAuthContext();
-  const userId = userCredentials.userId;
-
-  const addToWatchList = async () => {
-    
-  };
-
+  const {
+    _id,
+    brand,
+    model,
+    productionYear,
+    fuelType,
+    mileage,
+    color,
+    price,
+    region,
+    transmissionType,
+    vehicleType,
+    contactInformation,
+    description,
+    image,
+    watchlistCount,
+    canAdd,
+    isOwner,
+  } = offer;
+  
   return (
     <div className="details-container">
       <div className="car-image">
@@ -37,6 +41,7 @@ function DetailsPreview({
           {brand} {model}
         </h2>
         <ul>
+          <li>{watchlistCount} watchers</li>
           <li>Year: {productionYear}</li>
           <li>Price: ${price}</li>
           <li>City: {region}</li>
@@ -50,19 +55,30 @@ function DetailsPreview({
         </ul>
       </div>
       <div className="offer-actions">
-        {_ownerId === userId ? (
+        {isOwner ? (
           <>
             <Link to={`/offer/edit/${_id}`} className="details-link">
               Edit
             </Link>
-            <Link to={`/offer/delete/${_id}`} className="details-link">
+            <button className="details-link" onClick={deleteClickHandler}>
               Delete
-            </Link>
+            </button>
+            {isDeleting && (
+              <div className="confirmation-box">
+                <p>Are you sure you want to delete this offer?</p>
+                <button onClick={confirmDeleteClickHandler}>Confirm</button>
+                <button onClick={cancelDeleteClickHandler}>Cancel</button>
+              </div>
+            )}
           </>
+        ) : canAdd ? (
+          <button className="add-to-watchlist-btn" onClick={addToWatchList}>
+            Add to watchlist
+          </button>
         ) : (
-          <Link to={`/offer/like/${_id}`} className="details-link">
-            Add to watch list
-          </Link>
+          <button className="remove-from-watchlist-btn" onClick={removeFromWatchList}>
+            Remove from watch list
+          </button>
         )}
       </div>
     </div>
