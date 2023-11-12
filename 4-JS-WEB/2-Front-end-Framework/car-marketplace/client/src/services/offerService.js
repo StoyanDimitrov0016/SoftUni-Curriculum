@@ -1,27 +1,8 @@
 import requestHTTP from "./requestHTTP";
-
-const offerEndpoints = {
-    allOffers: '/data/offers',
-    oneOffer: (id) => `/data/offers/${id}`,
-    createOffer: '/data/offers',
-    detailsOffer: (id) => `/data/offers/${id}`,
-    updateOffer: (id) => `/data/offers/${id}`,
-    deleteOffer: (id) => `/data/offers/${id}`,
-    offerOptions: '/data/vehicle-properties',
-    brandModels: (brand) => `/data/vehicle-models/${brand}`,
-    userOffers: (id) => {
-        const staticPart = '/data/offers/?where=';
-        const encodedPart = encodeURIComponent(`_ownerId="${id}"`);
-        return staticPart + encodedPart;
-    },
-    'watchlist-add': '/data/watchlist',
-    'watchlist-count': (offerId) => `/data/watchlist?where=offerId%3D%22${offerId}%22&count`,
-    'watchlist-remove': '/data/watchlist',
-
-};
+import { offerEndpoints as endpoints } from "./endpoints";
 
 async function getAll() {
-    const offers = await requestHTTP.get(offerEndpoints.allOffers);
+    const offers = await requestHTTP.get(endpoints.offersCollection);
 
     const leanOffers = offers.map(offer => ({
         _id: offer._id,
@@ -40,32 +21,27 @@ async function getAll() {
 //TODO: add getNewest - first 10 offers or add criteria for getting the first 10 of most liked or newest
 
 async function getOne(id) {
-    const offer = await requestHTTP.get(offerEndpoints.oneOffer(id));
-    return offer;
-}
-
-async function getOfferDetails(offerId) {
-    const offer = await requestHTTP.get(offerEndpoints.detailsOffer(offerId));
+    const offer = await requestHTTP.get(endpoints.specificOffer(id));
     return offer;
 }
 
 async function create(offerData) {
-    const result = await requestHTTP.post(offerEndpoints.createOffer, offerData);
+    const result = await requestHTTP.post(endpoints.offersCollection, offerData);
     return result;
 }
 
 async function update(offerId, offerData) {
-    const result = await requestHTTP.put(offerEndpoints.updateOffer(offerId), offerData);
+    const result = await requestHTTP.put(endpoints.specificOffer(offerId), offerData);
     return result;
 }
 
 async function del(offerId) {
-    const result = await requestHTTP.delete(offerEndpoints.deleteOffer(offerId));
+    const result = await requestHTTP.delete(endpoints.specificOffer(offerId));
     return result;
 }
 
 async function getOfferOptions() {
-    const options = await requestHTTP.get(offerEndpoints.offerOptions);
+    const options = await requestHTTP.get(endpoints.vehicleOptions);
     const formattedOptions = {
         brand: options[0],
         fuelType: options[1],
@@ -79,32 +55,43 @@ async function getOfferOptions() {
 
 async function getBrandModels(brand) {
     if (brand) {
-        const brandModels = await requestHTTP.get(offerEndpoints.brandModels(brand));
+        const brandModels = await requestHTTP.get(endpoints.brandModels(brand));
         return brandModels;
     }
     return [];
 }
 
 async function getUserOffers(id) {
-    const offers = requestHTTP.get(offerEndpoints.userOffers(id));
+    const offers = requestHTTP.get(endpoints.userOffers(id));
     return offers;
 }
 
 async function addToWatchList(offerId) {
-    const result = await requestHTTP.post(offerEndpoints["watchlist-add"], { offerId });
+    const result = await requestHTTP.post(endpoints.watchlistsCollection, { offerId });
+    return result;
+}
+async function removeFromWatchList(offerId, userId) {
+    const entry = await requestHTTP.get(endpoints.specificWatchlistByOfferAndUserId(offerId, userId));
+    const entryId = entry[0]._id;
+    console.log(endpoints.specificWatchlistById(entryId, userId));
+    const result = await requestHTTP.delete(endpoints.specificWatchlistById(entryId));
     return result;
 }
 
+
 async function getWatchlistCountForOffer(offerId) {
-    // debugger
-    const result = await requestHTTP.get(offerEndpoints["watchlist-count"](offerId), { offerId });
+    const result = await requestHTTP.get(endpoints.specificWatchlistCount(offerId), { offerId });
     return result;
+}
+
+async function canAddToWatchlist(offerId, userId) {
+    const watchlistCount = await requestHTTP.get(endpoints.specificWatchlistCount(offerId, userId));
+    return watchlistCount === 0;
 }
 
 const offerService = {
     getAll,
     getOne,
-    getOfferDetails,
     create,
     update,
     delete: del,
@@ -112,7 +99,9 @@ const offerService = {
     getBrandModels,
     getUserOffers,
     addToWatchList,
-    getWatchlistCountForOffer
+    getWatchlistCountForOffer,
+    canAddToWatchlist,
+    removeFromWatchList
 };
 
 export default offerService;
