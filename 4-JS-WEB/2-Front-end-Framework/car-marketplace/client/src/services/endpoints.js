@@ -28,4 +28,9 @@ const offerEndpoints = {
         `/data/watchlists?where=offerId%3D%22${offerId}%22%20and%20_ownerId%3D%22${userId}%22`
 };
 
+const searchEndpoints = {
+    base: 'data/offers',
+    
+}
+
 export { authenticationEndpoints, dealershipEndpoints, offerEndpoints };
