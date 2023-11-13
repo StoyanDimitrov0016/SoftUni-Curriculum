@@ -1,11 +1,11 @@
-const DescriptionInput = ({description, changeHandler}) => {
+const DescriptionInput = ({ description, changeHandler, isRequired = true }) => {
   return (
     <>
       <label htmlFor="description">Description:</label>
       <textarea
         id="description"
         name="description"
-        required
+        required={isRequired}
         value={description}
         onChange={changeHandler}
       ></textarea>

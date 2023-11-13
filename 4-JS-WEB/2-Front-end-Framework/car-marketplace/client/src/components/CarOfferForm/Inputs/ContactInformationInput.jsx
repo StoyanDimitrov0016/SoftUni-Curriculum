@@ -1,4 +1,4 @@
-const ContactInformationInput = ({contactInformation, changeHandler}) => {
+const ContactInformationInput = ({ contactInformation, changeHandler, isRequired = true }) => {
   return (
     <>
       <label htmlFor="contactInformation">Contact Information:</label>
@@ -7,7 +7,7 @@ const ContactInformationInput = ({contactInformation, changeHandler}) => {
         id="contactInformation"
         name="contactInformation"
         placeholder="tel. or email"
-        required
+        required={isRequired}
         value={contactInformation}
         onChange={changeHandler}
       />

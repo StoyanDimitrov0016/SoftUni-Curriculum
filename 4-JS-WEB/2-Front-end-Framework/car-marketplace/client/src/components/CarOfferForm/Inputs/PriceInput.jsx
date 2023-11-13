@@ -1,4 +1,4 @@
-const PriceInput = ({price, changeHandler}) => {
+const PriceInput = ({ price, changeHandler, isRequired = true }) => {
   return (
     <>
       <label htmlFor="price">Price:</label>
@@ -6,7 +6,7 @@ const PriceInput = ({price, changeHandler}) => {
         type="number"
         id="price"
         name="price"
-        required
+        required={isRequired ? "required" : ""}
         value={price || ""}
         onChange={changeHandler}
       />

@@ -1,4 +1,4 @@
-const MileageInput = ({mileage, changeHandler}) => {
+const MileageInput = ({ mileage, changeHandler, isRequired = true }) => {
   return (
     <>
       <label htmlFor="mileage">Mileage (in kilometers):</label>
@@ -6,7 +6,7 @@ const MileageInput = ({mileage, changeHandler}) => {
         type="number"
         id="mileage"
         name="mileage"
-        required
+        required={isRequired}
         value={mileage || ""}
         onChange={changeHandler}
       />

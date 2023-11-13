@@ -1,4 +1,4 @@
-const ProductionYearInput = ({productionYear, changeHandler}) => {
+const ProductionYearInput = ({ productionYear, changeHandler, isRequired = true }) => {
   return (
     <>
       <label htmlFor="year">Production year:</label>
@@ -6,7 +6,7 @@ const ProductionYearInput = ({productionYear, changeHandler}) => {
         type="number"
         id="year"
         name="productionYear"
-        required
+        required={isRequired}
         value={productionYear || ""}
         onChange={changeHandler}
       />
