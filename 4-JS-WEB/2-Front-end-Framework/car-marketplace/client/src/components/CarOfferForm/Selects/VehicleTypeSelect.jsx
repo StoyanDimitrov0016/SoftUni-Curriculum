@@ -1,11 +1,11 @@
-const VehicleType = ({ vehicleTypes, changeHandler, selectedVehicleType }) => {
+const VehicleTypeSelect = ({ vehicleTypes, changeHandler, selectedVehicleType, isRequired=true }) => {
   return (
     <>
       <label htmlFor="vehicleType">Vehicle Type:</label>
       <select
         id="vehicleType"
         name="vehicleType"
-        required
+        required={isRequired}
         value={selectedVehicleType}
         onChange={changeHandler}
       >
@@ -20,4 +20,4 @@ const VehicleType = ({ vehicleTypes, changeHandler, selectedVehicleType }) => {
   );
 };
 
-export default VehicleType;
+export default VehicleTypeSelect;
