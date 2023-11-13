@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import offerService from "../../services/offerService";
 
-import { useNavigate } from "react-router-dom";
-import { useCarOfferForm } from "../../hooks/useCarOfferForm";
-import CarOfferForm from "../CarOfferForm/CarOfferForm";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { useCarOfferForm } from "../../hooks/useCarOfferForm";
 import dealershipService from "../../services/dealershipService";
+
+import CarOfferForm from "../CarOfferForm/CarOfferForm";
 
 const CreateOffer = () => {
   const navigate = useNavigate();
@@ -15,6 +15,9 @@ const CreateOffer = () => {
   const onSubmitHandler = async () => {
     try {
       const offerData = await offerService.create(formValues);
+
+      if (userType === "regular") {
+      }
 
       if (userType === "dealership") {
         const result = await dealershipService.addOfferIdToAvailableOffers(
@@ -41,6 +44,7 @@ const CreateOffer = () => {
       formValues={formValues}
       changeHandler={changeHandler}
       submit={submit}
+      actionType={'create'}
     />
   );
 };
