@@ -27,6 +27,7 @@ const EditOffer = () => {
       formValues={formValues}
       changeHandler={changeHandler}
       submit={submit}
+      actionType={"edit"}
     />
   );
 };
