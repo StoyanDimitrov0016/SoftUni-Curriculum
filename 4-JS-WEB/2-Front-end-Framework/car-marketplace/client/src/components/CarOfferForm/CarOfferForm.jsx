@@ -11,81 +11,97 @@ import PriceInput from "./Inputs/PriceInput";
 import ContactInformationInput from "./Inputs/ContactInformationInput";
 import DescriptionInput from "./Inputs/DescriptionInput";
 
-const CarOfferForm = ({ offerPredefinedOptions, formValues, changeHandler, submit }) => {
+const CarOfferForm = ({
+  offerPredefinedOptions,
+  formValues,
+  changeHandler,
+  submit,
+  actionType,
+}) => {
+  const actionLabels = {
+    create: "Create an offer",
+    edit: "Edit an offer",
+    search: "Search",
+  };
 
   return (
-    <form className="new-offer-form" onSubmit={submit}>
-      <BrandSelect
-        brands={offerPredefinedOptions.brand}
-        changeHandler={changeHandler}
-        selectedBrand={formValues.brand}
-      />
+    <div className="offer-form">
+      <form className="new-offer-form" onSubmit={submit}>
+        <div className="filed-container-left">
+          <BrandSelect
+            brands={offerPredefinedOptions.brand}
+            changeHandler={changeHandler}
+            selectedBrand={formValues.brand}
+          />
 
-      <ModelSelect
-        models={offerPredefinedOptions.model}
-        changeHandler={changeHandler}
-        selectedModel={formValues.model}
-      />
+          <ModelSelect
+            models={offerPredefinedOptions.model}
+            changeHandler={changeHandler}
+            selectedModel={formValues.model}
+          />
 
-      <ProductionYearInput
-        productionYear={formValues.productionYear}
-        changeHandler={changeHandler}
-      />
+          <ProductionYearInput
+            productionYear={formValues.productionYear}
+            changeHandler={changeHandler}
+          />
 
-      <FuelTypeSelect
-        fuelTypes={offerPredefinedOptions.fuelType}
-        changeHandler={changeHandler}
-        selectedFuelType={formValues.fuelType}
-      />
+          <FuelTypeSelect
+            fuelTypes={offerPredefinedOptions.fuelType}
+            changeHandler={changeHandler}
+            selectedFuelType={formValues.fuelType}
+          />
 
-      <MileageInput mileage={formValues.mileage} changeHandler={changeHandler} />
+          <MileageInput mileage={formValues.mileage} changeHandler={changeHandler} />
 
-      <ColorSelect
-        colors={offerPredefinedOptions.color}
-        changeHandler={changeHandler}
-        selectedColor={formValues.color}
-      />
+          <ColorSelect
+            colors={offerPredefinedOptions.color}
+            changeHandler={changeHandler}
+            selectedColor={formValues.color}
+          />
 
-      <PriceInput price={formValues.price} changeHandler={changeHandler} />
+          <PriceInput price={formValues.price} changeHandler={changeHandler} />
+        </div>
+        <div className="filed-container-right">
+          <RegionSelect
+            regions={offerPredefinedOptions.region}
+            changeHandler={changeHandler}
+            selectedRegion={formValues.region}
+          />
 
-      <RegionSelect
-        regions={offerPredefinedOptions.region}
-        changeHandler={changeHandler}
-        selectedRegion={formValues.region}
-      />
+          <TransmissionTypeSelect
+            transmissionTypes={offerPredefinedOptions.transmissionType}
+            changeHandler={changeHandler}
+            selectedTransmissionType={formValues.transmissionType}
+          />
 
-      <TransmissionTypeSelect
-        transmissionTypes={offerPredefinedOptions.transmissionType}
-        changeHandler={changeHandler}
-        selectedTransmissionType={formValues.transmissionType}
-      />
+          <VehicleTypeSelect
+            vehicleTypes={offerPredefinedOptions.vehicleType}
+            changeHandler={changeHandler}
+            selectedVehicleType={formValues.vehicleType}
+          />
 
-      <VehicleTypeSelect
-        vehicleTypes={offerPredefinedOptions.vehicleType}
-        changeHandler={changeHandler}
-        selectedVehicleType={formValues.vehicleType}
-      />
+          <ContactInformationInput
+            contactInformation={formValues.contactInformation}
+            changeHandler={changeHandler}
+          />
 
-      <ContactInformationInput
-        contactInformation={formValues.contactInformation}
-        changeHandler={changeHandler}
-      />
+          <DescriptionInput description={formValues.description} changeHandler={changeHandler} />
 
-      <DescriptionInput description={formValues.description} changeHandler={changeHandler} />
+          <label htmlFor="image">Image:</label>
+          <input
+            type="url"
+            id="image"
+            name="image"
+            placeholder="https://"
+            required
+            value={formValues.image}
+            onChange={changeHandler}
+          />
 
-      <label htmlFor="image">Image:</label>
-      <input
-        type="text"
-        id="image"
-        name="image"
-        placeholder="https://"
-        required
-        value={formValues.image}
-        onChange={changeHandler}
-      />
-
-      <button type="submit">Create Offer</button>
-    </form>
+          <button type="submit">{actionLabels[actionType]}</button>
+        </div>
+      </form>
+    </div>
   );
 };
 
