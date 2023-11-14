@@ -29,8 +29,10 @@ const offerEndpoints = {
 };
 
 const searchEndpoints = {
-    base: 'data/offers',
-    
-}
+    base: '/data/offers',
+    where: '?where=',
+    queryString: (key, value) => `${key}%3D%22${value}%22`,
+    and: '%20AND%20'
+};
 
-export { authenticationEndpoints, dealershipEndpoints, offerEndpoints };
+export { authenticationEndpoints, dealershipEndpoints, offerEndpoints, searchEndpoints };
