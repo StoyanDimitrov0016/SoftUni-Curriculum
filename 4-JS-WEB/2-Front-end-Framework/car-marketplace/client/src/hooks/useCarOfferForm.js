@@ -3,7 +3,7 @@ import offerService from "../services/offerService";
 
 export const useCarOfferForm = (submitHandler, offerId) => {
     const parseToNumberValues = ["productionYear", "mileage", "price"];
-    
+
     const [offerPredefinedOptions, setOfferPredefinedOptions] = useState({
         brand: [],
         model: [],
@@ -14,7 +14,7 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         vehicleType: []
     });
 
-    const [formValues, setFormValues] = useState({
+    const [initialFormValues, setInitialFormValues] = useState({
         brand: "",
         model: "",
         productionYear: 0,
@@ -28,7 +28,9 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         contactInformation: "",
         description: "",
         image: ""
-    });
+    })
+
+    const [formValues, setFormValues] = useState(initialFormValues);
 
     useEffect(() => {
         if (offerId) {
@@ -72,6 +74,10 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         }
     };
 
+    const resetFormValues = () => {
+        setFormValues(initialFormValues);
+    }
+
     const loadOfferData = useCallback(async () => {
         try {
             const offerData = await offerService.getOne(offerId);
@@ -82,5 +88,5 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         }
     }, [offerId]);
 
-    return { offerPredefinedOptions, formValues, changeHandler, submit };
+    return { offerPredefinedOptions, formValues, changeHandler, submit, setFormValues, resetFormValues };
 };
