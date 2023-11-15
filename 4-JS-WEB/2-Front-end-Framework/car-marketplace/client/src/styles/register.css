@@ -1,33 +1,54 @@
+.register {
+  width: 50%;
+  margin: 6em auto;
+  /* For visibility */
+  border: 2px solid rgba(156, 154, 161, 1);
+  padding: 0.5em;
+}
+
+.controllers {
+  display: flex;
+}
 
 .user-type-label {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
 .user-type-button {
-    width: 100px; /* Adjust the width to your desired size, e.g., 100px */
-    height: 40px; /* Adjust the height to your desired size, e.g., 36px */
-    padding: 5px 20px;
-    margin: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-  }
-  
-  .user-type-button:hover {
-    background-color: #ff8c00;
-  }
-  
-  /* Styling for the login link */
-  .login-link {
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  .login-link:hover {
-    color: #ff8c00;
-  }
-  
+  width: 50%;
+  margin: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.user-type-button:hover {
+  background-color: #ff8c00;
+}
+
+.user-button {
+  width: 50%;
+  margin: 12px auto;
+}
+
+.login-link {
+  opacity: 0.8;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+
+.login-link:hover {
+  color: #ff8c00;
+}
+
+.has-account {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+  align-items: center;
+}
