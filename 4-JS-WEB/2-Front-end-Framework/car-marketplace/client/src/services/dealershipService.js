@@ -1,5 +1,5 @@
 import requestHTTP from "./requestHTTP";
-import { dealershipEndpoints as endpoints } from "./endpoints";
+import { dealershipEndpoints as endpoints, searchEndpoints } from "./endpoints";
 
 async function createDealershipInCollection({ dealershipName, location, phoneNumber, email, workingHours }) {
     const availableOffers = [];
@@ -13,6 +13,19 @@ async function createDealershipInCollection({ dealershipName, location, phoneNum
             availableOffers
         });
     return createdEntry;
+}
+
+async function getDealershipEntity(dealershipId) {
+    const dealershipEntity = requestHTTP.get(endpoints.specificDealership(dealershipId));
+    return dealershipEntity;
+}
+
+async function getReference(userId) {
+    //TODO: add proper endpoint for getting this reference
+    const dealershipEntity = await requestHTTP.get(`/data/dealerships?where=_ownerId%3D%22${userId}%22`);
+
+    const reference = dealershipEntity[0]._id;
+    return reference;
 }
 
 async function addOfferIdToAvailableOffers(dealershipId, offerId) {
@@ -36,7 +49,9 @@ async function removeOfferIdFromAvailableOffers(dealershipId, offerId) {
 const dealershipService = {
     createDealershipInCollection,
     addOfferIdToAvailableOffers,
-    removeOfferIdFromAvailableOffers
+    removeOfferIdFromAvailableOffers,
+    getDealershipEntity,
+    getReference
 };
 
 export default dealershipService;
