@@ -26,6 +26,9 @@ const NavigationBar = () => {
               <Link to="/my-offers">My offers</Link>
             </li>
             <li>
+              <Link to="/my-watchlist">My watchlist</Link>
+            </li>
+            <li>
               <Link to="/logout">Logout</Link>
             </li>
             <li>
