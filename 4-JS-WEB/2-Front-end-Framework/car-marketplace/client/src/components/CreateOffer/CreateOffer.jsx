@@ -9,22 +9,21 @@ import CarOfferForm from "../CarOfferForm/CarOfferForm";
 
 const CreateOffer = () => {
   const navigate = useNavigate();
+
   const { userCredentials } = useAuthContext();
   const { reference, userType } = userCredentials;
 
   const onSubmitHandler = async () => {
     try {
-      const offerData = await offerService.create(formValues);
+      const updatedFormValues = { ...formValues };
 
-      if (userType === "regular") {
-      }
+      updatedFormValues.sellerType =
+        userType === "regular" ? "person" : { type: "dealership", reference };
+
+      const offerData = await offerService.create(updatedFormValues);
 
       if (userType === "dealership") {
-        const result = await dealershipService.addOfferIdToAvailableOffers(
-          reference,
-          offerData._id
-        );
-        console.log(result);
+        await dealershipService.addOfferIdToAvailableOffers(reference, offerData._id);
       }
 
       navigate("/my-offers");
@@ -44,7 +43,7 @@ const CreateOffer = () => {
       formValues={formValues}
       changeHandler={changeHandler}
       submit={submit}
-      actionType={'create'}
+      actionType={"create"}
     />
   );
 };
