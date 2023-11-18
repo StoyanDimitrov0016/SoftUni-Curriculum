@@ -18,9 +18,13 @@ export const useForm = (initialValues = {}, onSubmitHandler, parseToNumberValues
         onSubmitHandler(formValues);
     };
 
+    const resetFromValues = () => {
+        setFormValues(initialValues)
+    }
+
     const changeFormValues = (newFormValues) => {
         setFormValues(newFormValues);
     };
 
-    return { formValues, changeHandler, onSubmit, changeFormValues };
+    return { formValues, changeHandler, onSubmit, changeFormValues, resetFromValues };
 };
