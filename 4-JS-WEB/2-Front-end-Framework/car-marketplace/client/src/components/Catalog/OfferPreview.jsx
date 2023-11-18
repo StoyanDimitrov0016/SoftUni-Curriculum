@@ -10,6 +10,7 @@ function OfferPreview({
   price,
   mileage,
   fuelType,
+  sellerType,
 }) {
   return (
     <article className="vehicle-listing">
@@ -24,6 +25,17 @@ function OfferPreview({
           <p>Region: {region}</p>
           <p>Fuel Type: {fuelType}</p>
           <p>Mileage: {mileage} km</p>
+          <p>
+            Seller:
+            {sellerType === "person" ? (
+              "Individual person"
+            ) : (
+              <>
+                <span>dealership</span>{" "}
+                <Link to={`/dealerships/${sellerType.reference}`}>check dealer</Link>
+              </>
+            )}
+          </p>
         </div>
         <Link to={`/offer/${_id}`} className="view-details-link">
           View Details
