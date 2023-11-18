@@ -25,6 +25,11 @@ const AuthProvider = ({ children }) => {
       const response = await authenticationService.login(credentials.email, credentials.password);
       const userData = responseParser(response);
 
+      if (userData.userType === "dealership") {
+        const dealershipReference = await dealershipService.getReference(userData.userId);
+        userData.reference = dealershipReference;
+      }
+
       setUserCredentials(userData);
       localStorage.setItem("userCredentials", JSON.stringify(userData));
 
