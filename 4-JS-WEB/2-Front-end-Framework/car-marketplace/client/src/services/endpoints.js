@@ -7,7 +7,7 @@ const authenticationEndpoints = {
 const dealershipEndpoints = {
     dealershipsCollection: '/data/dealerships',
     specificDealership: (dealershipId) => `/data/dealerships/${dealershipId}`,
-    deleteOffer: (offerId) => `/data/offers/${offerId}`
+    deleteOffer: (offerId) => `/data/offers/${offerId}`,
 };
 
 const offerEndpoints = {
@@ -28,11 +28,29 @@ const offerEndpoints = {
         `/data/watchlists?where=offerId%3D%22${offerId}%22%20and%20_ownerId%3D%22${userId}%22`
 };
 
+const reviewsEndpoints = {
+    base: '/data/reviews',
+    specificReview: (reviewId) => `/data/reviews/${reviewId}`
+};
+
+const watchlistEndpoints = {
+    base: '/data/watchlists',
+    allWatchlistsOfUser: (userId) => `/data/watchlists?where=_ownerId%3D%22${userId}%22`,
+};
+
 const searchEndpoints = {
     base: '/data/offers',
+    reviewsBase: '/data/reviews',
     where: '?where=',
     queryString: (key, value) => `${key}%3D%22${value}%22`,
     and: '%20AND%20'
 };
 
-export { authenticationEndpoints, dealershipEndpoints, offerEndpoints, searchEndpoints };
+export {
+    authenticationEndpoints,
+    dealershipEndpoints,
+    offerEndpoints,
+    searchEndpoints,
+    reviewsEndpoints,
+    watchlistEndpoints
+};
