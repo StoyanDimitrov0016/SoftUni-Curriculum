@@ -10,7 +10,7 @@ const ReviewEntity = ({ review }) => {
         <p>{`Stars: ${stars}`}</p>
       </div>
       <div>
-        {comments.map((comment, index) => (
+        {comments?.map((comment, index) => (
           <p key={index}>{comment}</p>
         ))}
       </div>
