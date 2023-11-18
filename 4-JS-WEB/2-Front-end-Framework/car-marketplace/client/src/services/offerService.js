@@ -14,6 +14,7 @@ async function getAll() {
         price: offer.price,
         mileage: offer.mileage,
         fuelType: offer.fuelType,
+        sellerType: offer.sellerType
     }));
 
     return leanOffers;
