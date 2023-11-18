@@ -3,14 +3,18 @@ import { useParams } from "react-router-dom";
 import dealershipService from "../../services/dealershipService";
 import offerService from "../../services/offerService";
 import DealershipPreview from "./DealershipPreview";
+import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
+import reviewsService from "../../services/reviewService";
+import { reviewsEndpoints } from "../../services/endpoints";
 
 const DealershipPage = () => {
   const { dealershipId } = useParams();
+  const { userCredentials } = useAuthContext();
 
   const [dealerInfo, setDealerInfo] = useState({});
   const [currentOffers, setCurrentOffers] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [userReview, setUserReview] = useState({ stars: 0, comment: "" });
 
   const loadAvailableOffers = async (availableOffers) => {
     for (let i = 0; i < availableOffers.length; i++) {
@@ -26,23 +30,39 @@ const DealershipPage = () => {
   };
 
   const loadComments = async () => {
-    const fetchedReviews = await dealershipService.getReviewsForSpecificDealership(dealershipId);
-    console.log(fetchedReviews);
+    const fetchedReviews = await reviewsService.getReviewsForSpecificDealership(dealershipId);
+
     setReviews([...fetchedReviews]);
   };
 
-  const changeHandler = (e) => {
-    e.preventDefault();
+  const onSubmitHandler = async () => {
+    const { firstName, lastName } = userCredentials;
 
-    setUserReview((state) => ({ ...state, [e.target.name]: e.target.value }));
+    try {
+      const userReview = {
+        firstName,
+        lastName,
+        reference: dealershipId,
+        stars: formValues.stars,
+        comment: formValues.comment,
+      };
+
+      await reviewsService.addReview(userReview);
+      resetFromValues();
+      await loadComments();
+    } catch (error) {
+      console.log("Error while uploading the review", error);
+    }
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-  };
-
-  const addComment = async () => {};
-  const addStarReview = async () => {};
+  const { formValues, changeHandler, onSubmit, resetFromValues } = useForm(
+    {
+      stars: 0,
+      comment: "",
+    },
+    onSubmitHandler,
+    ["stars"]
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +70,7 @@ const DealershipPage = () => {
         const receivedDealership = await dealershipService.getDealershipEntity(dealershipId);
 
         setDealerInfo(receivedDealership);
-        // debugger
+
         await loadAvailableOffers(receivedDealership.availableOffers);
         await loadComments();
       } catch (error) {
@@ -61,17 +81,14 @@ const DealershipPage = () => {
     fetchData();
   }, [dealershipId]);
 
-  console.log(currentOffers);
-
   return (
     <DealershipPreview
       dealershipInfo={dealerInfo}
       currentOffers={currentOffers}
       reviews={reviews}
-      userReview={userReview}
+      userReview={formValues}
+      onSubmit={onSubmit}
       changeHandler={changeHandler}
-      addComment={addComment}
-      addStarReview={addStarReview}
     />
   );
 };
