@@ -1,0 +1,54 @@
+/* Style for the entire section */
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Style for the form container */
+  .search-form {
+    display: flex;
+    width: 500px;
+    height: 650px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style for individual form elements */
+  .form-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Style for the submit button */
+  .submit-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  /* Style for the content container */
+  .content-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* Style for the no matches message */
+  .no-matches-message {
+    color: red;
+    font-size: 18px;
+  }
+  
