@@ -10,14 +10,15 @@ const Register = () => {
   const { register } = useAuthContext();
 
   return (
-    <>
-      <p className="user-type-label">I am a :</p>
-      <button className="user-type-button" onClick={() => setUserType("user")}>
-        Regular User
-      </button>
-      <button className="user-type-button" onClick={() => setUserType("dealership")}>
-        Company
-      </button>
+    <div className="register">
+      <div className="controllers">
+        <button className="user-type-button" onClick={() => setUserType("user")}>
+          Regular User
+        </button>
+        <button className="user-type-button" onClick={() => setUserType("dealership")}>
+          Company
+        </button>
+      </div>
 
       {userType === "user" ? (
         <UserRegisterForm register={register} />
@@ -25,13 +26,13 @@ const Register = () => {
         <DealershipRegisterForm register={register} />
       )}
 
-      <p>
-        Already have an account?
+      <div className="has-account">
+        <p>Already have an account?</p>
         <Link to="/login" className="login-link">
           Login
         </Link>
-      </p>
-    </>
+      </div>
+    </div>
   );
 };
 
