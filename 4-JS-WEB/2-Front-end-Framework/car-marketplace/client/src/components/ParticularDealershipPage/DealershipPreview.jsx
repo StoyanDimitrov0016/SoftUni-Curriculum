@@ -8,9 +8,7 @@ const DealershipPreview = ({
   reviews,
   userReview,
   changeHandler,
-  submit,
-  handleCommentChange,
-  handleCommentSubmit,
+  onSubmit,
 }) => {
   const { dealershipName, email, location, phoneNumber, workingHours } = dealershipInfo;
 
@@ -42,7 +40,7 @@ const DealershipPreview = ({
         </ul>
 
         {/* Write a comment section */}
-        <form onSubmit={submit}>
+        <form onSubmit={onSubmit}>
           <div>
             <label htmlFor="stars">Stars:</label>
             <input
@@ -65,7 +63,7 @@ const DealershipPreview = ({
               onChange={changeHandler}
             />
           </div>
-          <button type="submit">Submit Comment</button>
+          <button type="onSubmit">Submit Comment</button>
         </form>
       </section>
     </div>
