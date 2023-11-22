@@ -1,17 +1,17 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import dealershipService from "../services/dealershipService";
 import authenticationService from "../services/authenticationService";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [userCredentials, setUserCredentials] = useState(() => {
     const userCredentialsString = localStorage.getItem("userCredentials");
 
     if (!userCredentialsString) {
-      return null;
+      return { userId: null };
     }
 
     const parsedUserCredentials = JSON.parse(userCredentialsString);
@@ -108,10 +108,5 @@ const responseParser = ({ _id, email, ...response }) => ({
   userId: _id,
   userEmail: email,
 });
-
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-  return context;
-};
 
 export default AuthProvider;
