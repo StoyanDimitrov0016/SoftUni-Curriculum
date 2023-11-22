@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import offerService from "../../services/offerService";
 import DetailsPreview from "./DetailsPreview";
-import { useAuthContext } from "../../contexts/AuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const Details = () => {
   const [offer, setOffer] = useState({});

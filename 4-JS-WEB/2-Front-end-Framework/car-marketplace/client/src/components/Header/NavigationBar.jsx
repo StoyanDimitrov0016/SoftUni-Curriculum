@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../../contexts/AuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const NavigationBar = () => {
   const { userCredentials } = useAuthContext();
   const userEmail = userCredentials?.userEmail;
-
   return (
     <nav className="navbar">
       <ul>

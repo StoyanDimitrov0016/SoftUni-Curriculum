@@ -1,4 +1,4 @@
-import { useAuthContext } from "../../contexts/AuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
 import { useForm } from "../../hooks/useForm";
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
         <label htmlFor="email" className="login-label">
           Email:
         </label>
-        <input
+        <input 
           type="email"
           id="email"
           name="email"

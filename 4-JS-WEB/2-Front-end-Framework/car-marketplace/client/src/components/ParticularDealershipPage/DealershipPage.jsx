@@ -4,9 +4,11 @@ import dealershipService from "../../services/dealershipService";
 import offerService from "../../services/offerService";
 import DealershipPreview from "./DealershipPreview";
 import { useForm } from "../../hooks/useForm";
-import { useAuthContext } from "../../contexts/AuthContext";
+
+import useAuthContext from "../../hooks/useAuthContext";
+
 import reviewsService from "../../services/reviewService";
-import { reviewsEndpoints } from "../../services/endpoints";
+import {} from "../../services/endpoints";
 
 const DealershipPage = () => {
   const { dealershipId } = useParams();
@@ -89,6 +91,7 @@ const DealershipPage = () => {
       userReview={formValues}
       onSubmit={onSubmit}
       changeHandler={changeHandler}
+      isRegularUser={userCredentials.userType === "regular"}
     />
   );
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useAuthContext } from "../../contexts/AuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
+
 import watchlistService from "../../services/watchlistService";
 import OfferPreview from "../Catalog/OfferPreview";
 import offerService from "../../services/offerService";

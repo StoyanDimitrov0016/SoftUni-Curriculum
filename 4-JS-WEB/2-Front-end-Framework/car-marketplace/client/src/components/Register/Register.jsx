@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import useAuthContext from "../../hooks/useAuthContext";
+
 import UserRegisterForm from "./UserRegisterForm";
 import DealershipRegisterForm from "./DealershipRegisterForm";
-import { useAuthContext } from "../../contexts/AuthContext";
 
 const Register = () => {
   const [userType, setUserType] = useState("user");

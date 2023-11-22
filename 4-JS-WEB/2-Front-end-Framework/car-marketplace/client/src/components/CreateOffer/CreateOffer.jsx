@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import offerService from "../../services/offerService";
 
-import { useAuthContext } from "../../contexts/AuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
 import { useCarOfferForm } from "../../hooks/useCarOfferForm";
 import dealershipService from "../../services/dealershipService";
 
