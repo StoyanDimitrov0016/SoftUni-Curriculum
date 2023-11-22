@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import AuthProvider from "./contexts/AuthContext";
 
 import NavigationBar from "./components/Header/NavigationBar";
 import Catalog from "./components/Catalog/Catalog";
@@ -13,36 +12,45 @@ import Logout from "./components/Logout/Logout";
 import MyOffers from "./components/MyOffers/MyOffers";
 import Search from "./components/Search/Search";
 import EditOffer from "./components/EditOffer/EditOffer";
+import DealershipPage from "./components/ParticularDealershipPage/DealershipPage";
+import Watchlist from "./components/PersonalWatchlist/Watchlist";
+import Layout from "./components/Layout/Layout";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 function App() {
   return (
-    <AuthProvider>
+    <>
       <header>
         <NavigationBar />
       </header>
 
       <main>
         <Routes>
-          <Route path="/" element={<Catalog />}></Route>
-
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/logout" element={<Logout />}></Route>
-
-          <Route path="/offer/:offerId" element={<Details />}></Route>
-          <Route path="/create-offer" element={<CreateOffer />}></Route>
-          <Route path="/my-offers" element={<MyOffers />}></Route>
-
-          <Route path="/offer/edit/:offerId" element={<EditOffer />}></Route>
-          <Route path="/offer/delete/:offerId" element={<MyOffers />}></Route>
-
-          <Route path="/search" element={<Search />}></Route>
-          <Route path="/about" element={<About />}></Route>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Catalog />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
+            
+            <Route element={<RequireAuth />}>
+              <Route path="/offer/:offerId" element={<Details />} />
+              <Route path="/create-offer" element={<CreateOffer />} />
+              <Route path="/my-offers" element={<MyOffers />} />
+              <Route path="/my-watchlist" element={<Watchlist />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/offer/edit/:offerId" element={<EditOffer />} />
+              <Route path="/offer/delete/:offerId" element={<MyOffers />} />
+              <Route path="/dealerships/:dealershipId" element={<DealershipPage />} />
+              <Route path="/search" element={<Search />} />
+            </Route>
+            //TODO: Add 404 page and unauthorized one
+            <Route path="/*" element={<About />} />
+          </Route>
         </Routes>
       </main>
 
       <Footer />
-    </AuthProvider>
+    </>
   );
 }
 
