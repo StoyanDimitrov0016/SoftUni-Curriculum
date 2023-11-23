@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import offerService from "../../services/offerService";
 
-import useAuthContext from "../../hooks/useAuthContext";
 import { useCarOfferForm } from "../../hooks/useCarOfferForm";
+import offerService from "../../services/offerService";
 import dealershipService from "../../services/dealershipService";
+import useAuthContext from "../../hooks/useAuthContext";
+import userService from "../../services/userService";
 
 import CarOfferForm from "../CarOfferForm/CarOfferForm";
 
@@ -12,6 +14,9 @@ const CreateOffer = () => {
 
   const { userCredentials } = useAuthContext();
   const { reference, userType } = userCredentials;
+
+  const [offerStatus, setOfferStatus] = useState({ isAbleToCreate: true, remainingOffers: null });
+  const OFFER_LIMIT = 5;
 
   const onSubmitHandler = async () => {
     try {
@@ -37,14 +42,34 @@ const CreateOffer = () => {
     null
   );
 
-  return (
+  useEffect(() => {
+    if (userType === "regular") {
+      Promise.all([
+        userService.isAbleToCreate(userCredentials.userId, OFFER_LIMIT),
+        userService.createdOffersCount(userCredentials.userId),
+      ])
+        .then(([isAble, createdOffers]) => {
+          console.log(createdOffers);
+          setOfferStatus({ isAbleToCreate: isAble, remainingOffers: OFFER_LIMIT - createdOffers });
+        })
+        .catch((error) => {
+          console.error("Error while fetching user data", error);
+        });
+    }
+  }, []);
+
+  return offerStatus.isAbleToCreate ? (
     <CarOfferForm
       offerPredefinedOptions={offerPredefinedOptions}
       formValues={formValues}
       changeHandler={changeHandler}
       submit={submit}
       actionType={"create"}
+      remainingOffers={offerStatus.remainingOffers}
+      userType={userType}
     />
+  ) : (
+    <p>You have exceeded your offer limit, to create more offers, you have to be a dealership.</p>
   );
 };
 
