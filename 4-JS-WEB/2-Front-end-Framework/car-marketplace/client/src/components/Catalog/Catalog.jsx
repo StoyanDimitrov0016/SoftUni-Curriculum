@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import offerService from "../../services/offerService";
 import OfferPreview from "./OfferPreview";
 
@@ -14,14 +15,15 @@ const Catalog = () => {
       );
   }, []);
 
-  const renderContent = () => {
-    if (offers.length > 0) {
-      return offers.map((offer) => <OfferPreview key={offer._id} {...offer} />);
-    }
-    return <p>There are no offers yet</p>;
-  };
-
-  return <section className="catalog">{renderContent()}</section>;
+  return (
+    <section className="catalog">
+      {offers.length > 0 ? (
+        offers.map((offer) => <OfferPreview key={offer._id} {...offer} />)
+      ) : (
+        <p>There are no offers yet</p>
+      )}
+    </section>
+  );
 };
 
 export default Catalog;
