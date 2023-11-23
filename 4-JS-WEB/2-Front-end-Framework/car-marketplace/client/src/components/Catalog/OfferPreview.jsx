@@ -28,10 +28,10 @@ function OfferPreview({
           <p>
             Seller:
             {sellerType === "person" ? (
-              "Individual person"
+              "individual person"
             ) : (
               <>
-                <span>dealership</span>{" "}
+                <span>dealership</span>
                 <Link to={`/dealerships/${sellerType.reference}`}>check dealer</Link>
               </>
             )}
