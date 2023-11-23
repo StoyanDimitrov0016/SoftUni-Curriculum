@@ -17,6 +17,8 @@ const CarOfferForm = ({
   changeHandler,
   submit,
   actionType,
+  remainingOffers,
+  userType,
 }) => {
   const actionLabels = {
     create: "Create an offer",
@@ -26,6 +28,8 @@ const CarOfferForm = ({
 
   return (
     <div className="offer-form">
+      {userType === "regular" && <p>Remaining Offers: {remainingOffers}</p>}
+
       <form className="new-offer-form" onSubmit={submit}>
         <div className="filed-container-left">
           <BrandSelect
