@@ -13,7 +13,7 @@ const Login = () => {
   );
 
   return (
-    <div className="login">
+    <section className="login">
       <form className="login-form" onSubmit={onSubmit}>
         <label htmlFor="email" className="login-label">
           Email:
@@ -45,7 +45,7 @@ const Login = () => {
           Login
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 
