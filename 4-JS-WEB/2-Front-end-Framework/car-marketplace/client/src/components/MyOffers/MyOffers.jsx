@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+
+import useAuthContext from "../../hooks/useAuthContext";
+
 import offerService from "../../services/offerService";
-import { useAuthContext } from "../../contexts/AuthContext";
 import OfferPreview from "../Catalog/OfferPreview";
 
 const MyOffers = () => {
