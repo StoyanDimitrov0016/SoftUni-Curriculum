@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Skills You Will Acquire](#skills-you-will-acquire)
+- [Skills I have acquired](#skills-you-will-acquire)
 - [Module Structure](#module-structure)
   - [Language Comparison](#language-comparison)
   - [Course Introduction](#course-introduction)
@@ -36,7 +36,7 @@
 
 The "Programming Fundamentals" module is an integral part of the internal curriculum at SoftUni, providing a comprehensive foundation for aspiring software engineers. This course delves into fundamental programming concepts, building upon the knowledge gained in the "Programming Basics" course. Participants advance their skills and begin employing more sophisticated programming techniques and structures, including dictionaries, objects, and classes.
 
-## Skills You Will Acquire
+## Skills I have acquired 
 
 - Working with the standard functionality of programming languages
 - Handling linear data structures
@@ -231,4 +231,4 @@ There are two exams: the "Mid Exam," which must be passed to continue with the c
 Here are some external resources you may find helpful:
 
 - [SoftUni Official Website](https://softuni.bg/) - Visit the official website of SoftUni for more courses and resources (keep in mind that the site is in Bulgarian).
-- [Programming Fundamentals Module](https://softuni.bg/courses/programming-fundamentals-csharp-java-js-python) - Access the official Programming Basics course on the SoftUni website.
+- [Programming Fundamentals Module](https://softuni.bg/courses/programming-fundamentals-csharp-java-js-python) - Access the official Programming fundamentals course on the SoftUni website.
