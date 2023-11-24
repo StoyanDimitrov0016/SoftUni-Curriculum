@@ -29,6 +29,8 @@ Founded with a vision to bridge the gap between education and industry needs, So
 
 SoftUni offers diverse study paths, focusing on Quality Assurance (QA) and Software Engineering. The Software Engineering path is further divided into fundamental and professional modules:
 
+![SoftUniPaths](softuni-possible-paths.png)
+
 ### [Fundamental Modules:](#fundamentals-module)
 
 #### **Entry Module:** A foundational starting point for beginners. (Duration: 2 months)
