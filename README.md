@@ -1,98 +1,145 @@
-# SoftUni Curriculum for JavaScript
-
-Welcome to the SoftUni Curriculum for JavaScript repository! This repository contains a comprehensive collection of learning materials, exercises, and projects for the SoftUni JavaScript curriculum. As a participant in the curriculum, this repository will serve as your guide and resource to mastering JavaScript programming.
+# SoftUni JavaScript Web Developer Curriculum
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Curriculum Structure](#curriculum-structure)
-- [Contributing](#contributing)
+- [What is SoftUni](#what-is-softuni)
+- [Possible Paths You Can Choose](#possible-paths-you-can-choose)
+  - [Fundamental Modules](#fundamental-modules)
+  - [Professional Paths](#professional-paths)
+- [JavaScript Developer Curriculum](#javascript-developer-curriculum)
+  - [Curriculum Structure](#curriculum-structure)
+    - [Professional Module 1: JS Advanced (4 months)](#professional-module-1-js-advanced-4-months)
+      - [Submodule 1: JS Advanced (2 months)](#submodule-1-js-advanced-2-months)
+      - [Submodule 2: JS Application (2 months)](#submodule-2-js-application-2-months)
+    - [Professional Module 2: JS Web (4 months)](#professional-module-2-js-web-4-months)
+      - [Submodule 1: JS Back-end (2 months)](#submodule-1-js-back-end-2-months)
+      - [Submodule 2: Front-end framework (React) (2 months)](#submodule-2-front-end-framework-react-2-months)
+    - [Professional Module 3: Front-End (4 months)](#professional-module-3-front-end-4-months)
+      - [Submodule 1: HTML&CSS (2 months)](#submodule-1-htmlcss-2-months)
+      - [Submodule 2: Front-end framework (2 months)](#submodule-2-front-end-framework-2-months)
 - [Resources](#resources)
 
-## Introduction
+## What is SoftUni?
 
-The SoftUni Curriculum for JavaScript is designed to guide learners through the fundamental concepts, advanced techniques, and real-world applications of JavaScript programming. This curriculum offers a structured learning path to help you enhance your JavaScript skills and build powerful applications.
+SoftUni, short for Software University, is a leading educational institution in Bulgaria dedicated to creating and improving tech talents.
+
+Founded with a vision to bridge the gap between education and industry needs, SoftUni has been at the forefront of transforming aspiring individuals into skilled professionals in the dynamic world of technology.
+
+## Possible Paths You Can Choose
+
+SoftUni offers diverse study paths, focusing on Quality Assurance (QA) and Software Engineering. The Software Engineering path is further divided into fundamental and professional modules:
+
+### [Fundamental Modules:](#fundamentals-module)
+
+#### **Entry Module:** A foundational starting point for beginners. (Duration: 2 months)
+
+- First steps in programming
+- Conditional Statements
+- Conditional Statements Advanced
+- For Loop
+- While Loop
+- Nested Loops
+- Exam Preparation
+
+#### **Fundamentals Module:**(Duration: 3 months)
+
+- Basic Syntax, Conditional Statements, and Loops
+- Data Types and Variables
+- Arrays
+- Functions
+- Arrays Advanced
+- Mid Exam Preparation
+- Objects and Classes
+- Associative Arrays
+- Text Processing
+- Regular Expressions
+- Final Exam Preparation
+
+### Professional Paths:
+
+- **C#:**
+- **Java:**
+- **JavaScript:**
+- **Python:**
+
+## JavaScript Developer Curriculum
+
+This programming path covers a comprehensive range of topics, starting with the basics of JavaScript and advancing to more complex concepts such as DOM manipulations, creating basic web applications, and covering the backend part of JS by creating both Multi-Page Applications (MPA) and RESTful APIs. The journey culminates in learning front-end frameworks such as React and Angular, along with mastering HTML and CSS.
 
 ## Curriculum Structure
 
-The curriculum is organized into several main modules, submodules, and lab or exercise lectures, covering a wide range of JavaScript concepts and applications. Here's an overview of the curriculum structure:
+As you progress to the JavaScript Developer Curriculum, you will delve into three main modules, each further divided into two submodules.
 
-1. Module 1: Entry Module - Programming Basics
-   - First steps in programming
-   - Conditional Statements
-   - Conditional Statements Advanced
-   - For Loop
-   - While Loop 
-   - Nested Loops
-   - Exam Preparation
+### Professional Module 1: JS Advanced (4 months)
 
-2. Module 2: Fundamentals Module
-   - Basic Syntax, Conditional Statements, and Loops
-   - Data Types and Variables
-   - Arrays
-   - Functions
-   - Arrays Advanced
-   - Mid Exam Preparation
-   - Objects and Classes
-   - Associative Arrays
-   - Text Processing
-   - Regular Expressions
-   - Final Exam Preparation
+- **Submodule 1: JS Advanced** (2 months)
 
-3. Module 3: JS Advanced
-   - Syntax, Functions, and Statements
-   - Arrays and Nested Arrays
-   - Objects and Composition
-   - DOM Introduction
-   - DOM Manipulations and Events
-   - Advanced Functions
-   - Unit Testing and Error Handling 
-   - Classes and Attributes
-   - Prototypes and Inheritance 
-   - Workshop
-   - Exam Preparation
+  - Syntax, Functions, and Statements
+  - Arrays and Nested Arrays
+  - Objects and Composition
+  - DOM Introduction
+  - DOM Manipulations and Events
+  - Advanced Functions
+  - Unit Testing and Error Handling
+  - Classes and Attributes
+  - Prototypes and Inheritance
+  - Workshop
+  - Exam Preparation
 
-4. Module 4: JS Applications
-   - HTTP and REST Services
-   - Asynchronous Programming
-   - Remote Data and Authentication
-   - Single Page Applications
-   - Architecture and Testing
-   - Client-Side Rendering
-   - Routing
-   - Modular Applications
-   - Exam Preparation
-   - Workshop
-   - Exam
+- **Submodule 2: JS Application** (2 months)
+  - HTTP and REST Services
+  - Asynchronous Programming
+  - Remote Data and Authentication
+  - Single Page Applications
+  - Architecture and Testing
+  - Client-Side Rendering
+  - Routing
+  - Modular Applications
+  - Exam Preparation
+  - Workshop
+  - Exam
 
-5. Module 5: JS Web
-   - JS Back-end
-   - Front-end Framework
+### Professional Module 2: JS Web (4 months)
 
-6. Module 6: Front End
-   - HTML & CSS
-   - Front-end Framework
+- ## **Submodule 1: JS Back-end** (2 months)
 
-## Contributing
+  - Intro to Node.js
+  - Node.js Streams and utilities
+  - Express.js and templating
+  - Workshop: Express.js and templating
+  - NoSQL and MongoDB
+  - Workshop: NoSQL and MongoDB
+  - Session and Authentication
+  - Workshop: Session and Authentication
+  - Validation and error handling
+  - Exam preparation
+  - Workshop: REST API
+  - Front-end Framework
+  - Exam
 
-Contributions to the SoftUni Curriculum for JavaScript are welcome! If you have any suggestions, improvements, or additional resources to contribute, please follow these steps:
+- ## **Submodule 2: Front-end framework (React)** (2 months)
+  - Intro to React and JSX
+  - Components: Basic idea
+  - Components: Deep dive
+  - Workshop: Components
+  - Forms
+  - Routing
+  - Workshop: Routing
+  - React hooks
+  - Workshop: React hooks and Authentication
+  - Workshop: Advanced Techniques - Part 1
+  - Workshop: Advanced Techniques - Part 2
+  - Project defense
 
-1. Fork the repository.
+### Professional Module 3: Front-End (4 months)
 
-2. Create a new branch for your contributions.
-
-3. Make your modifications and additions.
-
-4. Submit a pull request describing the changes you made and the rationale behind them.
-
-Your contributions will help improve the learning experience for all participants in the curriculum.
+- ## **Submodule 1: HTML&CSS** (2 months)
+- ## **Submodule 2: Front-end framework** (2 months)
 
 ## Resources
 
-In addition to the materials provided in this repository, here are some external resources you may find helpful for further learning and exploration:
+In addition here are some external resources you may find helpful for further learning and exploration:
 
 - [SoftUni Official Website](https://softuni.bg/) - Visit the official website of SoftUni for more courses and resources (keep in mind that the site is in Bulgarian).
-- [Mozilla Developer Network (MDN)](https://developer.mozilla.org) - A comprehensive documentation resource for web technologies, including JavaScript.
 
 For a complete list of resources, exercises, and projects, please refer to the specific modules and lectures in the curriculum.
-
