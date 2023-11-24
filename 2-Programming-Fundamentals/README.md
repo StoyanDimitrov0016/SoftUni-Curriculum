@@ -1,4 +1,4 @@
-# Module 2: Fundamentals
+# Module 2: Programming Fundamentals
 
 ## Table of Contents
 
