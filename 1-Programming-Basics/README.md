@@ -1,11 +1,11 @@
-# Module 1: Programming Basics:
+# Module 1: Programming Basics
 
 ## Table of Contents
 
 - [Module 1: Programming Basics](#module-1-programming-basics)
   - [Introduction](#introduction)
   - [What is covered?](#what-is-covered)
-  - [Skills I have Acquired](#skills-i-have-acquired)
+  - [Skills I have acquired](#skills-i-have-acquired)
   - [Module Structure](#module-structure)
     - [First Steps in Programming](#first-steps-in-programming)
     - [Conditional Statements](#conditional-statements)
@@ -24,7 +24,7 @@ The course "Programming Basics" provides foundational programming skills necessa
 
 This module includes writing introductory-level code, working with integrated development environments (IDEs), using variables and data, handling operators and expressions, interacting with the console (reading input and printing results), and employing conditional constructs (if, if-else) and loops (for, while, do-while).
 
-## Skills I have Acquired:
+## Skills I have acquired:
 
 - Console input and output operations
 - Working with loops (for)
