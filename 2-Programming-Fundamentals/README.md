@@ -230,5 +230,5 @@ There are two exams: the "Mid Exam," which must be passed to continue with the c
 
 Here are some external resources you may find helpful:
 
-- [SoftUni Official Website](https://softuni.bg/) - Visit the official website of SoftUni for more courses and resources (keep in mind that the site is in Bulgarian).
+- [SoftUni Official Website](https://softuni.bg/) - Visit the official website of SoftUni for more courses and resources.
 - [Programming Fundamentals Module](https://softuni.bg/courses/programming-fundamentals-csharp-java-js-python) - Access the official Programming fundamentals course on the SoftUni website.
