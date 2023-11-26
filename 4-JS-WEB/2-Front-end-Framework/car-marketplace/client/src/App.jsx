@@ -17,6 +17,9 @@ import Watchlist from "./components/PersonalWatchlist/Watchlist";
 import Layout from "./components/Layout/Layout";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 
+import PROTECTED_ROUTES from "./Paths/protectedPaths";
+import PUBLIC_ROUTES from "./Paths/publicPaths";
+
 function App() {
   return (
     <>
@@ -26,26 +29,27 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Catalog />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/about" element={<About />} />
-            
-            <Route element={<RequireAuth />}>
-              <Route path="/offer/:offerId" element={<Details />} />
-              <Route path="/create-offer" element={<CreateOffer />} />
-              <Route path="/my-offers" element={<MyOffers />} />
-              <Route path="/my-watchlist" element={<Watchlist />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="/offer/edit/:offerId" element={<EditOffer />} />
-              <Route path="/offer/delete/:offerId" element={<MyOffers />} />
-              <Route path="/dealerships/:dealershipId" element={<DealershipPage />} />
-              <Route path="/search" element={<Search />} />
-            </Route>
-            //TODO: Add 404 page and unauthorized one
-            <Route path="/*" element={<About />} />
+          <Route path={PUBLIC_ROUTES.HOME.path} element={<Catalog />} />
+          <Route path={PUBLIC_ROUTES.LOGIN.path} element={<Login />} />
+          <Route path={PUBLIC_ROUTES.REGISTER.path} element={<Register />} />
+          <Route path={PUBLIC_ROUTES.ABOUT.path} element={<About />} />
+          <Route element={<RequireAuth />}>
+            <Route path={PROTECTED_ROUTES.DETAILS.staticPath} element={<Details />} />
+            <Route path={PROTECTED_ROUTES.CREATE_OFFER.staticPath} element={<CreateOffer />} />
+            <Route path={PROTECTED_ROUTES.MY_OFFERS.staticPath} element={<MyOffers />} />
+            <Route path={PROTECTED_ROUTES.WATCHLIST.staticPath} element={<Watchlist />} />
+            <Route path={PROTECTED_ROUTES.LOGOUT.staticPath} element={<Logout />} />
+            <Route path={PROTECTED_ROUTES.EDIT_OFFER.staticPath} element={<EditOffer />} />
+            // TODO: see if delete path is needed - deleting on the details page the offer
+            <Route path={PROTECTED_ROUTES.DELETE_OFFER.staticPath} element={<MyOffers />} />
+            <Route
+              path={PROTECTED_ROUTES.DEALERSHIP_PAGE.staticPath}
+              element={<DealershipPage />}
+            />
+            <Route path={PROTECTED_ROUTES.SEARCH.staticPath} element={<Search />} />
           </Route>
+          //TODO: Add 404 page and unauthorized one
+          <Route path="/*" element={<About />} />
         </Routes>
       </main>
 
