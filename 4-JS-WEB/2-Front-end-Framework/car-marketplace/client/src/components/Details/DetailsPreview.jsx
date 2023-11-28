@@ -30,7 +30,7 @@ function DetailsPreview({
     canAdd,
     isOwner,
   } = offer;
-  
+
   return (
     <div className="details-container">
       <div className="car-image">
@@ -57,18 +57,21 @@ function DetailsPreview({
       <div className="offer-actions">
         {isOwner ? (
           <>
-            <Link to={`/offer/edit/${_id}`} className="details-link">
-              Edit
-            </Link>
-            <button className="details-link" onClick={deleteClickHandler}>
-              Delete
-            </button>
-            {isDeleting && (
+            {isDeleting ? (
               <div className="confirmation-box">
                 <p>Are you sure you want to delete this offer?</p>
                 <button onClick={confirmDeleteClickHandler}>Confirm</button>
                 <button onClick={cancelDeleteClickHandler}>Cancel</button>
               </div>
+            ) : (
+              <>
+                <Link to={`/offer/edit/${_id}`} className="details-link">
+                  Edit
+                </Link>
+                <button className="details-link" onClick={deleteClickHandler}>
+                  Delete
+                </button>
+              </>
             )}
           </>
         ) : canAdd ? (
