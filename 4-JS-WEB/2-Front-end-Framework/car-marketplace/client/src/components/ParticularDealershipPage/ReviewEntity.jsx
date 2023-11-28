@@ -1,8 +1,8 @@
 import React from 'react';
 
 const ReviewEntity = ({ review }) => {
-  const { stars, comments, firstName, lastName } = review;
-
+  const { stars, comment, firstName, lastName } = review;
+console.log(comment)
   return (
     <div>
       <div>
@@ -10,9 +10,7 @@ const ReviewEntity = ({ review }) => {
         <p>{`Stars: ${stars}`}</p>
       </div>
       <div>
-        {comments?.map((comment, index) => (
-          <p key={index}>{comment}</p>
-        ))}
+        {comment}
       </div>
     </div>
   );
