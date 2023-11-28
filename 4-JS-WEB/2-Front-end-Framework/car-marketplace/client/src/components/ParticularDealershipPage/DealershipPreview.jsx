@@ -1,6 +1,7 @@
 import React from "react";
 import OfferPreview from "../Catalog/OfferPreview";
 import ReviewEntity from "./ReviewEntity";
+import ReviewForm from "./ReviewForm";
 
 const DealershipPreview = ({
   dealershipInfo,
@@ -9,6 +10,7 @@ const DealershipPreview = ({
   userReview,
   changeHandler,
   onSubmit,
+  isRegularUser,
 }) => {
   const { dealershipName, email, location, phoneNumber, workingHours } = dealershipInfo;
 
@@ -39,32 +41,9 @@ const DealershipPreview = ({
           ))}
         </ul>
 
-        {/* Write a comment section */}
-        <form onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="stars">Stars:</label>
-            <input
-              type="number"
-              id="stars"
-              name="stars"
-              min="1"
-              max="5"
-              value={userReview.star}
-              onChange={changeHandler}
-            />
-          </div>
-          <div>
-            <label htmlFor="comment">Comment:</label>
-            <textarea
-              id="comment"
-              name="comment"
-              placeholder="Write your comment..."
-              value={userReview.comment}
-              onChange={changeHandler}
-            />
-          </div>
-          <button type="onSubmit">Submit Comment</button>
-        </form>
+        {isRegularUser && (
+          <ReviewForm onSubmit={onSubmit} userReview={userReview} changeHandler={changeHandler} />
+        )}
       </section>
     </div>
   );
