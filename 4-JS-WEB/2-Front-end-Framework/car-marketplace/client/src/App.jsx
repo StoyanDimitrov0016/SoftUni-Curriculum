@@ -19,6 +19,7 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 import PROTECTED_ROUTES from "./Paths/protectedPaths";
 import PUBLIC_ROUTES from "./Paths/publicPaths";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
             <Route path={PROTECTED_ROUTES.SEARCH.staticPath} element={<Search />} />
           </Route>
           //TODO: Add 404 page and unauthorized one
-          <Route path="/*" element={<About />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>
 
