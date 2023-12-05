@@ -12,7 +12,7 @@ const PROTECTED_ROUTES = {
         label: "My Offers",
         staticPath: '/my-offers',
     },
-    WATCHLIST: {
+    MY_WATCHLIST: {
         label: "My Watchlist",
         staticPath: '/my-watchlist',
     },
