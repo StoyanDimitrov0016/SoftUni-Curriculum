@@ -1,33 +1,42 @@
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 
+import PUBLIC_ROUTES from "../../Routes/publicRoutes";
+import PROTECTED_ROUTES from "../../Routes/protectedRoutes";
+
 const NavigationBar = () => {
   const { userCredentials } = useAuthContext();
   const userEmail = userCredentials?.userEmail;
+
+  //TODO: I will be cool if I make every route in an array and map them
   return (
     <nav className="navbar">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to={PUBLIC_ROUTES.HOME.path}>{PUBLIC_ROUTES.HOME.label}</Link>
         </li>
         {userEmail ? (
           <>
             <li>
-              <Link to="/create-offer">Create an offer</Link>
-            </li>
-            <li>
-              <Link to="/search">
-                <img src="/icons/search.svg" alt="search" />
+              <Link to={PROTECTED_ROUTES.CREATE_OFFER.staticPath}>
+                {PROTECTED_ROUTES.CREATE_OFFER.label}
               </Link>
             </li>
             <li>
-              <Link to="/my-offers">My offers</Link>
+              <Link to={PROTECTED_ROUTES.SEARCH.staticPath}>
+                <img src="/icons/search.svg" alt="search" />
+              </Link>
+            </li>
+            <Link to={PROTECTED_ROUTES.MY_OFFERS.staticPath}>
+              {PROTECTED_ROUTES.MY_OFFERS.label}
+            </Link>
+            <li>
+              <Link to={PROTECTED_ROUTES.MY_WATCHLIST.staticPath}>
+                {PROTECTED_ROUTES.MY_WATCHLIST.label}
+              </Link>
             </li>
             <li>
-              <Link to="/my-watchlist">My watchlist</Link>
-            </li>
-            <li>
-              <Link to="/logout">Logout</Link>
+              <Link to={PROTECTED_ROUTES.LOGOUT.staticPath}>{PROTECTED_ROUTES.LOGOUT.label}</Link>
             </li>
             <li>
               <p>{userEmail}</p>
@@ -36,19 +45,13 @@ const NavigationBar = () => {
         ) : (
           <>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to={PUBLIC_ROUTES.LOGIN.path}>{PUBLIC_ROUTES.LOGIN.label}</Link>
             </li>
             <li>
-              <Link to="/register">Register</Link>
+              <Link to={PUBLIC_ROUTES.REGISTER.path}>{PUBLIC_ROUTES.REGISTER.label}</Link>
             </li>
           </>
         )}
-
-        <li>
-          <a href="settings.html">
-            <img src="/icons/gear.svg" alt="settings" />
-          </a>
-        </li>
       </ul>
     </nav>
   );
