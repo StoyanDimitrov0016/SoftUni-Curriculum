@@ -17,7 +17,7 @@ const Register = () => {
           Regular User
         </button>
         <button className="user-type-button" onClick={() => setUserType("dealership")}>
-          Company
+          Dealership
         </button>
       </div>
 
