@@ -26,6 +26,16 @@ async function getOne(id) {
     return offer;
 }
 
+async function fetchPaginatedEntities(collection, page, pageSize) {
+    page = page < 0 ? 0 : page;
+
+    const offset = pageSize * (page - 1);
+
+    const response = await requestHTTP.get(`/data/${collection}?offset=${offset}&pageSize=${pageSize}`);
+    console.log(response);
+    return response;
+}
+
 async function create(offerData) {
     const result = await requestHTTP.post(endpoints.offersCollection, offerData);
     return result;
@@ -39,6 +49,11 @@ async function update(offerId, offerData) {
 async function del(offerId) {
     const result = await requestHTTP.delete(endpoints.specificOffer(offerId));
     return result;
+}
+
+async function getOfferCount (){
+    const count = await requestHTTP.get(endpoints.offerCount);
+    return count;
 }
 
 async function getOfferOptions() {
@@ -90,6 +105,8 @@ async function canAddToWatchlist(offerId, userId) {
     return watchlistCount === 0;
 }
 
+
+
 const offerService = {
     getAll,
     getOne,
@@ -102,7 +119,9 @@ const offerService = {
     addToWatchList,
     getWatchlistCountForOffer,
     canAddToWatchlist,
-    removeFromWatchList
+    removeFromWatchList,
+    fetchPaginatedEntities,
+    getOfferCount
 };
 
 export default offerService;
