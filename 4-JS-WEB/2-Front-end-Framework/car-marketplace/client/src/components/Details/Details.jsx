@@ -8,6 +8,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 const Details = () => {
   const [offer, setOffer] = useState({});
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -15,13 +16,9 @@ const Details = () => {
   const { userCredentials } = useAuthContext();
   const { userId } = userCredentials;
 
-  const deleteClickHandler = () => {
-    setIsDeleting(true);
-  };
+  const deleteClickHandler = () => setIsDeleting(true);
 
-  const cancelDeleteClickHandler = () => {
-    setIsDeleting(false);
-  };
+  const cancelDeleteClickHandler = () => setIsDeleting(false);
 
   const confirmDeleteClickHandler = async () => {
     try {
@@ -73,13 +70,17 @@ const Details = () => {
         });
       } catch (error) {
         console.error("Error fetching offer data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-
+    
     fetchOfferData();
   }, [offerId, userId]);
 
-  return (
+  return isLoading ? (
+    <h3>Loading...</h3>
+  ) : (
     <DetailsPreview
       offer={offer}
       isDeleting={isDeleting}
