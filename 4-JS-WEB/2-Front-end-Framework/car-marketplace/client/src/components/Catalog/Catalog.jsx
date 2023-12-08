@@ -4,11 +4,16 @@ import OfferPreview from "./OfferPreview";
 import Pagination from "../Pagination/Pagination";
 
 const Catalog = () => {
-  const PAGE_SIZE = 6;
+  const PAGE_SIZE = 5;
 
-  const [offers, setOffers] = useState([]);
+  const [offersData, setOffers] = useState({
+    offers: [],
+    count: 0,
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [offerCount, setOfferCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,46 +23,42 @@ const Catalog = () => {
           offerService.getOfferCount(),
         ]);
 
-        setOffers(fetchedOffers);
-        setOfferCount(count);
+        setOffers({ offers: fetchedOffers, count });
+        setError(null);
       } catch (error) {
         console.error("Error fetching offers in Catalog:", error);
+        setError("An error occurred while fetching offers. Please try again.");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [currentPage]);
 
-  const onPageChange = (action) => {
-    if (action === "reduce" && currentPage > 1) {
-      setCurrentPage((state) => state - 1);
-    } else if (action === "increase" && currentPage < Math.ceil(offerCount / PAGE_SIZE)) {
-      setCurrentPage((state) => state + 1);
-    }
-  };
-
-  const setParticularPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
+  //TODO: Set Catalog styles to offers-container
   return (
     <section className="catalog">
-      {offers.length > 0 ? (
+      {loading && <h1>Loading...</h1>}
+      {error && <p>{error}</p>}
+      {!loading && !error && offersData.offers.length > 0 ? (
         <>
-          {offers.map((offer) => (
+          {/* <div className="offers-container"> */}
+          {offersData.offers.map((offer) => (
             <OfferPreview key={offer._id} {...offer} />
           ))}
+          {/* </div> */}
 
           <Pagination
+            PAGE_SIZE={PAGE_SIZE}
+            offerCount={offersData.count}
             currentPage={currentPage}
-            linkCount={Math.ceil(offerCount / PAGE_SIZE)}
-            onPageChange={onPageChange}
-            setParticularPage={setParticularPage}
+            setCurrentPage={setCurrentPage}
           />
         </>
-      ) : (
+      ) : !loading && !error ? (
         <p>There are no offers yet</p>
-      )}
+      ) : null}
     </section>
   );
 };
