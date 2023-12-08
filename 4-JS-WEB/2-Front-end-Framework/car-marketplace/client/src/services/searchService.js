@@ -10,9 +10,7 @@ async function search(searchParameters) {
     }
 
     const encodedUrl = parameters.map(([key, value]) => endpoints.queryString(key, value)).join(endpoints.and);
-
     const url = `${endpoints.base}${endpoints.where}${encodedUrl}`;
-  
     return await requestHTTP.get(url);
 }
 
