@@ -14,7 +14,7 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         vehicleType: []
     });
 
-    const [initialFormValues, setInitialFormValues] = useState({
+    const initialFormValues = {
         brand: "",
         model: "",
         productionYear: 0,
@@ -28,7 +28,7 @@ export const useCarOfferForm = (submitHandler, offerId) => {
         contactInformation: "",
         description: "",
         image: ""
-    })
+    }
 
     const [formValues, setFormValues] = useState(initialFormValues);
 
