@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import dealershipService from "../../services/dealershipService";
 import offerService from "../../services/offerService";
 import DealershipPreview from "./DealershipPreview";
 import { useForm } from "../../hooks/useForm";
-
 import useAuthContext from "../../hooks/useAuthContext";
 
 import reviewsService from "../../services/reviewService";
@@ -46,7 +46,7 @@ const DealershipPage = () => {
         lastName,
         reference: dealershipId,
         stars: formValues.stars,
-        comment: formValues.comment,
+        comment: formValues.comment.trim(),
       };
 
       await reviewsService.addReview(userReview);

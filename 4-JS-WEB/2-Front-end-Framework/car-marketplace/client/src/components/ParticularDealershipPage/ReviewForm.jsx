@@ -1,5 +1,4 @@
 const ReviewForm = ({ onSubmit, userReview, changeHandler }) => {
-  console.log(userReview);
   return (
     <form onSubmit={onSubmit}>
       <div>

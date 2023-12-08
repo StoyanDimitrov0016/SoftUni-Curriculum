@@ -2,7 +2,6 @@ import React from 'react';
 
 const ReviewEntity = ({ review }) => {
   const { stars, comment, firstName, lastName } = review;
-console.log(comment)
   return (
     <div>
       <div>
