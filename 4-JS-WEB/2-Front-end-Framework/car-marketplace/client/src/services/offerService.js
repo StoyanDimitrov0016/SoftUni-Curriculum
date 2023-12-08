@@ -19,7 +19,6 @@ async function getAll() {
 
     return leanOffers;
 }
-//TODO: add getNewest - first 10 offers or add criteria for getting the first 10 of most liked or newest
 
 async function getOne(id) {
     const offer = await requestHTTP.get(endpoints.specificOffer(id));
@@ -32,7 +31,6 @@ async function fetchPaginatedEntities(collection, page, pageSize) {
     const offset = pageSize * (page - 1);
 
     const response = await requestHTTP.get(`/data/${collection}?offset=${offset}&pageSize=${pageSize}`);
-    console.log(response);
     return response;
 }
 
@@ -89,7 +87,6 @@ async function addToWatchList(offerId) {
 async function removeFromWatchList(offerId, userId) {
     const entry = await requestHTTP.get(endpoints.specificWatchlistByOfferAndUserId(offerId, userId));
     const entryId = entry[0]._id;
-    console.log(endpoints.specificWatchlistById(entryId, userId));
     const result = await requestHTTP.delete(endpoints.specificWatchlistById(entryId));
     return result;
 }
