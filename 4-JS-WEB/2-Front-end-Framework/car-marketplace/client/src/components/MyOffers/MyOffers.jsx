@@ -10,6 +10,7 @@ const MyOffers = () => {
   const userId = userCredentials.userId;
 
   const [offers, setOffers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     offerService
@@ -19,12 +20,11 @@ const MyOffers = () => {
       })
       .catch((error) => {
         console.error("Error fetching user offers:", error);
-      });
-  }, []);
+      })
+      .finally(() => setIsLoading(false));
+  }, [userId]);
 
-  //TODO: Make offer preview component to receive class names so it becomes a reusable component
-
-  const renderContent = () => {
+  const RenderContent = () => {
     if (offers.length > 0) {
       return offers.map((offer) => <OfferPreview key={offer._id} {...offer} />);
     }
@@ -34,8 +34,7 @@ const MyOffers = () => {
   return (
     <div className="my-offers">
       <h1 className="my-offers-title">My Offers</h1>
-
-      <div className="list">{renderContent()}</div>
+      {isLoading ? <h3>Loading...</h3> : <div className="list">{<RenderContent/>}</div>}
     </div>
   );
 };
