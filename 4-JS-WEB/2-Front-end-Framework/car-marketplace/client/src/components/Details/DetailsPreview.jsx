@@ -1,17 +1,7 @@
 import { Link } from "react-router-dom";
 
 function DetailsPreview({
-  offer,
-
-  isDeleting,
-  deleteClickHandler,
-  cancelDeleteClickHandler,
-  confirmDeleteClickHandler,
-
-  addToWatchList,
-  removeFromWatchList,
-}) {
-  const {
+  offer: {
     _id,
     brand,
     model,
@@ -29,7 +19,48 @@ function DetailsPreview({
     watchlistCount,
     canAdd,
     isOwner,
-  } = offer;
+  },
+  isDeleting,
+  deleteClickHandler,
+  cancelDeleteClickHandler,
+  confirmDeleteClickHandler,
+  addToWatchList,
+  removeFromWatchList,
+}) {
+  const ownerActions = (
+    <>
+      {isDeleting ? (
+        <div className="confirmation-box">
+          <p>Are you sure you want to delete this offer?</p>
+          <button onClick={confirmDeleteClickHandler}>Confirm</button>
+          <button onClick={cancelDeleteClickHandler}>Cancel</button>
+        </div>
+      ) : (
+        <>
+          <Link to={`/offer/edit/${_id}`} className="details-link">
+            Edit
+          </Link>
+          <button className="details-link" onClick={deleteClickHandler}>
+            Delete
+          </button>
+        </>
+      )}
+    </>
+  );
+
+  const watcherActions = (
+    <>
+      {canAdd ? (
+        <button className="add-to-watchlist-btn" onClick={addToWatchList}>
+          Add to watchlist
+        </button>
+      ) : (
+        <button className="remove-from-watchlist-btn" onClick={removeFromWatchList}>
+          Remove from watch list
+        </button>
+      )}
+    </>
+  );
 
   return (
     <div className="details-container">
@@ -54,36 +85,7 @@ function DetailsPreview({
           <li>Description: {description}</li>
         </ul>
       </div>
-      <div className="offer-actions">
-        {isOwner ? (
-          <>
-            {isDeleting ? (
-              <div className="confirmation-box">
-                <p>Are you sure you want to delete this offer?</p>
-                <button onClick={confirmDeleteClickHandler}>Confirm</button>
-                <button onClick={cancelDeleteClickHandler}>Cancel</button>
-              </div>
-            ) : (
-              <>
-                <Link to={`/offer/edit/${_id}`} className="details-link">
-                  Edit
-                </Link>
-                <button className="details-link" onClick={deleteClickHandler}>
-                  Delete
-                </button>
-              </>
-            )}
-          </>
-        ) : canAdd ? (
-          <button className="add-to-watchlist-btn" onClick={addToWatchList}>
-            Add to watchlist
-          </button>
-        ) : (
-          <button className="remove-from-watchlist-btn" onClick={removeFromWatchList}>
-            Remove from watch list
-          </button>
-        )}
-      </div>
+      <div className="offer-actions">{isOwner ? ownerActions : watcherActions}</div>
     </div>
   );
 }
