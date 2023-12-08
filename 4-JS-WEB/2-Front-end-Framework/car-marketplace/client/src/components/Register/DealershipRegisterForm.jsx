@@ -1,7 +1,8 @@
 import { useForm } from "../../hooks/useForm";
+import dealershipRegisterValidation from "../../validations/dealershipRegisterValidation";
 
-const DealershipRegisterForm = ({ register }) => {
-  const { formValues, changeHandler, onSubmit } = useForm(
+const DealershipRegisterForm = ({ register, setError, showPassword, setShowPassword }) => {
+  const { formValues, changeHandler, onSubmit, resetFromValues } = useForm(
     {
       dealershipName: "",
       location: "",
@@ -12,9 +13,23 @@ const DealershipRegisterForm = ({ register }) => {
       workingHours: "",
       userType: "dealership",
     },
-    register
+    async () => {
+      try {
+        dealershipRegisterValidation(formValues);
+        await register(formValues);
+
+        resetFromValues();
+        setError(null);
+      } catch (error) {
+        console.log("Error while user registration:", error);
+        setError(error.message.split(";"));
+      }
+    }
   );
 
+  function onClickSetErr() {
+     setShowPassword(!showPassword)
+  }
   return (
     <form className="dealership-register-form" onSubmit={onSubmit}>
       <label htmlFor="dealershipName">Dealership Name:</label>
@@ -57,20 +72,26 @@ const DealershipRegisterForm = ({ register }) => {
         name="phoneNumber"
         required
         className="dealership-input"
+        placeholder="0896..."
         value={formValues.phoneNumber}
         onChange={changeHandler}
       />
 
       <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-        className="dealership-input"
-        value={formValues.password}
-        onChange={changeHandler}
-      />
+      <div className="password-input-container">
+        <input
+          type={showPassword ? "text" : "password"}
+          id="password"
+          name="password"
+          required
+          className="user-input"
+          value={formValues.password}
+          onChange={changeHandler}
+        />
+        <button type="button" className="password-toggle" onClick={onClickSetErr}>
+          {showPassword ? "Hide" : "Show"}
+        </button>
+      </div>
 
       <label htmlFor="confirmPassword">Confirm Password:</label>
       <input
