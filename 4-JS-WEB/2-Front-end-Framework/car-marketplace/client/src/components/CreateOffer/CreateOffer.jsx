@@ -18,9 +18,9 @@ const CreateOffer = () => {
   const [offerStatus, setOfferStatus] = useState({ isAbleToCreate: true, remainingOffers: null });
   const OFFER_LIMIT = 5;
 
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async (data) => {
     try {
-      const updatedFormValues = { ...formValues };
+      const updatedFormValues = { ...data };
 
       updatedFormValues.sellerType =
         userType === "regular" ? "person" : { type: "dealership", reference };
@@ -48,15 +48,17 @@ const CreateOffer = () => {
         userService.isAbleToCreate(userCredentials.userId, OFFER_LIMIT),
         userService.createdOffersCount(userCredentials.userId),
       ])
-        .then(([isAble, createdOffers]) => {
-          console.log(createdOffers);
-          setOfferStatus({ isAbleToCreate: isAble, remainingOffers: OFFER_LIMIT - createdOffers });
+        .then(([isAble, createdOffersCount]) => {
+          setOfferStatus({
+            isAbleToCreate: isAble,
+            remainingOffers: OFFER_LIMIT - createdOffersCount,
+          });
         })
         .catch((error) => {
           console.error("Error while fetching user data", error);
         });
     }
-  }, []);
+  }, [userType]);
 
   return offerStatus.isAbleToCreate ? (
     <CarOfferForm
