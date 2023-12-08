@@ -5,9 +5,11 @@ const ProductionYearInput = ({ productionYear, changeHandler, isRequired = true 
       <input
         type="number"
         id="year"
+        min={1945}
+        max={new Date().getFullYear()}
         name="productionYear"
         required={isRequired}
-        value={productionYear || ""}
+        value={productionYear || "2000"}
         onChange={changeHandler}
       />
     </>
