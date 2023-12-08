@@ -1,7 +1,8 @@
 import { useForm } from "../../hooks/useForm";
+import regularUserRegisterValidation from "../../validations/regularUserRegisterValidation";
 
-const UserRegisterForm = ({ register }) => {
-  const { formValues, changeHandler, onSubmit } = useForm(
+const UserRegisterForm = ({ register, setError, showPassword, setShowPassword }) => {
+  const { formValues, changeHandler, onSubmit, resetFromValues } = useForm(
     {
       firstName: "",
       lastName: "",
@@ -10,15 +11,26 @@ const UserRegisterForm = ({ register }) => {
       confirmPassword: "",
       userType: "regular",
     },
-    register
+    async () => {
+      try {
+        regularUserRegisterValidation(formValues);
+        await register(formValues);
+
+        resetFromValues();
+        setError(null);
+      } catch (error) {
+        console.log("Error while user registration:", error);
+        setError(error.message.split(";"));
+      }
+    }
   );
 
   return (
     <form className="user-register-form" onSubmit={onSubmit}>
-      <label htmlFor="firstname">First Name:</label>
+      <label htmlFor="firstName">First Name:</label>
       <input
         type="text"
-        id="firstname"
+        id="firstName"
         name="firstName"
         required
         className="user-input"
@@ -26,10 +38,10 @@ const UserRegisterForm = ({ register }) => {
         onChange={changeHandler}
       />
 
-      <label htmlFor="lastname">Last Name:</label>
+      <label htmlFor="lastName">Last Name:</label>
       <input
         type="text"
-        id="lastname"
+        id="lastName"
         name="lastName"
         required
         className="user-input"
@@ -49,20 +61,26 @@ const UserRegisterForm = ({ register }) => {
       />
 
       <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-        className="user-input"
-        value={formValues.password}
-        onChange={changeHandler}
-      />
+      <div className="password-input-container">
+        <input
+          type={showPassword ? "text" : "password"}
+          id="password"
+          name="password"
+          required
+          className="user-input"
+          value={formValues.password}
+          onChange={changeHandler}
+        />
+        <button className="password-toggle" onClick={() => {
+          setShowPassword(!showPassword)}}>
+          {showPassword ? "Hide" : "Show"}
+        </button>
+      </div>
 
-      <label htmlFor="password">Confirm password:</label>
+      <label htmlFor="confirmPassword">Confirm password:</label>
       <input
         type="password"
-        id="password"
+        id="confirmPassword"
         name="confirmPassword"
         required
         className="user-input"
