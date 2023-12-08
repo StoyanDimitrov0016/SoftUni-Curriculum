@@ -17,8 +17,8 @@ import Watchlist from "./components/PersonalWatchlist/Watchlist";
 import Layout from "./components/Layout/Layout";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 
-import PROTECTED_ROUTES from "./Paths/protectedPaths";
-import PUBLIC_ROUTES from "./Paths/publicPaths";
+import PROTECTED_ROUTES from "./Routes/protectedRoutes";
+import PUBLIC_ROUTES from "./Routes/publicRoutes";
 import NotFound from "./components/NotFound/NotFound";
 
 function App() {
@@ -38,18 +38,15 @@ function App() {
             <Route path={PROTECTED_ROUTES.DETAILS.staticPath} element={<Details />} />
             <Route path={PROTECTED_ROUTES.CREATE_OFFER.staticPath} element={<CreateOffer />} />
             <Route path={PROTECTED_ROUTES.MY_OFFERS.staticPath} element={<MyOffers />} />
-            <Route path={PROTECTED_ROUTES.WATCHLIST.staticPath} element={<Watchlist />} />
+            <Route path={PROTECTED_ROUTES.MY_WATCHLIST.staticPath} element={<Watchlist />} />
             <Route path={PROTECTED_ROUTES.LOGOUT.staticPath} element={<Logout />} />
             <Route path={PROTECTED_ROUTES.EDIT_OFFER.staticPath} element={<EditOffer />} />
-            // TODO: see if delete path is needed - deleting on the details page the offer
-            <Route path={PROTECTED_ROUTES.DELETE_OFFER.staticPath} element={<MyOffers />} />
             <Route
               path={PROTECTED_ROUTES.DEALERSHIP_PAGE.staticPath}
               element={<DealershipPage />}
             />
             <Route path={PROTECTED_ROUTES.SEARCH.staticPath} element={<Search />} />
           </Route>
-          //TODO: Add 404 page and unauthorized one
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>
