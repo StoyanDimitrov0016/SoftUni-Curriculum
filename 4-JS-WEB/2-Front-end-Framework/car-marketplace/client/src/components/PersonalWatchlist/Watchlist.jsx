@@ -18,10 +18,10 @@ const Watchlist = () => {
       const offerPromises = ids.map(async (id) => {
         try {
           const offer = await offerService.getOne(id);
-          return { ...offer, sellerType: "person" }; // Modify the offer as needed
+          return { ...offer, sellerType: "person" };
         } catch (error) {
           console.log("Error while fetching the data occurred:", error);
-          return null; // Handle the error, return null or a default value
+          return null;
         }
       });
 
@@ -38,7 +38,6 @@ const Watchlist = () => {
   useEffect(() => {
     const fetchWatchlistOffers = async () => {
       try {
-        setLoading(true);
         const ids = await watchlistService.getAllOffersFromWatchlist(userId);
         await loadOffers(ids);
       } catch (error) {
@@ -54,7 +53,7 @@ const Watchlist = () => {
   return (
     <div>
       <h2>Watchlist</h2>
-      {loading && <p>Loading watchlist...</p>}
+      {loading && <h3>Loading watchlist...</h3>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {offers.length === 0 && !loading && !error && <p>Your watchlist is empty.</p>}
       {offers.length > 0 && (
