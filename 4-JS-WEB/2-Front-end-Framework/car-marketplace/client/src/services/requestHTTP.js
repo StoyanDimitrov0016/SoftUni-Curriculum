@@ -20,7 +20,7 @@ async function request(url = '', options) {
             return response.json();
         }
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
         throw error;
     }
 }
