@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import useAuthContext from "../../hooks/useAuthContext";
 
 function OfferPreview({
   _id,
@@ -12,10 +13,12 @@ function OfferPreview({
   fuelType,
   sellerType,
 }) {
+  const { userCredentials } = useAuthContext();
+
   return (
     <article className="vehicle-listing">
       <div className="image-container">
-        <img src={image} alt={`${brand} ${model}`} />
+        <img src={image} alt={`${brand} ${model} ${productionYear}`} />
       </div>
       <div className="vehicle-details">
         <h3>{`${brand} ${model}`}</h3>
@@ -28,11 +31,13 @@ function OfferPreview({
           <p>
             Seller:
             {sellerType === "person" ? (
-              "individual person"
+              <span>individual person</span>
             ) : (
               <>
                 <span>dealership</span>
-                <Link to={`/dealerships/${sellerType.reference}`}>check dealer</Link>
+                {sellerType.type === "dealership" && userCredentials.userType !== "dealership" && (
+                  <Link to={`/dealerships/${sellerType.reference}`}>check dealer</Link>
+                )}
               </>
             )}
           </p>
