@@ -6,7 +6,8 @@ const authenticationEndpoints = {
 
 const dealershipEndpoints = {
     dealershipsCollection: '/data/dealerships',
-    specificDealership: (dealershipId) => `/data/dealerships/${dealershipId}`,
+    specificDealershipById: (dealershipId) => `/data/dealerships/${dealershipId}`,
+    specificDealershipByQuery: (userId) => `/data/dealerships?where=_ownerId%3D%22${userId}%22`,
     deleteOffer: (offerId) => `/data/offers/${offerId}`,
 };
 
@@ -14,6 +15,7 @@ const offerEndpoints = {
     offersCollection: '/data/offers',
     specificOffer: (id) => `/data/offers/${id}`,
     vehicleOptions: '/data/vehicle-properties',
+    offerCount: '/data/offers?count',
     brandModels: (brand) => `/data/vehicle-models/${brand}`,
     userOffers: (id) => {
         const staticPart = '/data/offers/?where=';
@@ -46,11 +48,16 @@ const searchEndpoints = {
     and: '%20AND%20'
 };
 
+const paginationEndpoints = {
+    queryString: (collection, offset, pageSize) => `/data/${collection}?offset=${offset}&pageSize=${pageSize}`
+}
+
 export {
     authenticationEndpoints,
     dealershipEndpoints,
     offerEndpoints,
     searchEndpoints,
     reviewsEndpoints,
-    watchlistEndpoints
+    watchlistEndpoints,
+    paginationEndpoints
 };
