@@ -8,7 +8,6 @@ const NavigationBar = () => {
   const { userCredentials } = useAuthContext();
   const userEmail = userCredentials?.userEmail;
 
-  //TODO: I will be cool if I make every route in an array and map them
   return (
     <nav className="navbar">
       <ul>
