@@ -4,7 +4,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 const RequireAuth = () => {
   const { userCredentials } = useAuthContext();
   const location = useLocation();
-  console.log(location);
+  
   return userCredentials?.userId ? (
     <Outlet />
   ) : (
