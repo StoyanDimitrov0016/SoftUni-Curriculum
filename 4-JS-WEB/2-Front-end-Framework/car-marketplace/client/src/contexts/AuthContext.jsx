@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
       navigate("/");
     } catch (error) {
       console.error("Error while logging in:", error);
+      throw error;
     }
   };
 
@@ -83,6 +84,7 @@ const AuthProvider = ({ children }) => {
       navigate("/");
     } catch (error) {
       console.error("Error registering in:", error);
+      throw error;
     }
   };
 
@@ -102,6 +104,7 @@ const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;
 };
+
 
 const responseParser = ({ _id, email, ...response }) => ({
   ...response,
