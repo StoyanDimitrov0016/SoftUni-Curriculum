@@ -1,15 +1,32 @@
+import { useState } from "react";
 import useAuthContext from "../../hooks/useAuthContext";
 import { useForm } from "../../hooks/useForm";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { login } = useAuthContext();
 
-  const { formValues, changeHandler, onSubmit } = useForm(
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { formValues, changeHandler, onSubmit, resetFromValues } = useForm(
     {
       email: "",
       password: "",
     },
-    login
+    async () => {
+      try {
+        setError(null);
+        setLoading(true);
+        await login(formValues);
+        resetFromValues();
+      } catch (error) {
+        setError("Invalid email or password");
+      } finally {
+        setLoading(false);
+      }
+    }
   );
 
   return (
@@ -18,7 +35,8 @@ const Login = () => {
         <label htmlFor="email" className="login-label">
           Email:
         </label>
-        <input 
+
+        <input
           type="email"
           id="email"
           name="email"
@@ -31,18 +49,44 @@ const Login = () => {
         <label htmlFor="password" className="login-label">
           Password:
         </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formValues.password}
-          onChange={changeHandler}
-          className="login-input"
-          required
-        />
 
-        <button type="submit" className="login-button">
-          Login
+        <div className="password-input-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            value={formValues.password}
+            onChange={changeHandler}
+            className="login-input"
+            required
+            aria-label="Password"
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="toggle-password-button"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
+
+        {error && (
+          <p className="error-message" aria-live="assertive">
+            {error}
+          </p>
+        )}
+
+        <div className="no-account">
+          <p>Don't have an account?</p>
+          <Link to="/register" className="register-link">
+            Register
+          </Link>
+        </div>
+
+        <button type="submit" className="login-button" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </section>
