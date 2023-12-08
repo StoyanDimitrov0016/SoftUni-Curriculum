@@ -7,24 +7,60 @@ import UserRegisterForm from "./UserRegisterForm";
 import DealershipRegisterForm from "./DealershipRegisterForm";
 
 const Register = () => {
-  const [userType, setUserType] = useState("user");
   const { register } = useAuthContext();
+
+  const [error, setError] = useState(null);
+  const [isRegularUser, setIsRegularUser] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   return (
     <div className="register">
       <div className="controllers">
-        <button className="user-type-button" onClick={() => setUserType("user")}>
+        <button
+          className={`user-type-button ${isRegularUser ? "selected" : ""}`}
+          onClick={() => {
+            setIsRegularUser(true);
+            setError(null);
+          }}
+        >
           Regular User
         </button>
-        <button className="user-type-button" onClick={() => setUserType("dealership")}>
+        <button
+          className={`user-type-button ${!isRegularUser ? "selected" : ""}`}
+          onClick={() => {
+            setIsRegularUser(false);
+            setError(null);
+          }}
+        >
           Dealership
         </button>
       </div>
 
-      {userType === "user" ? (
-        <UserRegisterForm register={register} />
+      {isRegularUser ? (
+        <UserRegisterForm
+          register={register}
+          setError={setError}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
       ) : (
-        <DealershipRegisterForm register={register} />
+        <DealershipRegisterForm
+          register={register}
+          setError={setError}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      )}
+
+      {error && (
+        <div className="error-container">
+          {error.map((errorMessage, index) => (
+            <p key={index} className="error-message">
+              {errorMessage}
+            </p>
+          ))}
+        </div>
       )}
 
       <div className="has-account">
