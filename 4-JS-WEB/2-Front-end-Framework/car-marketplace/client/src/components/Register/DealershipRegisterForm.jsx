@@ -49,6 +49,7 @@ const DealershipRegisterForm = ({ register, setError, showPassword, setShowPassw
         id="location"
         name="location"
         required
+        placeholder="city:... street: ... №..."
         className="dealership-input"
         value={formValues.location}
         onChange={changeHandler}
@@ -110,6 +111,7 @@ const DealershipRegisterForm = ({ register, setError, showPassword, setShowPassw
         id="workingHours"
         name="workingHours"
         required
+        placeholder="Working days: 9:00 - 20:00, Saturday: 10:00-20:00"
         className="dealership-input"
         value={formValues.workingHours}
         onChange={changeHandler}
