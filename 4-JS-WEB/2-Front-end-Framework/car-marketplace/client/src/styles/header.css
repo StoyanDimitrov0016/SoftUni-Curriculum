@@ -22,12 +22,18 @@ header a {
     color: #fff;
     display: flex;
     justify-content: space-around;
+
+    .active {
+        background-color: #c0c0c0;
+        color:  black;
+    }
 }
 
 .navbar ul {
     list-style: none;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1em;
 }

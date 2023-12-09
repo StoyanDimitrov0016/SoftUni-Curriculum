@@ -16,7 +16,7 @@ const Register = () => {
 
   return (
     <div className="register">
-      <div className="controllers">
+      <div className="controllers-register">
         <button
           className={`user-type-button ${isRegularUser ? "selected" : ""}`}
           onClick={() => {

@@ -31,6 +31,7 @@ async function fetchPaginatedEntities(collection, page, pageSize) {
     const offset = pageSize * (page - 1);
 
     const response = await requestHTTP.get(`/data/${collection}?offset=${offset}&pageSize=${pageSize}`);
+    console.log(response);
     return response;
 }
 

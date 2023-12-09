@@ -1,9 +1,10 @@
 const ReviewForm = ({ onSubmit, userReview, changeHandler }) => {
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label htmlFor="stars">Stars:</label>
+    <form className="review-form" onSubmit={onSubmit}>
+      <div className="review-stars-wrapper">
+        <label  htmlFor="stars">Stars:</label>
         <input
+        className="review-stars"
           type="number"
           id="stars"
           name="stars"
@@ -13,9 +14,10 @@ const ReviewForm = ({ onSubmit, userReview, changeHandler }) => {
           onChange={changeHandler}
         />
       </div>
-      <div>
+      <div className="submit-review-wrapper">
         <label htmlFor="comment">Comment:</label>
         <textarea
+        className="review-textarea"
           id="comment"
           name="comment"
           placeholder="Write your comment..."
@@ -23,7 +25,7 @@ const ReviewForm = ({ onSubmit, userReview, changeHandler }) => {
           onChange={changeHandler}
         />
       </div>
-      <button type="submit">Submit Comment</button>
+      <button className="dealership-btn" type="submit">Submit Comment</button>
     </form>
   );
 };

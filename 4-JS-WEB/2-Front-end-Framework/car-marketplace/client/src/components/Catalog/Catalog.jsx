@@ -36,18 +36,17 @@ const Catalog = () => {
     fetchData();
   }, [currentPage]);
 
-  //TODO: Set Catalog styles to offers-container
   return (
     <section className="catalog">
       {loading && <h1>Loading...</h1>}
       {error && <p>{error}</p>}
       {!loading && !error && offersData.offers.length > 0 ? (
         <>
-          {/* <div className="offers-container"> */}
+          <div className="offers-container">
           {offersData.offers.map((offer) => (
             <OfferPreview key={offer._id} {...offer} />
           ))}
-          {/* </div> */}
+          </div>
 
           <Pagination
             PAGE_SIZE={PAGE_SIZE}

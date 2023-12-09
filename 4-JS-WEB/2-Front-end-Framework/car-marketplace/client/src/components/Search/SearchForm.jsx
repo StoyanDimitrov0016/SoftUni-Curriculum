@@ -19,71 +19,82 @@ const SearchForm = ({
 }) => {
   return (
     <form className="search-form" onSubmit={submit}>
-      <BrandSelect
-        brands={offerPredefinedOptions.brand}
-        changeHandler={changeHandler}
-        selectedBrand={formValues.brand}
-        isRequired={false}
-      />
+      <div className="form-first-half">
+        <BrandSelect
+          brands={offerPredefinedOptions.brand}
+          changeHandler={changeHandler}
+          selectedBrand={formValues.brand}
+          isRequired={false}
+        />
 
-      <ModelSelect
-        models={offerPredefinedOptions.model}
-        changeHandler={changeHandler}
-        selectedModel={formValues.model}
-        isRequired={false}
-      />
+        <ModelSelect
+          models={offerPredefinedOptions.model}
+          changeHandler={changeHandler}
+          selectedModel={formValues.model}
+          isRequired={false}
+        />
 
-      <ProductionYearInput
-        productionYear={formValues.productionYear}
-        changeHandler={changeHandler}
-        isRequired={false}
-      />
+        <ProductionYearInput
+          productionYear={formValues.productionYear}
+          changeHandler={changeHandler}
+          isRequired={false}
+        />
 
-      <FuelTypeSelect
-        fuelTypes={offerPredefinedOptions.fuelType}
-        changeHandler={changeHandler}
-        selectedFuelType={formValues.fuelType}
-        isRequired={false}
-      />
+        <FuelTypeSelect
+          fuelTypes={offerPredefinedOptions.fuelType}
+          changeHandler={changeHandler}
+          selectedFuelType={formValues.fuelType}
+          isRequired={false}
+        />
 
-      <MileageInput mileage={formValues.mileage} changeHandler={changeHandler} isRequired={false} />
+        <MileageInput
+          mileage={formValues.mileage}
+          changeHandler={changeHandler}
+          isRequired={false}
+        />
+      </div>
 
-      <ColorSelect
-        colors={offerPredefinedOptions.color}
-        changeHandler={changeHandler}
-        selectedColor={formValues.color}
-        isRequired={false}
-      />
+      <div className="form-second-half">
+        <ColorSelect
+          colors={offerPredefinedOptions.color}
+          changeHandler={changeHandler}
+          selectedColor={formValues.color}
+          isRequired={false}
+        />
 
-      <PriceInput price={formValues.price} changeHandler={changeHandler} isRequired={false} />
+        <PriceInput price={formValues.price} changeHandler={changeHandler} isRequired={false} />
 
-      <RegionSelect
-        regions={offerPredefinedOptions.region}
-        changeHandler={changeHandler}
-        selectedRegion={formValues.region}
-        isRequired={false}
-      />
+        <RegionSelect
+          regions={offerPredefinedOptions.region}
+          changeHandler={changeHandler}
+          selectedRegion={formValues.region}
+          isRequired={false}
+        />
 
-      <TransmissionTypeSelect
-        transmissionTypes={offerPredefinedOptions.transmissionType}
-        changeHandler={changeHandler}
-        selectedTransmissionType={formValues.transmissionType}
-        isRequired={false}
-      />
+        <TransmissionTypeSelect
+          transmissionTypes={offerPredefinedOptions.transmissionType}
+          changeHandler={changeHandler}
+          selectedTransmissionType={formValues.transmissionType}
+          isRequired={false}
+        />
 
-      <VehicleTypeSelect
-        vehicleTypes={offerPredefinedOptions.vehicleType}
-        changeHandler={changeHandler}
-        selectedVehicleType={formValues.vehicleType}
-        isRequired={false}
-      />
+        <VehicleTypeSelect
+          vehicleTypes={offerPredefinedOptions.vehicleType}
+          changeHandler={changeHandler}
+          selectedVehicleType={formValues.vehicleType}
+          isRequired={false}
+        />
+      </div>
 
-      <button className="clear" onClick={resetFormValues}>
-        Clear
-      </button>
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Searching..." : "Search"}
-      </button>
+      <div className="controllers">
+        <button className="clear" onClick={resetFormValues}>
+          Clear
+        </button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Searching..." : "Search"}
+        </button>
+      </div>
+
     </form>
   );
 };

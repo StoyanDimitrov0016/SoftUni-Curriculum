@@ -6,17 +6,16 @@
     padding: 20px;
   }
   
-  /* Style for the form container */
   .search-form {
     display: flex;
     width: 500px;
-    height: 650px;
+    height: 500px;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 0 auto;
+    position: relative;
   }
   
-  /* Style for individual form elements */
   .form-input {
     padding: 8px;
     border: 1px solid #ddd;
@@ -42,6 +41,8 @@
   /* Style for the content container */
   .content-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
   }
@@ -52,3 +53,28 @@
     font-size: 18px;
   }
   
+
+.form-first-half {
+  width: 50%;
+}
+
+
+.form-second-half {
+  width: 50%;
+}
+
+.controllers {
+  display: flex;
+  position: absolute;
+  gap: 4em;
+  bottom: 0;
+  justify-content: space-around;
+
+  margin-bottom: 1em;
+  left: 77%;
+  transform: translateX(-50%);
+
+  button {
+    width: 90px;
+  }
+}

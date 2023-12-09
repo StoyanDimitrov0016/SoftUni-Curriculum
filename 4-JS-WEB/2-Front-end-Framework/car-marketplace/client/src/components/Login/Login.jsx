@@ -79,16 +79,16 @@ const Login = () => {
           </p>
         )}
 
+        <button type="submit" className="login-button" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+        
         <div className="no-account">
           <p>Don't have an account?</p>
           <Link to={PUBLIC_ROUTES.REGISTER.path} className="register-link">
             {PUBLIC_ROUTES.REGISTER.label}
           </Link>
         </div>
-
-        <button type="submit" className="login-button" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
       </form>
     </section>
   );

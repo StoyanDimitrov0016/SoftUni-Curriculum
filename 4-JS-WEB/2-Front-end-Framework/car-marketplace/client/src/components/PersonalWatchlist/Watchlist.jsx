@@ -51,17 +51,17 @@ const Watchlist = () => {
   }, [userId]);
 
   return (
-    <div>
+    <div className="watchlist-wrapper">
       <h2>Watchlist</h2>
       {loading && <h3>Loading watchlist...</h3>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {offers.length === 0 && !loading && !error && <p>Your watchlist is empty.</p>}
       {offers.length > 0 && (
-        <ul>
+        <div className="offers-container">
           {offers.map((offer) => (
             <OfferPreview key={offer._id} {...offer} />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

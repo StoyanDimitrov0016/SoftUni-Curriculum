@@ -15,27 +15,40 @@ const DealershipPreview = ({
   const { dealershipName, email, location, phoneNumber, workingHours } = dealershipInfo;
 
   return (
-    <div>
-      <section>
+    <section className="dealership-wrapper">
+      <article className="dealer-info">
         <h1>{dealershipName}</h1>
-        <div>
-          <p>Email: {email}</p>
-          <p>Phone Number: {phoneNumber}</p>
-          <p>Location: {location}</p>
-          <p>Working Hours: {workingHours}</p>
+        <div className="dealership-credentials">
+          <p>
+            <span>Email:</span>
+            {email}
+          </p>
+          <p>
+            <span>Phone Number:</span>
+            {phoneNumber}
+          </p>
+          <p>
+            <span>Location:</span>
+            {location}
+          </p>
+          <p>
+            <span>Working Hours:</span> {workingHours}
+          </p>
         </div>
-      </section>
+      </article>
 
-      <section>
+      <article className="dealer-offers">
         <h2>Current Offers:</h2>
-        {currentOffers.map((offer) => (
-          <OfferPreview key={offer._id} {...offer} />
-        ))}
-      </section>
+        <div className="offer-container">
+          {currentOffers.map((offer) => (
+            <OfferPreview key={offer._id} {...offer} />
+          ))}
+        </div>
+      </article>
 
-      <section>
+      <article className="reviews">
         <h2>Comments</h2>
-        <ul>
+        <ul className="comments-list">
           {reviews.map((review) => (
             <ReviewEntity key={review._id} review={review} />
           ))}
@@ -44,8 +57,8 @@ const DealershipPreview = ({
         {isRegularUser && (
           <ReviewForm onSubmit={onSubmit} userReview={userReview} changeHandler={changeHandler} />
         )}
-      </section>
-    </div>
+      </article>
+    </section>
   );
 };
 

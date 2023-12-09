@@ -31,7 +31,7 @@ const CarOfferForm = ({
       {userType === "regular" && <p>Remaining Offers: {remainingOffers}</p>}
 
       <form className="new-offer-form" onSubmit={submit}>
-        <div className="filed-container-left">
+        <div className="form-first-half ">
           <BrandSelect
             brands={offerPredefinedOptions.brand}
             changeHandler={changeHandler}
@@ -56,7 +56,9 @@ const CarOfferForm = ({
           />
 
           <MileageInput mileage={formValues.mileage} changeHandler={changeHandler} />
+        </div>
 
+        <div className="form-second-half ">
           <ColorSelect
             colors={offerPredefinedOptions.color}
             changeHandler={changeHandler}
@@ -64,8 +66,6 @@ const CarOfferForm = ({
           />
 
           <PriceInput price={formValues.price} changeHandler={changeHandler} />
-        </div>
-        <div className="filed-container-right">
           <RegionSelect
             regions={offerPredefinedOptions.region}
             changeHandler={changeHandler}
@@ -83,7 +83,9 @@ const CarOfferForm = ({
             changeHandler={changeHandler}
             selectedVehicleType={formValues.vehicleType}
           />
+        </div>
 
+        <div className="user-contact-info">
           <ContactInformationInput
             contactInformation={formValues.contactInformation}
             changeHandler={changeHandler}
@@ -101,9 +103,9 @@ const CarOfferForm = ({
             value={formValues.image}
             onChange={changeHandler}
           />
-
-          <button type="submit">{actionLabels[actionType]}</button>
         </div>
+        
+        <button type="submit">{actionLabels[actionType]}</button>
       </form>
     </div>
   );

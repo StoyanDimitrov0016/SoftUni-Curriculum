@@ -91,8 +91,8 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await authenticationService.logout();
       setUserCredentials(null);
+      await authenticationService.logout();
 
       localStorage.removeItem("userCredentials");
       navigate(PUBLIC_ROUTES.HOME.path);
