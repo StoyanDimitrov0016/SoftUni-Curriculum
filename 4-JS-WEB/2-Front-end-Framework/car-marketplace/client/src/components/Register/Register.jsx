@@ -5,6 +5,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 
 import UserRegisterForm from "./UserRegisterForm";
 import DealershipRegisterForm from "./DealershipRegisterForm";
+import PUBLIC_ROUTES from "../../Routes/publicRoutes";
 
 const Register = () => {
   const { register } = useAuthContext();
@@ -12,7 +13,6 @@ const Register = () => {
   const [error, setError] = useState(null);
   const [isRegularUser, setIsRegularUser] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-
 
   return (
     <div className="register">
@@ -65,8 +65,8 @@ const Register = () => {
 
       <div className="has-account">
         <p>Already have an account?</p>
-        <Link to="/login" className="login-link">
-          Login
+        <Link to={PUBLIC_ROUTES.REGISTER.path} className="login-link">
+          {PUBLIC_ROUTES.REGISTER.label}
         </Link>
       </div>
     </div>

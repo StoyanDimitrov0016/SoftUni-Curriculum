@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import dealershipService from "../services/dealershipService";
 import authenticationService from "../services/authenticationService";
+import PUBLIC_ROUTES from "../Routes/publicRoutes";
 
 export const AuthContext = createContext();
 
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }) => {
       setUserCredentials(userData);
       localStorage.setItem("userCredentials", JSON.stringify(userData));
 
-      navigate("/");
+      navigate(PUBLIC_ROUTES.HOME.path);
     } catch (error) {
       console.error("Error while logging in:", error);
       throw error;
@@ -81,7 +82,7 @@ const AuthProvider = ({ children }) => {
         });
       }
 
-      navigate("/");
+      navigate(PUBLIC_ROUTES.HOME.path);
     } catch (error) {
       console.error("Error registering in:", error);
       throw error;
@@ -94,7 +95,7 @@ const AuthProvider = ({ children }) => {
       setUserCredentials(null);
 
       localStorage.removeItem("userCredentials");
-      navigate("/");
+      navigate(PUBLIC_ROUTES.HOME.path);
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -104,7 +105,6 @@ const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;
 };
-
 
 const responseParser = ({ _id, email, ...response }) => ({
   ...response,

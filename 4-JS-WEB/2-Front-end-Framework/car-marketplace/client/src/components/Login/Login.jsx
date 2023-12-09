@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuthContext from "../../hooks/useAuthContext";
 import { useForm } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
+import PUBLIC_ROUTES from "../../Routes/publicRoutes";
 
 const Login = () => {
   const { login } = useAuthContext();
@@ -80,8 +81,8 @@ const Login = () => {
 
         <div className="no-account">
           <p>Don't have an account?</p>
-          <Link to="/register" className="register-link">
-            Register
+          <Link to={PUBLIC_ROUTES.REGISTER.path} className="register-link">
+            {PUBLIC_ROUTES.REGISTER.label}
           </Link>
         </div>
 

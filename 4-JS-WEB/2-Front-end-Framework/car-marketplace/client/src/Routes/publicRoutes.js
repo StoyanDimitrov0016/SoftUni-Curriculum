@@ -12,7 +12,7 @@ const PUBLIC_ROUTES = {
         path: '/register'
     },
     ABOUT: {
-        label: "About",
+        label: "About us",
         path: '/about'
     }
 };

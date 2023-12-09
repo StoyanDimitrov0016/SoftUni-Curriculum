@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PUBLIC_ROUTES from "../../Routes/publicRoutes";
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
       <p>© {new Date().getFullYear()} Vehicle Catalog</p>
       <ul>
         <li>
-          <Link to="/about">About us</Link>
+          <Link to={PUBLIC_ROUTES.ABOUT.path}>{PUBLIC_ROUTES.ABOUT.label}</Link>
         </li>
       </ul>
     </footer>

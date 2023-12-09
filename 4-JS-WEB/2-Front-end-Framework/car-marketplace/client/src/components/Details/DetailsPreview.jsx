@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PROTECTED_ROUTES from "../../Routes/protectedRoutes";
 
 function DetailsPreview({
   offer: {
@@ -37,7 +38,7 @@ function DetailsPreview({
         </div>
       ) : (
         <>
-          <Link to={`/offer/edit/${_id}`} className="details-link">
+          <Link to={PROTECTED_ROUTES.EDIT_OFFER.dynamicPath(_id)} className="details-link">
             Edit
           </Link>
           <button className="details-link" onClick={deleteClickHandler}>

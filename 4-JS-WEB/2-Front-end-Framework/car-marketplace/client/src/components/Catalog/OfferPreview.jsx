@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
+import PROTECTED_ROUTES from "../../Routes/protectedRoutes";
 
 function OfferPreview({
   _id,
@@ -13,7 +14,6 @@ function OfferPreview({
   fuelType,
   sellerType,
 }) {
-  const { userCredentials } = useAuthContext();
 
   return (
     <article className="vehicle-listing">
@@ -35,14 +35,16 @@ function OfferPreview({
             ) : (
               <>
                 <span>dealership</span>
-                {sellerType.type === "dealership" && userCredentials.userType !== "dealership" && (
-                  <Link to={`/dealerships/${sellerType.reference}`}>check dealer</Link>
+                {sellerType.type === "dealership" && (
+                  <Link to={PROTECTED_ROUTES.DEALERSHIP_PAGE.dynamicPath(sellerType.reference)}>
+                    check dealer
+                  </Link>
                 )}
               </>
             )}
           </p>
         </div>
-        <Link to={`/offer/${_id}`} className="view-details-link">
+        <Link to={PROTECTED_ROUTES.DETAILS.dynamicPath(_id)} className="view-details-link">
           View Details
         </Link>
       </div>
