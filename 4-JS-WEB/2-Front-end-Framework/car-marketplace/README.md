@@ -4,11 +4,9 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Pages](#pages)
+- [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Screenshots/Demo](#screenshotsdemo)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -153,28 +151,30 @@ Car Star is a React project that serves as a secondhand vehicle marketplace. It 
     - Allows non-dealership users to provide a review.
     - Fields include stars and comments.
 
+## Screenshots
+
+![Homepage for guest user](/client/screenshots/home-page-unauthenticated.png)
+
+![Homepage for logged in user](/client/screenshots/home-page-authorized.png)
+
+![Register Page for regular page](/client/screenshots/register-page-dealership.png)
+
+![Register Page for dealership](/client/screenshots/register-page-regular-user.png)
+
+![Log in page](/client/screenshots/login-page.png)
+
+![Create an offer page](/client/screenshots/create-offer-page-regular-user.png)
+
+![Particular offer page](/client/screenshots/current-offer-page.png)
+
+![Search page](/client/screenshots/search-page.png)
+
 ## Tech Stack
 
 - React with Vite
 - HTML & CSS
 - Vanilla JS and Node.js (provided server)
 
-## Installation
-
-TODO: Instructions on how to clone and set up the project locally.
-
-## Usage
-
-TODO: Instructions on how users can interact with the project.
-
-## Screenshots/Demo
-
-TODO: Add screenshots or a live demo of the project.
-
-## Contributing
-
-Currently, contributions to this project are not open. However, this may change in the future.
-
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
