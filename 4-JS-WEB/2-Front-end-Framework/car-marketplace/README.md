@@ -153,21 +153,21 @@ Car Star is a React project that serves as a secondhand vehicle marketplace. It 
 
 ## Screenshots
 
-![Homepage for guest user](screenshots/home-page-unauthenticated.png)
+![Homepage for guest user](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/home-page-unauthenticated.png)
 
-![Homepage for logged in user](/client/screenshots/home-page-authorized.png)
+![Homepage for logged in user](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/home-page-authorized.png)
 
-![Register Page for regular page](/client/screenshots/register-page-dealership.png)
+![Register Page for regular page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/register-page-regular-user.png)
 
-![Register Page for dealership](/client/screenshots/register-page-regular-user.png)
+![Register Page for dealership](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/register-page-dealership.png)
 
-![Log in page](/client/screenshots/login-page.png)
+![Log in page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/login-page.png)
 
-![Create an offer page](/client/screenshots/create-offer-page-regular-user.png)
+![Create an offer page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/create-offer-page-regular-user.png)
 
-![Particular offer page](/client/screenshots/current-offer-page.png)
+![Particular offer page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/current-offer-page.png)
 
-![Search page](/client/screenshots/search-page.png)
+![Search page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/search-page.png)
 
 ## Tech Stack
 
