@@ -153,7 +153,7 @@ Car Star is a React project that serves as a secondhand vehicle marketplace. It 
 
 ## Screenshots
 
-![Homepage for guest user](/client/screenshots/home-page-unauthenticated.png)
+![Homepage for guest user](screenshots/home-page-unauthenticated.png)
 
 ![Homepage for logged in user](/client/screenshots/home-page-authorized.png)
 
