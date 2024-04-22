@@ -1,38 +1,33 @@
-
 .offer-form {
-    border: 2px solid black;
+  p {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
 
-    p {
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-    
-    button {
-        margin-bottom: 1em;
-    }
+  button {
+    margin-bottom: 1em;
+  }
 }
 
 .new-offer-form {
-
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .new-offer-form > * {
-    width: 300px;
+  width: 300px;
 }
 
 button:hover {
-    background-color: #ff8c00;
+  background-color: #ff8c00;
 }
 
 .user-contact-info {
-    width: 70%;
+  width: 70%;
 
-    textarea {
-        width: 100%;
-    }
+  textarea {
+    width: 100%;
+  }
 }
