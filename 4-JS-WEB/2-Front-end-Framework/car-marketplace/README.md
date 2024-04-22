@@ -153,21 +153,45 @@ Car Star is a React project that serves as a secondhand vehicle marketplace. It 
 
 ## Screenshots
 
-![Homepage for guest user](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/home-page-unauthenticated.png)
+<details>
+  <summary>Homepage for Guest User</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/home-page-unauthenticated.png" alt="Homepage for guest user">
+</details>
 
-![Homepage for logged in user](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/home-page-authorized.png)
+<details>
+  <summary>Homepage for Logged-In User</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/home-page-authorized.png" alt="Homepage for logged in user">
+</details>
 
-![Register Page for regular page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/register-page-regular-user.png)
+<details>
+  <summary>Register Page for Regular User</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/register-page-regular-user.png" alt="Register Page for regular user">
+</details>
 
-![Register Page for dealership](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/register-page-dealership.png)
+<details>
+  <summary>Register Page for Dealership</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/register-page-dealership.png" alt="Register Page for dealership">
+</details>
 
-![Log in page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/login-page.png)
+<details>
+  <summary>Log In Page</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/login-page.png" alt="Log in page">
+</details>
 
-![Create an offer page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/create-offer-page-regular-user.png)
+<details>
+  <summary>Create an Offer Page for Regular User</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/create-offer-page-regular-user.png" alt="Create an offer page">
+</details>
 
-![Particular offer page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/current-offer-page.png)
+<details>
+  <summary>Particular Offer Page</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/current-offer-page.png" alt="Particular offer page">
+</details>
 
-![Search page](/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/search-page.png)
+<details>
+  <summary>Search Page</summary>
+  <img src="/4-JS-WEB/2-Front-end-Framework/car-marketplace/client/screenshots/search-page.png" alt="Search page">
+</details>
 
 ## Tech Stack
 
